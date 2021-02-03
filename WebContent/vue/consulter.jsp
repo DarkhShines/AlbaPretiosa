@@ -31,7 +31,7 @@
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 annonce">
 					<div class="grid-form">
 					<div class="imgpres">
-						<img class="poudlard" alt="Poudlard" src="../img/poudlard.jpg">
+						<img class="poudlard" alt="Poudlard" src="../assets/images/poudlard.jpg">
 						<div class="pres">
 							<!-- 
 							Alain : Le titre de l'annonce, les images, la déscription, les petits plus 
