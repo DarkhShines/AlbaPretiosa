@@ -46,14 +46,13 @@ public class Commentaire {
 		this.dateCom = dateCom;
 	}
 	
-	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
-	public String listCom() {
-		return null;
-	}
+	
 	
 	// Alain : Pas de gros mots sur Alba&Pretiosa ! 
 	public String filtreLangage(){
 		return null;
 	}
+	
+	
 
 }
