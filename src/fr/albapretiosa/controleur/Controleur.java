@@ -17,6 +17,7 @@ import fr.albapretiosa.metier.nico.Abonne;
  * Controleur principal
  * Tache : Empecher toute personne non autorisée l'accès à certaines parties du site
  * Et met en place l'organisation des URLs du site
+ * DEV : ALAIN
  */
 @WebServlet("/accueil")
 public class Controleur extends HttpServlet {
@@ -29,12 +30,12 @@ public class Controleur extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true); // Je r�cup ma session
 		Abonne abonne = new Abonne();
-		String login = ""; // Cr�ation de l'abonne ( vide ) et du login ( vide ) afin de ne pas provoqu� de NPE
+		String alias = ""; // Cr�ation de l'abonne ( vide ) et du alias ( vide ) afin de ne pas provoqu� de NPE
 		if((Abonne) session.getAttribute("Abonne") != null) {
 			abonne = (Abonne) session.getAttribute("Abonne");
-			//login =  abonne.getNom();
-			System.out.println(login);
-			// Si l'abonn� en session existe, il devient abonne et le login prend la valeur du nom de l'abo.
+			alias =  abonne.getAlias();
+			System.out.println(alias);
+			// Si l'abonn� en session existe, il devient abonne et le alias prend la valeur du Alias de l'abo.
 		} else {
 			// Si mon abonné est nul, aucun accès au site n'est autorisé, il est donc renvoyer vers l'accueil d'ou il pourra
 			// se connecter ou créé un compte
@@ -50,7 +51,7 @@ public class Controleur extends HttpServlet {
 		else if (path.endsWith("/connexion")) goEspaceAbo(request, response);
 //		else if (path.endsWith("/test/*")) goTest(request, response);
 		else if (path.endsWith("/vueAdmin")) {
-			if(login.equals("root"))goAdmin(request, response); // Je profite du controleur pour filtr� la page Admin
+			if(alias.equals("root"))goAdmin(request, response); // Je profite du controleur pour filtr� la page Admin
 			else {
 				request.setAttribute("message", "Vous n'avez pas la permission d'acc�der � cette page. Veuillez vous connecter.");
 //				RequestDispatcher disp = request.getRequestDispatcher(Erreur.getErrorLocation());
