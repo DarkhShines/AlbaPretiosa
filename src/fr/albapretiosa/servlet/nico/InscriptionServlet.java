@@ -9,8 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import fr.albapretiosa.dao.dao;
 import fr.albapretiosa.metier.nico.Abonne;
 
@@ -33,7 +31,6 @@ public class InscriptionServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("dopost");
 		String context = request.getContextPath();
 		ArrayList<Abonne> abonnes = dao.abonnes;
 		PrintWriter out = response.getWriter();
@@ -50,9 +47,7 @@ public class InscriptionServlet extends HttpServlet {
 		
 		
 		for (Abonne abonne : abonnes) {
-			System.out.println("je suis dans le for each ");
 			if(!alias.equals(abonne.getAlias()) &&  !email.equals(abonne.getEmail())) {
-				System.out.println("je suis dans le if");
 				inscriptionOk = true;
 			}
 		}
@@ -64,7 +59,6 @@ public class InscriptionServlet extends HttpServlet {
 			Abonne abonneOk = new Abonne(nom, prenom, alias, email, telPortable, mdp, parrainage);
 			dao.abonnes.add(abonneOk);
 			response.sendRedirect(context+"/index.jsp");
-			System.out.println(dao.abonnes);
 		}
 		else{
 			//		request.setAttribute("message", "Identifiants ou mot de passe incorrect.");
