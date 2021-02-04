@@ -6,7 +6,7 @@ import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.alain.*;
 
 public class dao {
-	public static ArrayList<Abonne> abonnes;
+	public static ArrayList<Abonne> abonnes = initAbo();
 	public static ArrayList<String> annonces;
 	public static ArrayList<Newsletter> newsletter;
 	public static ArrayList<Commentaire> commentaires;
@@ -35,6 +35,20 @@ public class dao {
 		// Alain : Lors du lancement du serveur des annonces, des abonnés et des Newsletter seront créé en dur
 		// Afin de ne pas avoir de site vide.
 		public static ArrayList<Abonne> initAbo() {
+			// parrainage = initale de Nom Prenom Alias en majuscule - 3 chiffres aléatoires
+			
+			// abonne 1,2 et 3 utilise le constructeur sans telFixe, le 4 et le 5 l'utilise
+			Abonne abonne1 = new Abonne("Muscat", "Nicolas", "Dayuum", "dayuum@gmail.com", "0607080910", true, "password", "NMD-123" );
+			Abonne abonne2 = new Abonne("Dardot", "Alain", "Darkhshines", "darkhshines@gmail.com", "0607030210", false, "password", "DAD-456" );
+			Abonne abonne3 = new Abonne("IronmanPremium", "Zack", "Kirby", "kirby@gmail.com", "0601101112", true, "password", "IZK-789" );
+			Abonne abonne4 = new Abonne("DupontPremium", "Jack", "Bigboss", "bigboss@gmail.com", "0607717273","0442056322", true, "password", "DJB-264" );
+			Abonne abonne5 = new Abonne("Sarkozy", "Eric", "Sarkeric", "sarkeric@gmail.com", "0634764903","0442053242", false, "password", "SES-812" );
+			ArrayList<Abonne> abonnes = new ArrayList<Abonne>();
+			abonnes.add(abonne1);
+			abonnes.add(abonne2);
+			abonnes.add(abonne3);
+			abonnes.add(abonne4);
+			abonnes.add(abonne5);
 			return abonnes;
 		}
 		
