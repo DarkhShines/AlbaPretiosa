@@ -1,9 +1,10 @@
 /**
  * 
  */
-package fr.albapretiosa.metier;
+package fr.albapretiosa.metier.zak;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 /**
  * @author linki
@@ -20,37 +21,64 @@ public class Annonce {
 	private LocalDate creneau_fin;
 	private String	  description;
 	private String[]  photos;
-	private String[]  options;
+	private boolean   piscine;
+	private boolean   spa;
+	private boolean   golf;
+	private boolean   tennis;
 	
 	
 	/*		LES CONSTRUCTEURS		 */
 
-/* CONSTRUCTEUR PRICIPALE */
-	public Annonce(String titre, int surface, LocalDate creneau_debut, LocalDate creneau_fin, String description,
-			String[] photos, String[] options) {
-		super();
-		this.titre = titre;
-		this.surface = surface;
-		this.creneau_debut = creneau_debut;
-		this.creneau_fin = creneau_fin;
-		this.description = description;
-		this.photos = photos;
-		this.options = options;
-	}
-
+/**
+	
+	/* CONSTRUCTEUR PRICIPALE */
+	
 /* CONSTRUCTEUR PAR DEFAUT*/
 	public Annonce() {}
+
+	/**
+	 * @param idAnnonce
+	 * @param titre
+	 * @param surface
+	 * @param creneau_debut
+	 * @param creneau_fin
+	 * @param description
+	 * @param photos
+	 * @param piscine
+	 * @param spa
+	 * @param golf
+	 * @param tennis
+	 */
+	public Annonce(String idAnnonce, String titre, int surface, LocalDate creneau_debut, LocalDate creneau_fin,
+			String description, String[] photos, boolean piscine, boolean spa, boolean golf, boolean tennis) {
+
+		setIdAnnonce(idAnnonce);;
+		setTitre(titre);
+		setSurface(surface);
+		setCreneau_debut(creneau_debut);
+		setCreneau_fin(creneau_fin);
+		setDescription(description);
+		setPhotos(photos);
+		setPiscine(piscine);
+		setSpa(spa);
+		setGolf(golf);;
+		setTennis(tennis);
+	}
 
 	/*		LES METHODES OVERRIDE		 */
 	public void init() {}
 	
 	
-	@Override 
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "";
-	}
+
 	
+	@Override
+	public String toString() {
+		return "Annonce [idAnnonce=" + idAnnonce + ", titre=" + titre + ", surface=" + surface + ", creneau_debut="
+				+ creneau_debut + ", creneau_fin=" + creneau_fin + ", description=" + description + ", photos="
+				+ Arrays.toString(photos) + ", piscine=" + piscine + ", spa=" + spa + ", golf=" + golf + ", tennis="
+				+ tennis + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
@@ -62,24 +90,17 @@ public class Annonce {
 		// TODO Auto-generated method stub
 		return super.equals(obj);
 	}
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
-
-
 
 	/*		LES GETTER ET SETTER		 */
 
 	/**
-	 * @return the titre
+	 * @return le titre
 	 */
 	public String getTitre() {
 		return titre;
 	}
 	/**
-	 * @param titre the titre to set
+	 * @param titre le titre to set
 	 */
 	public void setTitre(String titre) {
 		this.titre = titre;
@@ -144,19 +165,8 @@ public class Annonce {
 	public void setPhotos(String[] photos) {
 		this.photos = photos;
 	}
-	/**
-	 * @return the options
-	 */
-	public String[] getOptions() {
-		return options;
-	}
-	/**
-	 * @param options the options to set
-	 */
-	public void setOptions(String[] options) {
-		this.options = options;
-	}
 
+	
 	/**
 	 * @return the idAnnonce
 	 */
@@ -171,5 +181,62 @@ public class Annonce {
 		this.idAnnonce = idAnnonce;
 	}
 
+	/**
+	 * @return the piscine
+	 */
+	public boolean isPiscine() {
+		return piscine;
+	}
+
+	/**
+	 * @param piscine the piscine to set
+	 */
+	public void setPiscine(boolean piscine) {
+		this.piscine = piscine;
+	}
+
+	/**
+	 * @return the spa
+	 */
+	public boolean isSpa() {
+		return spa;
+	}
+
+	/**
+	 * @param spa the spa to set
+	 */
+	public void setSpa(boolean spa) {
+		this.spa = spa;
+	}
+
+	/**
+	 * @return the golf
+	 */
+	public boolean isGolf() {
+		return golf;
+	}
+
+	/**
+	 * @param golf the golf to set
+	 */
+	public void setGolf(boolean golf) {
+		this.golf = golf;
+	}
+
+	/**
+	 * @return the tennis
+	 */
+	public boolean isTennis() {
+		return tennis;
+	}
+
+	/**
+	 * @param tennis the tennis to set
+	 */
+	public void setTennis(boolean tennis) {
+		this.tennis = tennis;
+	}
+
+	
 
 }

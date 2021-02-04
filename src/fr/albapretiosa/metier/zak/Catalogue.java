@@ -1,4 +1,4 @@
-package fr.albapretiosa.metier;
+package fr.albapretiosa.metier.zak;
 
 
 public class Catalogue {
