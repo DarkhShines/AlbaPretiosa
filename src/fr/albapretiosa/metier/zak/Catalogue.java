@@ -1,5 +1,6 @@
 package fr.albapretiosa.metier.zak;
 
+import fr.albapretiosa.metier.zak.*;
 
 public class Catalogue {
 
