@@ -23,12 +23,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="apropos.jsp">A propos</a>
                 </li>
-                <li class="nav-item">
-                <!-- Nous avons deux exemples de page d'annonce que nous proposerons au client
-                	Une partie du site est différente pour les éléments de Zak, nous souhaitons également 
-                	connaître la préférence du client à ce propos.  -->
-                    <a class="nav-link" href="consultAnnonce.jsp">Version Zak</a>
-                </li>
             </ul>
         </div>
     </div>
