@@ -29,7 +29,7 @@ public class Controleur extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true); // Je rï¿½cup ma session
 		Abonne abonne = new Abonne();
-		String login = ""; // Crï¿½ation de l'abonne ( vide ) et du login ( vide ) afin de ne pas provoquï¿½ de NPE
+		String login = ""; // Création de l'abonne ( vide ) et du login ( vide ) afin de ne pas provoquï¿½ de NPE
 		if((Abonne) session.getAttribute("Abonne") != null) {
 			abonne = (Abonne) session.getAttribute("Abonne");
 			//login =  abonne.getNom();
