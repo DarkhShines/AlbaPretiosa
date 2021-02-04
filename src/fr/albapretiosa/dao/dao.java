@@ -3,13 +3,14 @@ package fr.albapretiosa.dao;
 import java.util.ArrayList;
 
 import fr.albapretiosa.metier.nico.Abonne;
+import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.metier.alain.*;
 
 public class dao {
 	public static ArrayList<Abonne> abonnes = initAbo();
-	public static ArrayList<String> annonces;
 	public static ArrayList<Newsletter> newsletter;
 	public static ArrayList<Commentaire> commentaires;
+	public static ArrayList<Annonce> annonces;
 	
 	
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
@@ -56,7 +57,7 @@ public class dao {
 			return newsletter;
 		}
 		
-		public static ArrayList<String> initAnnonce() {
+		public static ArrayList<Annonce> initAnnonce() {
 			return annonces;
 		}
 }

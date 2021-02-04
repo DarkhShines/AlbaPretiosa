@@ -163,16 +163,16 @@
 											<div class="checkbox">
 												<label for="spa"><strong class="white">SPA</strong></label>
 												<input class="form-control" placeholder="Option"
-													type="checkbox" name="option" id="spa" multiple /> <label
+													type="checkbox" name="spa" id="spa" multiple /> <label
 													for="golf"><strong class="white">Terrain
 														de golf</strong></label> <input class="form-control" placeholder="Option"
-													type="checkbox" name="option" id="golf" multiple /> <label
+													type="checkbox" name="golf" id="golf" multiple /> <label
 													for="piscine"><strong class="white">Piscine</strong></label>
 												<input class="form-control" placeholder="Option"
-													type="checkbox" name="option" id="piscine" multiple /> <label
+													type="checkbox" name="piscine" id="piscine" multiple /> <label
 													for="tennis"><strong class="white">Court
 														de tennis</strong></label> <input class="form-control" placeholder="Option"
-													type="checkbox" name="option" id="tennis" multiple />
+													type="checkbox" name="tennis" id="tennis" multiple />
 
 											</div>
 										</div>
@@ -187,7 +187,7 @@
 													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
 														width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_1">
+														accept="image/png, image/jpeg, image/jpg" value="img_1" name="img_1">
 												</figure>
 											</div>
 										</div>
@@ -197,7 +197,7 @@
 													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
 														width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_2">
+														accept="image/png, image/jpeg, image/jpg" value="img_2" name="img_2">
 												</figure>
 											</div>
 										</div>
@@ -207,7 +207,7 @@
 													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
 														width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_3">
+														accept="image/png, image/jpeg, image/jpg" value="img_3" name="img_3">
 												</figure>
 											</div>
 										</div>
@@ -217,7 +217,7 @@
 													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
 														width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_4">
+														accept="image/png, image/jpeg, image/jpg" value="img_4" name="img_4">
 												</figure>
 											</div>
 										</div>

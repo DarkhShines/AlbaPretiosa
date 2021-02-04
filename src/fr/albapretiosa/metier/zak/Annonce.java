@@ -4,7 +4,10 @@
 package fr.albapretiosa.metier.zak;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+
+
+
+
 
 /**
  * @author linki
@@ -14,28 +17,29 @@ public class Annonce {
 	
 	/*		LISTE DES VARIABLES D'INSTANCES		 */
 	
-	private String	  idAnnonce;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	private int 	  idAnnonce;
 	private String    titre;
 	private int 	  surface;
 	private LocalDate creneau_debut;
 	private LocalDate creneau_fin;
 	private String	  description;
-	private String[]  photos;
 	private boolean   piscine;
 	private boolean   spa;
 	private boolean   golf;
 	private boolean   tennis;
+	Photo photo     = new Photo();
 	
 	
-	/*		LES CONSTRUCTEURS		 */
-
-/**
+					/*		LES CONSTRUCTEURS		 */
 	
-	/* CONSTRUCTEUR PRICIPALE */
+	/* CONSTRUCTEUR PRICIPAL */
 	
-/* CONSTRUCTEUR PAR DEFAUT*/
-	public Annonce() {}
-
 	/**
 	 * @param idAnnonce
 	 * @param titre
@@ -43,53 +47,33 @@ public class Annonce {
 	 * @param creneau_debut
 	 * @param creneau_fin
 	 * @param description
-	 * @param photos
 	 * @param piscine
 	 * @param spa
 	 * @param golf
 	 * @param tennis
+	 * @param photo
 	 */
-	public Annonce(String idAnnonce, String titre, int surface, LocalDate creneau_debut, LocalDate creneau_fin,
-			String description, String[] photos, boolean piscine, boolean spa, boolean golf, boolean tennis) {
-
-		setIdAnnonce(idAnnonce);;
+	public Annonce(String titre, int surface, LocalDate creneau_debut, LocalDate creneau_fin,
+			String description, boolean piscine, boolean spa, boolean golf, boolean tennis, Photo photo) {
+		
+		setIdAnnonce(idAnnonce);
 		setTitre(titre);
 		setSurface(surface);
 		setCreneau_debut(creneau_debut);
 		setCreneau_fin(creneau_fin);
 		setDescription(description);
-		setPhotos(photos);
 		setPiscine(piscine);
 		setSpa(spa);
-		setGolf(golf);;
+		setGolf(golf);
 		setTennis(tennis);
+		setPhoto(photo);
 	}
+
+	public Annonce() {}
 
 	/*		LES METHODES OVERRIDE		 */
 	public void init() {}
-	
-	
 
-	
-	@Override
-	public String toString() {
-		return "Annonce [idAnnonce=" + idAnnonce + ", titre=" + titre + ", surface=" + surface + ", creneau_debut="
-				+ creneau_debut + ", creneau_fin=" + creneau_fin + ", description=" + description + ", photos="
-				+ Arrays.toString(photos) + ", piscine=" + piscine + ", spa=" + spa + ", golf=" + golf + ", tennis="
-				+ tennis + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		// TODO Auto-generated method stub
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
-	}
 
 	/*		LES GETTER ET SETTER		 */
 
@@ -153,31 +137,18 @@ public class Annonce {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	/**
-	 * @return the photos
-	 */
-	public String[] getPhotos() {
-		return photos;
-	}
-	/**
-	 * @param photos the photos to set
-	 */
-	public void setPhotos(String[] photos) {
-		this.photos = photos;
-	}
 
-	
 	/**
 	 * @return the idAnnonce
 	 */
-	public String getIdAnnonce() {
+	public int getIdAnnonce() {
 		return idAnnonce;
 	}
 
 	/**
 	 * @param idAnnonce the idAnnonce to set
 	 */
-	public void setIdAnnonce(String idAnnonce) {
+	public void setIdAnnonce(int idAnnonce) {
 		this.idAnnonce = idAnnonce;
 	}
 
@@ -235,6 +206,20 @@ public class Annonce {
 	 */
 	public void setTennis(boolean tennis) {
 		this.tennis = tennis;
+	}
+
+	/**
+	 * @return the photo
+	 */
+	public Photo getPhoto() {
+		return photo;
+	}
+
+	/**
+	 * @param photo the photo to set
+	 */
+	public void setPhoto(Photo photo) {
+		this.photo = photo;
 	}
 
 	

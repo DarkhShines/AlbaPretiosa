@@ -5,21 +5,19 @@ import fr.albapretiosa.metier.zak.*;
 public class Catalogue {
 
 	
-	private String villa;
-	private String appartement;
-	private String loft;
-	private String chateau;
+	private boolean villa;
+	private boolean appartement;
+	private boolean loft;
+	private boolean chateau;
 
 
-	public Catalogue(String villa, String appartement, String loft, String chateau) {
-		this.villa = villa;
-		this.appartement = appartement;
-		this.loft = loft;
-		this.chateau = chateau;
+	public Catalogue(boolean villa, boolean appartement, boolean loft, boolean chateau) {
+		setVilla(villa);
+		setLoft(loft);
+		setAppartement(appartement);
+		setChateau(chateau);
 	}
 
-	public Catalogue() {
-	}
 
 	@Override
 	public String toString() {
@@ -47,56 +45,56 @@ public class Catalogue {
 	/**
 	 * @return the villa
 	 */
-	public String getVilla() {
+	public boolean getVilla() {
 		return villa;
 	}
 
 	/**
 	 * @param villa the villa to set
 	 */
-	public void setVilla(String villa) {
+	public void setVilla(boolean villa) {
 		this.villa = villa;
 	}
 
 	/**
 	 * @return the appartement
 	 */
-	public String getAppartement() {
+	public boolean getAppartement() {
 		return appartement;
 	}
 
 	/**
 	 * @param appartement the appartement to set
 	 */
-	public void setAppartement(String appartement) {
+	public void setAppartement(boolean appartement) {
 		this.appartement = appartement;
 	}
 
 	/**
 	 * @return the loft
 	 */
-	public String getLoft() {
+	public boolean getLoft() {
 		return loft;
 	}
 
 	/**
 	 * @param loft the loft to set
 	 */
-	public void setLoft(String loft) {
+	public void setLoft(boolean loft) {
 		this.loft = loft;
 	}
 
 	/**
 	 * @return the chateau
 	 */
-	public String getChateau() {
+	public boolean getChateau() {
 		return chateau;
 	}
 
 	/**
 	 * @param chateau the chateau to set
 	 */
-	public void setChateau(String chateau) {
+	public void setChateau(boolean chateau) {
 		this.chateau = chateau;
 	}
 
