@@ -32,6 +32,7 @@ public class ConnexionServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("dopost");
 		String context = request.getContextPath();
 		ArrayList<Abonne> abonnes = dao.abonnes;
 		Abonne abonneOk = new Abonne();
@@ -42,6 +43,7 @@ public class ConnexionServlet extends HttpServlet {
 
 		for (Abonne abonne : abonnes) {
 			if(alias.equals(abonne.getAlias()) && mdp.equals(abonne.getMdp())) {
+				System.out.println("je suis dans le if");
 				connectionOk = true;
 				abonneOk = abonne;
 			}
@@ -50,7 +52,7 @@ public class ConnexionServlet extends HttpServlet {
 			out.println("Connection réussie "+alias);
 			HttpSession session = request.getSession(true);
 			session.setAttribute("Abonne", abonneOk);
-			response.sendRedirect(context+"/index.jsp");
+			response.sendRedirect(context+"/vue/infosPersonnelles.jsp");
 		}
 		else{
 			//		request.setAttribute("message", "Identifiants ou mot de passe incorrect.");

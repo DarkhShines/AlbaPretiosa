@@ -14,12 +14,12 @@
         <h2>Connexion</h2>
         <form method="POST" action="<%=request.getContextPath()%>/ConnexionServlet">
             <div class="user-box">
-                <input type="text" name="pseudo" id="pseudo" required>
-                <label for="pseudo">Pseudo</label>
+                <input type="text" name="alias" id="alias" required>
+                <label for="alias">Alias</label>
             </div>
             <div class="user-box">
-                <input type="password" name="password" id="password" required>
-                <label for="pseudo">Mot de passe</label>
+                <input type="password" name="mdp" id="mdp" required>
+                <label for="mdp">Mot de passe</label>
             </div>
             <!-- Le lien qui suit ne sera pas présent sur la version finale, mais il vous permet aujourd'hui d'accéder à la partie connecté du site. -->
             <a href="vue/consulter.jsp">Lien vers le site</a><br>
