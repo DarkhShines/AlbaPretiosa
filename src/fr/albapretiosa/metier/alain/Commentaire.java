@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Commentaire {
 	
-	// Alain : Mise en place des variables d'instances.
+	// Alain : Mise en place des variables d'instances..
 	private String expediteur;
 	private String idCom;
 	private String commentaire;
