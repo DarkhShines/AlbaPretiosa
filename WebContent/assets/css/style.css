@@ -547,10 +547,38 @@ p {
   font-size: 30px;
   text-align: center;
 }
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+.grid-item2 {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+.h2accueil {
+	text-align: center;
+	color: white;
+	
+}
+.test{
+	position: absolute;
+}
+
 .alain {
 	max-width: 200px;
 	height: auto;
 	border-radius: 50%;
+}
+
+.carousel {
+	max-width: 50%;
+    height: auto;
+    position: relative;
+    left: 150px;
 }
 
 /* Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas */

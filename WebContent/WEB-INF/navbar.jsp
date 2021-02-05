@@ -9,7 +9,7 @@
         <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="../index.html">Accueil</a>
+                    <a class="nav-link" href="accueil.jsp">Accueil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="consulter.jsp">Consulter</a>
