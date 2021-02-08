@@ -6,15 +6,17 @@ public class Notification {
 	public static int increment = 0;
 	private String idNotif;
 	private String exepditeur;
+	private int idExpediteur;
 	private String objet;
 	private String texteNotif;
 	private LocalDate dateNotif = LocalDate.now();
 	private boolean lu = false; 
 	
 	
-	public Notification(String exepditeur, String objet, String texteNotif) {
+	public Notification(String exepditeur, int idExpediteur, String objet, String texteNotif) {
 		idNotif = generateIdNotif();
 		setExepditeur(exepditeur);
+		setIdExpediteur(idExpediteur);
 		setObjet(objet);
 		setTexteNotif(texteNotif);
 	}
@@ -47,6 +49,16 @@ public class Notification {
 
 	public void setExepditeur(String exepditeur) {
 		this.exepditeur = exepditeur;
+	}
+
+
+	public int getIdExpediteur() {
+		return idExpediteur;
+	}
+
+
+	public void setIdExpediteur(int idExpediteur) {
+		this.idExpediteur = idExpediteur;
 	}
 
 

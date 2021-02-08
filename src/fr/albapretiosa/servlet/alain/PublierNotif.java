@@ -33,7 +33,7 @@ public class PublierNotif extends HttpServlet {
 		String objet = request.getParameter("objet");
 		String message = request.getParameter("message");
 		
-		Notification notif = new Notification(admin.getAlias(), objet, message);
+		Notification notif = new Notification(admin.getAlias(), admin.getIdAbonne(), objet, message);
 		Dao.notification.add(notif);
 		response.sendRedirect(request.getContextPath()+"/vue/vueAdmin.jsp");
 		

@@ -15,7 +15,7 @@
                     <a class="nav-link" href="consulter.jsp">Consulter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Déposer une annonce</a>
+                    <a class="nav-link" href="Formulaire_Annonce.jsp">Déposer une annonce</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="infosPersonnelles.jsp">Mon Espace</a>
