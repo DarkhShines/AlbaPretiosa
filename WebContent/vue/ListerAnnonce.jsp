@@ -75,7 +75,7 @@
 											</thead>
 
 											<%
-												for (Annonce ann : dao.annonces) {
+												for (Annonce ann : Dao.annonces) {
 											%>
 											<tr>
 												<td class="column1"><%=ann.getIdAnnonce()%></td>
