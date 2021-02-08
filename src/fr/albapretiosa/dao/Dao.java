@@ -3,12 +3,13 @@ package fr.albapretiosa.dao;
 import java.util.ArrayList;
 
 import fr.albapretiosa.metier.nico.Abonne;
+import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.metier.alain.*;
 
-public class dao {
+public class Dao {
 	public static ArrayList<Abonne> abonnes = initAbo();
 	public static ArrayList<Admin> admins = initAdmin();
-	public static ArrayList<String> annonces;
+	public static ArrayList<Annonce> annonces;
 	public static ArrayList<Notification> notification = initNotif();
 	public static ArrayList<Commentaire> commentaires;
 	
@@ -67,17 +68,17 @@ public class dao {
 		}
 		
 		public static ArrayList<Notification> initNotif() {
-			Notification notif1 = new Notification("DarkhShines", "Ouverture de poudlard", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
-			Notification notif2 = new Notification("DarkhShines", "Ouverture de numéro 2", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
-			Notification notif3 = new Notification("DarkhShines", "Ouverture de numéro 3", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+			Notification notif1 = new Notification("DarkhShines", 1, "Ouverture de poudlard", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+			Notification notif2 = new Notification("DarkhShines", 2, "Ouverture de numéro 2", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+			Notification notif3 = new Notification("DarkhShines", 3, "Ouverture de numéro 3", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
 			ArrayList<Notification> notification = new ArrayList<Notification>();
 			notification.add(notif1);
 			notification.add(notif2);
 			notification.add(notif3);
-			return notification;
+			return notification; 
 		}
 		
-		public static ArrayList<String> initAnnonce() {
+		public static ArrayList<Annonce> initAnnonce() {
 			return annonces;
 		}
 		
