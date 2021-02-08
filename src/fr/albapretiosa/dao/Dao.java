@@ -40,15 +40,9 @@ public class Dao {
 			// parrainage = initale de Nom Prenom Alias en majuscule - 3 chiffres aléatoires
 			
 			// abonne 1,2 et 3 utilise le constructeur sans telFixe, le 4 et le 5 l'utilise
-			Abonne abonne1 = new Abonne("Muscat", "Nicolas", "Dayuum", "dayuum@gmail.com", "0607080910", "password", "NMD-123" );
-			Abonne abonne2 = new Abonne("Dardot", "Alain", "Darkhshines", "darkhshines@gmail.com", "0607030210", "password", "DAD-456" );
-			Abonne abonne3 = new Abonne("IronmanPremium", "Zack", "Kirby", "kirby@gmail.com", "0601101112", "password", "IZK-789" );
 			Abonne abonne4 = new Abonne("DupontPremium", "Jack", "Bigboss", "bigboss@gmail.com", "0607717273","0442056322", "password", "DJB-264" );
 			Abonne abonne5 = new Abonne("Sarkozy", "Eric", "Sarkeric", "sarkeric@gmail.com", "0634764903","0442053242", "password", "SES-812" );
 			ArrayList<Abonne> abonnes = new ArrayList<Abonne>();
-			abonnes.add(abonne1);
-			abonnes.add(abonne2);
-			abonnes.add(abonne3);
 			abonnes.add(abonne4);
 			abonnes.add(abonne5);
 			return abonnes;
