@@ -580,7 +580,24 @@ p {
     position: relative;
     left: 150px;
 }
-
+/* STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN */
+/* Notification  Notification  Notification  Notification  Notification  Notification  Notification  Notification */
+.notification-div {
+	background-color: #ffc107!important;
+	height: 300px;
+	width: 600px;
+	color: black;
+	border-radius: 16px;
+	margin-left: 40%;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+.objetNotif {
+	text-align: center;
+	font-size: 25px;	
+	padding-top: 15px;
+}
+	
 /* Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas */
 
 .content-inscription {

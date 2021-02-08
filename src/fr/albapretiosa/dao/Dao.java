@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.alain.*;
 
-public class dao {
+public class Dao {
 	public static ArrayList<Abonne> abonnes = initAbo();
+	public static ArrayList<Admin> admins = initAdmin();
 	public static ArrayList<String> annonces;
 	public static ArrayList<Notification> notification = initNotif();
 	public static ArrayList<Commentaire> commentaires;
@@ -51,6 +52,19 @@ public class dao {
 			abonnes.add(abonne5);
 			return abonnes;
 		}
+		public static ArrayList<Admin> initAdmin() {
+			// parrainage = initale de Nom Prenom Alias en majuscule - 3 chiffres aléatoires
+			
+			// abonne 1,2 et 3 utilise le constructeur sans telFixe, le 4 et le 5 l'utilise
+			Admin Dayuum = new Admin("Muscat", "Nicolas", "Dayuum", "dayuum@gmail.com", "0607080910", "password", "NMD-123" );
+			Admin DarkhShines = new Admin("Dardot", "Alain", "Darkhshines", "darkhshines@gmail.com", "0607030210", "password", "DAD-456" );
+			Admin Zed = new Admin("Bahou", "Zak", "Kirby", "kirby@gmail.com", "0601101112", "password", "IZK-789" );
+			ArrayList<Admin> admins = new ArrayList<Admin>();
+			admins.add(DarkhShines);
+			admins.add(Dayuum);
+			admins.add(Zed);
+			return admins;
+		}
 		
 		public static ArrayList<Notification> initNotif() {
 			Notification notif1 = new Notification("DarkhShines", "Ouverture de poudlard", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
@@ -65,5 +79,20 @@ public class dao {
 		
 		public static ArrayList<String> initAnnonce() {
 			return annonces;
+		}
+		
+		public static String listNotif() {
+			String listNotif = "";
+			for (Notification notification : notification) {
+				listNotif += "<div class=\"notification-div\">\r\n" + 
+						"	<span class=\"objetNotif\">"+notification.getObjet()+"</span>\r\n" + 
+						"	<br>\r\n" + 
+						"	<p>De : "+notification.getExepditeur()+"<br><br>\r\n" + 
+						"	   Le : </p><br><br>\r\n" + 
+						"	<p>"+notification.getTexteNotif()+"</p>\r\n" + 
+						"</div>";
+			}
+			
+			return listNotif;
 		}
 }

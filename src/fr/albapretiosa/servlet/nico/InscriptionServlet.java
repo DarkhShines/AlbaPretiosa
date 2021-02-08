@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import fr.albapretiosa.dao.dao;
+import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.nico.Abonne;
 
 /**
@@ -32,7 +32,7 @@ public class InscriptionServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String context = request.getContextPath();
-		ArrayList<Abonne> abonnes = dao.abonnes;
+		ArrayList<Abonne> abonnes = Dao.abonnes;
 		PrintWriter out = response.getWriter();
 		String alias = request.getParameter("alias");
 		String mdp = request.getParameter("mdp");
@@ -57,7 +57,7 @@ public class InscriptionServlet extends HttpServlet {
 		if(inscriptionOk && pwOk) {
 			out.println("Connection réussie "+alias);
 			Abonne abonneOk = new Abonne(nom, prenom, alias, email, telPortable, mdp, parrainage);
-			dao.abonnes.add(abonneOk);
+			Dao.abonnes.add(abonneOk);
 			response.sendRedirect(context+"/index.jsp");
 		}
 		else{

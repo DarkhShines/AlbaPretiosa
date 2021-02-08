@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.albapretiosa.metier.nico.Abonne;
-import fr.albapretiosa.dao.dao;
+import fr.albapretiosa.dao.Dao;
 
 
 /**
@@ -33,7 +33,7 @@ public class ConnexionServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String context = request.getContextPath();
-		ArrayList<Abonne> abonnes = dao.abonnes;
+		ArrayList<Abonne> abonnes = Dao.abonnes;
 		Abonne abonneOk = new Abonne();
 		PrintWriter out = response.getWriter();
 		String alias = request.getParameter("alias");
