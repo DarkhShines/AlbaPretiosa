@@ -597,6 +597,11 @@ p {
 	font-size: 25px;	
 	padding-top: 15px;
 }
+
+#message {
+	height: 150px;
+	width: 250px;
+}
 	
 /* Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas */
 

@@ -1,11 +1,14 @@
 package fr.albapretiosa.metier.alain;
 
+import java.time.LocalDate;
+
 public class Notification {
 	public static int increment = 0;
 	private String idNotif;
 	private String exepditeur;
 	private String objet;
 	private String texteNotif;
+	private LocalDate dateNotif = LocalDate.now();
 	private boolean lu = false; 
 	
 	
@@ -64,6 +67,16 @@ public class Notification {
 
 	public void setTexteNotif(String texteNotif) {
 		this.texteNotif = texteNotif;
+	}
+
+
+	public LocalDate getDateNotif() {
+		return dateNotif;
+	}
+
+
+	public void setDateNotif(LocalDate dateNotif) {
+		this.dateNotif = dateNotif;
 	}
 
 

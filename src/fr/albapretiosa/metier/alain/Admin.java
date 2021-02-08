@@ -1,7 +1,11 @@
 package fr.albapretiosa.metier.alain;
 
 import fr.albapretiosa.metier.nico.Abonne;
-
+/**
+ * 
+ * @author Alain
+ *
+ */
 public class Admin extends Abonne {
 
 	
