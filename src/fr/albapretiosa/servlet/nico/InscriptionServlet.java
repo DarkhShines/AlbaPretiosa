@@ -9,48 +9,56 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.dao.dao;
-
+import fr.albapretiosa.metier.nico.Abonne;
 
 /**
- * Servlet implementation class ConnexionServlet
+ * Servlet implementation class InscriptionServlet
  */
-@WebServlet("/ConnexionServlet")
-public class ConnexionServlet extends HttpServlet {
+@WebServlet("/InscriptionServlet")
+public class InscriptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ConnexionServlet() {
+
+	public InscriptionServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String context = request.getContextPath();
 		ArrayList<Abonne> abonnes = dao.abonnes;
-		Abonne abonneOk = new Abonne();
 		PrintWriter out = response.getWriter();
 		String alias = request.getParameter("alias");
 		String mdp = request.getParameter("mdp");
-		boolean connectionOk = false;
-
+		String mdpConfirm = request.getParameter("mdpConfirm");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
+		String telPortable = request.getParameter("phone");
+		String parrainage = request.getParameter("parrainage");
+		boolean inscriptionOk = false;
+		boolean pwOk = false;
+		
+		
 		for (Abonne abonne : abonnes) {
-			if(alias.equals(abonne.getAlias()) && mdp.equals(abonne.getMdp())) {
-				connectionOk = true;
-				abonneOk = abonne;
+			if(!alias.equals(abonne.getAlias()) &&  !email.equals(abonne.getEmail())) {
+				inscriptionOk = true;
 			}
 		}
-		if(connectionOk) {
+		if(mdp.equals(mdpConfirm)) {
+			pwOk = true;
+		}
+		if(inscriptionOk && pwOk) {
 			out.println("Connection réussie "+alias);
-			HttpSession session = request.getSession(true);
-			session.setAttribute("Abonne", abonneOk);
-			response.sendRedirect(context+"/vue/infosPersonnelles.jsp");
+			Abonne abonneOk = new Abonne(nom, prenom, alias, email, telPortable, mdp, parrainage);
+			dao.abonnes.add(abonneOk);
+			response.sendRedirect(context+"/index.jsp");
 		}
 		else{
 			//		request.setAttribute("message", "Identifiants ou mot de passe incorrect.");
@@ -59,4 +67,5 @@ public class ConnexionServlet extends HttpServlet {
 			System.out.println("connexion echouée");
 		}
 	}
+
 }

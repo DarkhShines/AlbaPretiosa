@@ -110,7 +110,7 @@
 							</div>
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
 
-								<form class="main_form">
+								<form class="main_form" method="post" action="<%=request.getContextPath()%>/CreerAnnonce">
 									<div class="row">
 
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -187,7 +187,7 @@
 													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
 														width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_1" name="img_1">
+														accept="image/png, image/jpeg, image/jpg" value="img_1" name="fileName">
 												</figure>
 											</div>
 										</div>
@@ -197,7 +197,7 @@
 													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
 														width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_2" name="img_2">
+														accept="image/png, image/jpeg, image/jpg" value="img_2" name="fileName">
 												</figure>
 											</div>
 										</div>
@@ -207,7 +207,7 @@
 													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
 														width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_3" name="img_3">
+														accept="image/png, image/jpeg, image/jpg" value="img_3" name="fileName">
 												</figure>
 											</div>
 										</div>
@@ -217,13 +217,14 @@
 													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
 														width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_4" name="img_4">
+														accept="image/png, image/jpeg, image/jpg" value="img_4" name="fileName">
 												</figure>
 											</div>
 										</div>
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<input type="submit" class="form-control"
-												placeholder="Valider" /> <input type="reset"
+												placeholder="Valider" />
+												 <input type="reset"
 												class="form-control" placeholder="Reset">
 										</div>
 									</div>
@@ -243,7 +244,7 @@
 								<p>Vous pouvez accéder à votre espace abonné pour consulter
 									la mise en ligne de votre annonces, ainsi que vos annonces déja
 									en ligne. Vous pouvez modifier, supprimer les annonces.</p>
-								<a href="#">Consulter mes annonces <i
+								<a href="<%=request.getContextPath()%>/vue/ListerAnnonce.jsp">Consulter mes annonces <i
 									class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
 							</div>
 						</div>

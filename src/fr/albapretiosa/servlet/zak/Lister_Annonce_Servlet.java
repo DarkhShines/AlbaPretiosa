@@ -35,17 +35,29 @@ public class Lister_Annonce_Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Je suis dans doGet de Lister_Annonce");
+		
 		HttpSession session = request.getSession(false);
+		
 		Abonne a = (Abonne)session.getAttribute("Abonne");
+		
 		ArrayList<Annonce> annonce_liste = new ArrayList<Annonce>();
+		
 		RequestDispatcher disp = request.getRequestDispatcher("");	
 		
 		if(a != null) {
 			for(Annonce an : dao.annonces) {
-				if(an.getIdAnnonce() == a.getIdAbonne() ) {
+				if(an.getIdAbonne() == a.getIdAbonne() ) {
 					annonce_liste.add(an);
 				}
 			}
+		}
+		else {
+			request.setAttribute("message", "Vous n'avez pas d'annonce en ligne ou en cours de validation");
+			
+			String chemin = this.getServletContext().getInitParameter("pageErreur");
+			
+			RequestDispatcher disp1 = request.getRequestDispatcher(chemin);
+			disp1.forward(request, response);
 		}
 	}
 

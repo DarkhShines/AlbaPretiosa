@@ -19,8 +19,7 @@ public class Abonne {
 	private String 	parrainage; 
 	
 	// CONSTRUCTEUR 
-	public Abonne(String nom, String prenom, String alias, String email, String telPortable,
-			boolean platinum, String mdp, String parrainage) {
+	public Abonne(String nom, String prenom, String alias, String email, String telPortable, String mdp, String parrainage) {
 		super();
 		setNom(nom);
 		setIdAbonne(genId.getAndIncrement()); 
@@ -28,12 +27,11 @@ public class Abonne {
 	    setAlias(alias);
 	    setEmail(email);
 	    setTelPortable(telPortable);
-	    setPlatinum(platinum);
 	    setMdp(mdp);
 	    setParrainage(parrainage);
 	}
 	public Abonne(String nom, String prenom, String alias, String email, String telPortable,
-			String telFixe, boolean platinum, String mdp, String parrainage) {
+			String telFixe, String mdp, String parrainage) {
 		super();
 		setNom(nom);
 		setIdAbonne(genId.getAndIncrement()); 
@@ -42,7 +40,6 @@ public class Abonne {
 	    setEmail(email);
 	    setTelPortable(telPortable);
 	    setTelFixe(telFixe);
-	    setPlatinum(platinum);
 	    setMdp(mdp);
 	    setParrainage(parrainage);
 	}

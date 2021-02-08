@@ -597,4 +597,104 @@ p {
 .form-inscription {
     margin: auto;
 }
+
+/* PAGE ACCUEIL Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas PAGE ACCUEIL*/
+.carousel1 {
+  width: 100%;
+  height: 91vh;
+}
+.carousel2 {
+  width: 100%;
+  height: 91vh;
+}
+.carousel3 {
+  width: 100%;
+  height: 91vh;
+}
+/** about **/
+ .about {
+    padding-top: 90px;
+}
+ .about .about_box {
+    background: #191918;
+     padding: 55px 40px;
+}
+ .about .about_box h3 {
+     font-size: 30px;
+     line-height: 28px;
+     color: #fff;
+     font-weight: 500;
+     padding: 0;
+}
+ .about .about_box p {
+     color: #ffff;
+     font-size: 17px;
+     line-height: 28px;
+     padding: 30px 0px;
+     font-weight: 400;
+}
+ .about .about_box a {
+     color: #fff;
+     font-size: 22px;
+     line-height: 29px;
+}
+ .about .about_box a:hover {
+     color: #e7bb0b;
+}
+ .about .about_img {
+     height: 100%;
+     background: #d8b00f;
+     margin-top: 90px;
+}
+ .about .about_img figure {
+     margin: 0;
+     margin-right: 0px;
+     padding: 92px 0px 0px 60px;
+     margin-right: -64px;
+}
+.span-middle{
+	color: white;
+	padding-left: 10px;
+}
+.title-span {
+	color: white;
+	padding-left: 10px;
+}
+/** end about **/
+/** Our Client **/
+ .Client {
+     padding-top:90px;
+}
+ .Client .title h2 {
+     font-size: 45px;
+     font-weight: 500;
+     line-height: 40px;
+     color: #191918;
+     padding: 20px 0px;
+     padding-bottom: 0px;
+}
+ .Client .Client_box {
+     background: #212020;
+     border-radius: 20px;
+     text-align: center;
+     padding: 65px 50px;
+}
+ .Client .Client_box h3 {
+     color: #fff;
+     font-size: 30px;
+     line-height: 28px;
+     padding: 25px 0px;
+     padding-top: 32px;
+}
+ .Client .Client_box p {
+     color: #fff;
+     font-size: 17px;
+     line-height:28px;
+     font-weight: 400;
+}
+ .Client .Client_box i {
+     padding-top: 20px;
+     display: inline-block;
+}
+/** end Our Client **/
  

@@ -9,7 +9,7 @@
 		<div class="shadow-sm p-3 mb-5 bg-warning rounded">
 			<h1 class="titre-inscription mb-4">Inscription</h1>
 
-			<form class="form-inscription" action="#" method="post">
+			<form class="form-inscription" method="POST" action="<%=request.getContextPath()%>/InscriptionServlet" >
 
 				<div class="form-row pl-2 justify-content-center">
 					<div class="form-group col-md-4">
@@ -38,14 +38,14 @@
 				</div>
 				<div class="form-row pl-2 justify-content-center">
 					<div class="form-group col-md-4 ">
-						<label for="password">Mot de passe</label> <input type="password"
-							class="form-control" id="password" name="password"
+						<label for="mdp">Mot de passe</label> <input type="password"
+							class="form-control" id="mdp" name="mdp"
 							placeholder="Mot de passe" required>
 					</div>
 					<div class="form-group col-md-4 ">
-						<label for="passwordConfirm">Confirmer le mot de passe</label> <input
-							type="password" class="form-control" id="passwordConfirm"
-							name="passwordConfirm" placeholder="Confirmer" required>
+						<label for="mdpConfirm">Confirmer le mot de passe</label> <input
+							type="password" class="form-control" id="mdpConfirm"
+							name="mdpConfirm" placeholder="Confirmer" required>
 					</div>
 				</div>
 				<div class="form-row pl-2 justify-content-center">
@@ -63,7 +63,7 @@
 				<div class="form-row pl-2 justify-content-center">
 					<div class="form-check mt-3">
 						<input type="checkbox" class="form-check-input" id="checkNews"
-							name="checkNews"> <label class="form-check-label"
+							name="checkNews" required> <label class="form-check-label"
 							for="checkNews">J'accepte les termes et conditions
 							d'utilisations</label>
 
