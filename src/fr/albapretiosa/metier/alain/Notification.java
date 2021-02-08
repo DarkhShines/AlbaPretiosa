@@ -1,6 +1,8 @@
 package fr.albapretiosa.metier.alain;
 
 public class Notification {
+	public static int increment = 0;
+	private String idNotif;
 	private String exepditeur;
 	private String objet;
 	private String texteNotif;
@@ -8,9 +10,30 @@ public class Notification {
 	
 	
 	public Notification(String exepditeur, String objet, String texteNotif) {
+		idNotif = generateIdNotif();
 		setExepditeur(exepditeur);
 		setObjet(objet);
 		setTexteNotif(texteNotif);
+	}
+
+
+	public static int getIncrement() {
+		return increment;
+	}
+
+
+	public static void setIncrement(int increment) {
+		Notification.increment = increment;
+	}
+
+
+	public String getIdNotif() {
+		return idNotif;
+	}
+
+
+	public void setIdNotif(String idNotif) {
+		this.idNotif = idNotif;
 	}
 
 
@@ -53,5 +76,10 @@ public class Notification {
 		this.lu = lu;
 	}
 	
+	private String generateIdNotif() {
+		increment++;
+		String id = "N" + increment;
+		return id;
+	}
 	
 }

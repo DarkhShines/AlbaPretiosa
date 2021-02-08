@@ -97,5 +97,5 @@
 	</div>
 
 
-<!-- end form annonce-->
+
 <jsp:include page="/WEB-INF/footer.jsp"/>

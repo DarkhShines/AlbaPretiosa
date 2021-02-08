@@ -21,6 +21,9 @@
                     <a class="nav-link" href="infosPersonnelles.jsp">Mon Espace</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="notification.jsp">Notification</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="apropos.jsp">A propos</a>
                 </li>
             </ul>

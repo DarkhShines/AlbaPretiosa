@@ -8,7 +8,7 @@ import fr.albapretiosa.metier.alain.*;
 public class dao {
 	public static ArrayList<Abonne> abonnes = initAbo();
 	public static ArrayList<String> annonces;
-	public static ArrayList<Notification> notification;
+	public static ArrayList<Notification> notification = initNotif();
 	public static ArrayList<Commentaire> commentaires;
 	
 	
@@ -52,7 +52,14 @@ public class dao {
 			return abonnes;
 		}
 		
-		public static ArrayList<Notification> initNews() {
+		public static ArrayList<Notification> initNotif() {
+			Notification notif1 = new Notification("DarkhShines", "Ouverture de poudlard", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+			Notification notif2 = new Notification("DarkhShines", "Ouverture de numéro 2", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+			Notification notif3 = new Notification("DarkhShines", "Ouverture de numéro 3", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+			ArrayList<Notification> notification = new ArrayList<Notification>();
+			notification.add(notif1);
+			notification.add(notif2);
+			notification.add(notif3);
 			return notification;
 		}
 		
