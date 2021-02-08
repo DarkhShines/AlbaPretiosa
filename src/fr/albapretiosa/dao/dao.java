@@ -8,7 +8,7 @@ import fr.albapretiosa.metier.alain.*;
 public class dao {
 	public static ArrayList<Abonne> abonnes = initAbo();
 	public static ArrayList<String> annonces;
-	public static ArrayList<Newsletter> newsletter;
+	public static ArrayList<Notification> notification;
 	public static ArrayList<Commentaire> commentaires;
 	
 	
@@ -52,8 +52,8 @@ public class dao {
 			return abonnes;
 		}
 		
-		public static ArrayList<Newsletter> initNews() {
-			return newsletter;
+		public static ArrayList<Notification> initNews() {
+			return notification;
 		}
 		
 		public static ArrayList<String> initAnnonce() {
