@@ -7,7 +7,7 @@ import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.metier.alain.*;
 
 
-public class dao {
+public class Dao {
 	public static ArrayList<Abonne> abonnes = initAbo();
 	public static ArrayList<Newsletter> newsletter;
 	public static ArrayList<Commentaire> commentaires;

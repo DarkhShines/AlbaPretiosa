@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
-import fr.albapretiosa.dao.dao;
+import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.*;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
@@ -102,7 +100,7 @@ public class CreerAnnonce extends HttpServlet {
 			annonce.setTennis(tennis);
 			System.out.println("Pas 13");
 			
-			dao.annonces.add(annonce);
+			Dao.annonces.add(annonce);
 			System.out.println("Pas 14");
 			response.sendRedirect("vue/Formulaire_Annonce.jsp");
 			System.out.println("Je sors du doPost de CréerAnnonce");

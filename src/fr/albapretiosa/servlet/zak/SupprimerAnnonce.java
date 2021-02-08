@@ -8,7 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import fr.albapretiosa.dao.dao;
+
+import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.zak.Annonce;
 
 /**
@@ -45,9 +46,9 @@ public class SupprimerAnnonce extends HttpServlet {
 		Annonce a = (Annonce) request.getAttribute("annonce");
 		Annonce ab = null;
 
-		for (Annonce annonce : dao.initAnnonce()) {
+		for (Annonce annonce : Dao.annonces) {
 			if (a.getIdAnnonce() == (annonce.getIdAnnonce())) {
-				dao.initAnnonce().remove(a);
+				Dao.annonces.remove(a);
 
 				annonce = ab;
 			}

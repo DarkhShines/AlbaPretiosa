@@ -1,6 +1,7 @@
 package fr.albapretiosa.servlet.zak;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.albapretiosa.dao.dao;
+import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 
@@ -45,7 +46,7 @@ public class Lister_Annonce_Servlet extends HttpServlet {
 		RequestDispatcher disp = request.getRequestDispatcher("");	
 		
 		if(a != null) {
-			for(Annonce an : dao.annonces) {
+			for(Annonce an : Dao.annonces) {
 				if(an.getIdAbonne() == a.getIdAbonne() ) {
 					annonce_liste.add(an);
 				}
