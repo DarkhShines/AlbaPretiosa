@@ -1,5 +1,5 @@
 <jsp:include page="/WEB-INF/header.jsp" />
-<%@ page import="fr.albapretiosa.dao.Dao"%>
+<%@ page import="fr.albapretiosa.dao.*"%>
 <title>Notification - AlbaPretiosa</title>
  <!-- Alain : A l'avenir le titre de cette page sera dynamique,
  	  Le titre de l apage sera le titre de l'annonce -->

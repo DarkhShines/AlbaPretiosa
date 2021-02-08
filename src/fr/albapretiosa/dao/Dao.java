@@ -75,7 +75,7 @@ public class Dao {
 			notification.add(notif1);
 			notification.add(notif2);
 			notification.add(notif3);
-			return notification; 
+			return notification;
 		}
 		
 		public static ArrayList<Annonce> initAnnonce() {

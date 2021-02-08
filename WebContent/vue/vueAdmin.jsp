@@ -1,5 +1,5 @@
 <jsp:include page="/WEB-INF/header.jsp" />
-<%@ page import="fr.albapretiosa.dao.Dao"%>
+<%@ page import="fr.albapretiosa.dao.*"%>
 <title>Vue Administrateur - AlbaPretiosa</title>
 <!-- Alain : pas de référencement sur cette page bien entendu-->    
 
