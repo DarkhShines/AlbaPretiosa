@@ -1,6 +1,7 @@
 package fr.albapretiosa.servlet.zak;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,32 +33,28 @@ public class SupprimerAnnonce extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("Je suis dans la methode get de SupprimerAnnonce");
+		int idAnnonce = Integer.parseInt(request.getParameter("ID"));
+		ArrayList<Annonce> annonces = Dao.annonces;
+		System.out.println(idAnnonce);
+		
+		for (int i = 0; i < annonces.size(); i++) {
+			if (annonces.get(i).getIdAnnonce() == idAnnonce) {
+				Dao.annonces.remove(annonces.get(i));
+				}
+		}
+		
+		response.sendRedirect("vue/ListerAnnonce.jsp");
+		
 	}
+
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("Je suis dans la methode post de SupprimerAnnonce");
-		
-		Annonce a = (Annonce) request.getAttribute("annonce");
-		Annonce ab = null;
-
-		for (Annonce annonce : Dao.annonces) {
-			if (a.getIdAnnonce() == (annonce.getIdAnnonce())) {
-				Dao.annonces.remove(a);
-
-				annonce = ab;
-			}
-		}
-
-		String page = "/vue/ListerAnnnonce.jsp";
-		RequestDispatcher disp = request.getRequestDispatcher(page);
-
-		disp.forward(request, response);
 
 	}
 

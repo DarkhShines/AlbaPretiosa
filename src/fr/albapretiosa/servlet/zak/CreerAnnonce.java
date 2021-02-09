@@ -52,7 +52,7 @@ public class CreerAnnonce extends HttpServlet {
 		
 		HttpSession session = request.getSession(true);
 		Abonne a = (Abonne)session.getAttribute("Abonne");	
-
+		
 		String titre 			= request.getParameter("titre").strip();
 		int surface 			= Integer.parseInt(request.getParameter("surface").strip());
 		String pays				= request.getParameter("pays").strip();

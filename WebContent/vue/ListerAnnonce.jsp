@@ -36,28 +36,29 @@
 				<div class="col-md-12">
 					<div class="title">
 						<h2>Liste de mes annonces</h2>
+							<%						
+							Abonne abonne = (Abonne) session.getAttribute("Abonne");
+						if (abonne != null) {
+						%>
+						<h3><strong>
+							Bonjour <br>
+							<%=abonne.getPrenom()%>
+							<%=abonne.getNom()%></strong></h3>
 
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 	<section class="resip_section">
 		<div class="container">
 			<div class="row">
 
 				<div class="col-md-12">
 					<div class="col-md-6 offset-md-3">
-						<%
-							Abonne abonne = (Abonne) session.getAttribute("Abonne");
-						if (abonne != null) {
-						%>
-						<h3>
-							Bonjour
-							<%=abonne.getPrenom()%>
-							<%=abonne.getNom()%></h3>
+					
 						<br>
-						<h4>Vos Annonces</h4>
 						<div class="limiter">
 							<div class="container-table100">
 								<div class="wrap-table100">
@@ -83,7 +84,7 @@
 												<td class="column3"><%=ann.getCreneau_debut() %></td>
 												<td class="column4"><%=ann.getCreneau_fin() %></td>
 												<td class="column5"><img src="<%=request.getContextPath()%>/assets/images/modifier.png"/></td>
-												<td class="column5"><img src="<%=request.getContextPath()%>/assets/images/delete.png"/></td>
+												<td class="column5"><a href="<%= request.getContextPath() +"/SupprimerAnnonce?ID=" + ann.getIdAnnonce() %>"><img src="<%=request.getContextPath()%>/assets/images/delete.png"/></a></td>
 											</tr>
 											<%
 												}
