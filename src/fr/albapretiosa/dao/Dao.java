@@ -1,5 +1,6 @@
 package fr.albapretiosa.dao;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import fr.albapretiosa.metier.nico.Abonne;
@@ -60,6 +61,9 @@ public class Dao {
 		
 		public static ArrayList<Annonce> initAnnonce() {
 			ArrayList<Annonce> annonces = new ArrayList<Annonce>();
+			Annonce ann = new Annonce("Manoir DeCruz", 1200, "France", "Hyers", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), "Blablabla", true, true, false, true);
+			Annonce ann1 = new Annonce("Casa Vivaldi", 1200, "France", "Marseille", LocalDate.of(2018,12,12), LocalDate.of(2022,12,12), "Blablabla", true, false, false, true);
+			Annonce ann2 = new Annonce("Chateau Mont Perret", 1200, "France", "Bourg-en-Champagne", LocalDate.of(2019,12,12), LocalDate.of(2021,12,12), "Blablabla", true, true, false, false);
 			return annonces;
 		}
 }

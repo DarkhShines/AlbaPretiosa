@@ -8,14 +8,11 @@ import java.util.ArrayList;
 import java.util.Random;
 import fr.albapretiosa.metier.nico.Abonne;
 
-
-
-
-
 /**
  * @author Zakarya D. Bahou
  *
  */
+
 public class Annonce {
 
 	
@@ -26,6 +23,7 @@ public class Annonce {
 	private static int	incrementIdAnnonce;
 	
 	/*		LISTE DES VARIABLES D'INSTANCES		 */
+
 	private int 	  idAnnonce;
 	private int	      idAbonne;
 	private String    titre;
