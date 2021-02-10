@@ -15,15 +15,15 @@ import fr.albapretiosa.metier.nico.Abonne;
 
 public class Annonce {
 
-	
+
 
 	private static final long serialVersionUID = 1L;
 
 	/*		LISTE DES VARIABLES DE CLASSE		 */
 	private static int	incrementIdAnnonce;
-	
-	/*		LISTE DES VARIABLES D'INSTANCES		 */
 
+	/*		LISTE DES VARIABLES D'INSTANCES		 */
+	private ArrayList<String> idCommList = new ArrayList<String>();
 	private int 	  idAnnonce;
 	private int	      idAbonne;
 	private String    titre;
@@ -116,14 +116,14 @@ public class Annonce {
 		setGolf(golf);
 		setTennis(tennis);
 	}
-	
+
 	/**
 	 * CONSTRUCTEUR PAR DEFAUT
 	 */
 	public Annonce() {}
-	
-	
-	
+
+
+
 	/**
 	 * METHODE POUR GENERE UN ID ANNONCE AUTO_INCREMENTE COMME REFERENCE UNIQUE
 	 * @return idAnnonce + 1
@@ -131,6 +131,20 @@ public class Annonce {
 	public static int genereIdAnnonce(){
 		incrementIdAnnonce ++;
 		return incrementIdAnnonce;
+	}
+
+	/**
+	 * @param id
+	 */
+	public void addComm(String id) {
+		this.idCommList.add(id);
+	}
+	
+	/**
+	 * @param id
+	 */
+	public void deleteComm(String id) {
+		this.idCommList.remove(id);
 	}
 
 	/*		LES GETTER ET SETTER		 */
@@ -159,9 +173,9 @@ public class Annonce {
 	public void setSurface(int surface) {
 		this.surface = surface;
 	}
-	
-	
-	
+
+
+
 	/**
 	 * @return pays = Le pays de la propriété
 	 */
