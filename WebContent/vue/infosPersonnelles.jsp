@@ -10,11 +10,6 @@
 	<% 
 		HttpSession session1 = request.getSession(true); 
  		Abonne abonne = (Abonne) session.getAttribute("Abonne");
- 		String telFixe = abonne.getTelFixe();
- 		boolean telFok = false;
- 		if(telFixe == null){
- 			telFok = true;
- 		}
  	%>
 	<div class="content-inscription container">
 		<h1 class="titre-inscription mb-4">Espace Personnel</h1>
@@ -128,9 +123,11 @@
 						<label for="phone-fixe">Téléphone fixe </label> <input
 							type="number" class="form-control" id="phone-fixe"
 							name="phone-fixe" placeholder="Numéro de téléphone fixe" 
-							value="<% if(telFok){ abonne.getTelPortable(); } %>">
+							value="<% if(abonne.getTelFixe() != null){ 
+											abonne.getTelFixe(); 
+										}else{System.out.println(abonne.getTelFixe());} %>">
 					</div>
-					<span class="trash-bin"><i class="fas fa-trash-alt"></i></span>
+					<span class="trash-bin"><a href="<%=request.getContextPath()%>/SuppressionServlet"><i class="fas fa-trash-alt"></i></a></span>
 				</div>
 			</div>
 			<div class="form-row pl-2 justify-content-start">
