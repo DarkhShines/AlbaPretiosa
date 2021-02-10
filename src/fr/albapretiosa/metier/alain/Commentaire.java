@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Commentaire {
 	
 	// Alain : Mise en place des variables d'instances..
+	public static int increment = 0;
 	private String expediteur;
 	private String idCom;
 	private String commentaire;
@@ -13,10 +14,10 @@ public class Commentaire {
 	
 	// Alain : Création du constructeur et donc le constructeur classique disparait. ( Je n'en ai pas l'utilité )
 	// Utilisation des setters pour être certain de passé par les controles
-	public Commentaire(String expediteur, String idCom, String commentaire, LocalDate dateCom) {
+	public Commentaire(String expediteur,  String commentaire, LocalDate dateCom) {
 		super();
 		setExpediteur(expediteur);
-		setIdCom(idCom);
+		idCom = generateIdComm();
 		setCommentaire(commentaire);
 		setDateCom(dateCom);
 	}
@@ -45,7 +46,11 @@ public class Commentaire {
 	public void setDateCom(LocalDate dateCom) {
 		this.dateCom = dateCom;
 	}
-	
+	private String generateIdComm() {
+		increment++;
+		String id = ""+increment;
+		return id;
+	}
 	
 	
 	// Alain : Pas de gros mots sur Alba&Pretiosa ! 

@@ -103,7 +103,7 @@ public class Notification {
 	
 	private String generateIdNotif() {
 		increment++;
-		String id = "N" + increment;
+		String id = ""+increment;
 		return id;
 	}
 	
