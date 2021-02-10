@@ -1,4 +1,5 @@
 <jsp:include page="/WEB-INF/header.jsp" />
+<%@ page import="fr.albapretiosa.metier.nico.Abonne"%>
 <script src="https://kit.fontawesome.com/56455f0e6e.js"
 	crossorigin="anonymous"></script>
 </head>
@@ -6,7 +7,8 @@
 	<jsp:include page="/WEB-INF/navbar.jsp" />
 
 	<!-- FORMULAIRE DE MODIFICATION/SUPPRESSION DE DONNEES PERSONNELLES -->
-
+	<% HttpSession session1 = request.getSession(true); %>
+	<% Abonne abonne = (Abonne) session.getAttribute("Abonne"); %>
 	<div class="content-inscription container">
 		<h1 class="titre-inscription mb-4">Espace Personnel</h1>
 
@@ -21,7 +23,7 @@
 					<div class="form-group col-md-4">
 						<label for="nom">Nom</label> <input type="text"
 							class="form-control" id="nom" name="nom" placeholder="Nom"
-							required>
+							required value="<%= abonne.getNom() %>">
 					</div>
 				</div>
 				<div class="form-row pl-2 justify-content-start">

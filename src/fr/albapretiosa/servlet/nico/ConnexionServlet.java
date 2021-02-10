@@ -57,6 +57,7 @@ public class ConnexionServlet extends HttpServlet {
 		}
 		if(connectionOk) {
 			out.println("Connection réussie "+alias);
+			System.out.println(abonneOk.getNom());
 			HttpSession session = request.getSession(true);
 			session.setAttribute("Abonne", abonneOk);
 			response.sendRedirect(context+"/vue/infosPersonnelles.jsp");
