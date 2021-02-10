@@ -7,8 +7,15 @@
 	<jsp:include page="/WEB-INF/navbar.jsp" />
 
 	<!-- FORMULAIRE DE MODIFICATION/SUPPRESSION DE DONNEES PERSONNELLES -->
-	<% HttpSession session1 = request.getSession(true); %>
-	<% Abonne abonne = (Abonne) session.getAttribute("Abonne"); %>
+	<% 
+		HttpSession session1 = request.getSession(true); 
+ 		Abonne abonne = (Abonne) session.getAttribute("Abonne");
+ 		String telFixe = abonne.getTelFixe();
+ 		boolean telFok = false;
+ 		if(telFixe == null){
+ 			telFok = true;
+ 		}
+ 	%>
 	<div class="content-inscription container">
 		<h1 class="titre-inscription mb-4">Espace Personnel</h1>
 
@@ -30,7 +37,7 @@
 					<div class="form-group col-md-4">
 						<label for="prenom">Prenom</label> <input type="text"
 							class="form-control" id="prenom" name="Prenom"
-							placeholder="prenom" required>
+							placeholder="prenom" required value="<%= abonne.getPrenom() %>">
 					</div>
 				</div>
 			</div>
@@ -42,7 +49,7 @@
 					<div class="form-group col-md-4 ">
 						<label for="alias">Alias</label> <input type="text"
 							class="form-control" id="alias" name="alias" placeholder="Alias"
-							readonly>
+							readonly value="<%= abonne.getAlias() %>">
 					</div>
 				</div>
 			</div>
@@ -56,7 +63,7 @@
 					<div class="form-group col-md-4">
 						<label for="email">Email</label> <input type="email"
 							class="form-control" id="email" name="email" placeholder="Email"
-							required>
+							required value="<%= abonne.getEmail() %>">
 					</div>
 				</div>
 			</div>
@@ -70,12 +77,19 @@
 					<div class="form-group col-md-4 ">
 						<label for="password">Mot de passe</label> <input type="password"
 							class="form-control" id="password" name="password"
-							placeholder="Mot de passe" required>
+							placeholder="Mot de passe" required value="<%= abonne.getMdp() %>">
 					</div>
 				</div>
 				<div class="form-row pl-2 justify-content-start">
 					<div class="form-group col-md-4 ">
-						<label for="passwordConfirm">Confirmer le mot de passe</label> <input
+						<label for="passwordConfirm">Nouveau mot de passe</label> <input
+							type="password" class="form-control" id="newPassword"
+							name="newPassword" placeholder="Nouveau mot de passe" required>
+					</div>
+				</div>
+				<div class="form-row pl-2 justify-content-start">
+					<div class="form-group col-md-4 ">
+						<label for="passwordConfirm">Confirmer le nouveau mot de passe</label> <input
 							type="password" class="form-control" id="passwordConfirm"
 							name="passwordConfirm" placeholder="Confirmer" required>
 					</div>
@@ -92,7 +106,7 @@
 					<div class="form-group col-md-4 ">
 						<label for="parrainage">Parrainage</label> <input type="text"
 							class="form-control" id="parrainage" name="parrainage"
-							placeholder="Parrainage">
+							placeholder="Parrainage" value="<%= abonne.getParrainage() %>">
 					</div>
 				</div>
 			</div>
@@ -106,14 +120,15 @@
 					<div class="form-group col-md-4 ">
 						<label for="phone">Téléphone</label> <input type="number"
 							class="form-control" id="phone" name="phone"
-							placeholder="Numéro de téléphone" required>
+							placeholder="Numéro de téléphone" required value="<%= abonne.getTelPortable() %>">
 					</div>
 				</div>
 				<div class="form-row pl-2 justify-content-start">
 					<div class="form-group col-md-4 ">
 						<label for="phone-fixe">Téléphone fixe </label> <input
 							type="number" class="form-control" id="phone-fixe"
-							name="phone-fixe" placeholder="Numéro de téléphone fixe" required>
+							name="phone-fixe" placeholder="Numéro de téléphone fixe" 
+							value="<% if(telFok){ abonne.getTelPortable(); } %>">
 					</div>
 					<span class="trash-bin"><i class="fas fa-trash-alt"></i></span>
 				</div>
