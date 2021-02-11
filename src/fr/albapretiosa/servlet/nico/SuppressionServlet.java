@@ -33,23 +33,17 @@ public class SuppressionServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String context = request.getContextPath();
-		int idAbo = Integer.parseInt(request.getParameter("idAbonne"));
-		ArrayList<Abonne> abonnes = Dao.abonnes;
-		boolean supprOk = false;
-		System.out.println(idAbo);
+		String alias = request.getParameter("alias");
+//		ArrayList<Abonne> abonnes = Dao.abonnes;
+
 		
-		for (Abonne abonne : abonnes) {
-			if(idAbo == abonne.getIdAbonne()) {
+		for (Abonne abonne : Dao.abonnes) {
+			if(alias.equals(abonne.getAlias())) {
 				System.out.println("je suis dans le if ");
 				abonne.setTelFixe("");
-				supprOk = true;
-				response.sendRedirect(context+"/vue/infosPersonnelles.jsp");
 			}
-		}
-		if (supprOk) {
-			System.out.println("je suis dans le if supprOk");
-			response.sendRedirect(context+"/vue/infosPersonnelles.jsp");
-			
+		response.sendRedirect(context+"/vue/infosPersonnelles.jsp");
+		System.out.println(Dao.abonnes);
 		}
 	}
 
