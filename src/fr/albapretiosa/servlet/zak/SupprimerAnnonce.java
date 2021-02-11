@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.albapretiosa.dao.Dao;
+import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 
 /**
@@ -47,8 +48,6 @@ public class SupprimerAnnonce extends HttpServlet {
 		response.sendRedirect("vue/ListerAnnonce.jsp");
 		
 	}
-
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
