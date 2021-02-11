@@ -1,6 +1,8 @@
 package fr.albapretiosa.servlet.zak;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.nico.Abonne;
+import fr.albapretiosa.metier.zak.Annonce;
 
 /**
  * Servlet implementation class ModifAnnonce
@@ -40,8 +44,23 @@ public class ModifAnnonce extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("Je suis dans le doPost de la servlet ModifAnnonce");
 		HttpSession session = request.getSession(true);
-		Abonne a = (Abonne)session.getAttribute("Abonne");
 		
+		Abonne a = (Abonne)session.getAttribute("Abonne"); 
+		
+		
+		String titre 			= request.getParameter("titre");		
+		int surface 			= Integer.parseInt(request.getParameter("surface").strip());
+		ArrayList<Annonce> ann  = Dao.annonces;
+		int idAnnonce = Integer.parseInt(request.getParameter("ID"));
+		
+		for (int i = 0; i < ann.size(); i++) {
+			if (ann.get(i).getIdAnnonce() == idAnnonce) {
+				ann.get(i).setTitre(titre);
+				ann.get(i).setSurface(surface);
+				}
+		}
+		
+		response.sendRedirect("vue/ListerAnnonce.jsp");
 	}
 
 }
