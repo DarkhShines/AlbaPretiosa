@@ -8,23 +8,20 @@ import java.util.ArrayList;
 import java.util.Random;
 import fr.albapretiosa.metier.nico.Abonne;
 
-
-
-
-
 /**
  * @author Zakarya D. Bahou
  *
  */
+
 public class Annonce {
 
-	
+
 
 	private static final long serialVersionUID = 1L;
 
 	/*		LISTE DES VARIABLES DE CLASSE		 */
 	private static int	incrementIdAnnonce;
-	
+
 	/*		LISTE DES VARIABLES D'INSTANCES		 */
 	private int 	  idAnnonce;
 	private int	      idAbonne;
@@ -39,6 +36,7 @@ public class Annonce {
 	private boolean   spa;
 	private boolean   golf;
 	private boolean   tennis;
+	private ArrayList<Integer> idCommList = new ArrayList<Integer>();
 
 	Photo photo1     = new Photo();
 	Photo photo2     = new Photo();
@@ -118,14 +116,14 @@ public class Annonce {
 		setGolf(golf);
 		setTennis(tennis);
 	}
-	
+
 	/**
 	 * CONSTRUCTEUR PAR DEFAUT
 	 */
 	public Annonce() {}
-	
-	
-	
+
+
+
 	/**
 	 * METHODE POUR GENERE UN ID ANNONCE AUTO_INCREMENTE COMME REFERENCE UNIQUE
 	 * @return idAnnonce + 1
@@ -133,6 +131,20 @@ public class Annonce {
 	public static int genereIdAnnonce(){
 		incrementIdAnnonce ++;
 		return incrementIdAnnonce;
+	}
+
+	/**
+	 * @param id
+	 */
+	public void addComm(int id) {
+		this.idCommList.add(id);
+	}
+	
+	/**
+	 * @param id
+	 */
+	public void deleteComm(int id) {
+		this.idCommList.remove(id);
 	}
 
 	/*		LES GETTER ET SETTER		 */
@@ -161,9 +173,9 @@ public class Annonce {
 	public void setSurface(int surface) {
 		this.surface = surface;
 	}
-	
-	
-	
+
+
+
 	/**
 	 * @return pays = Le pays de la propriété
 	 */
@@ -374,7 +386,8 @@ public class Annonce {
 	public void setIdAbonne(int idAbonne) {
 		this.idAbonne = idAbonne;
 	}
-
+	
+	
 
 
 }

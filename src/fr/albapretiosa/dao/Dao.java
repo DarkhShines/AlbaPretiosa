@@ -1,5 +1,6 @@
 package fr.albapretiosa.dao;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import fr.albapretiosa.metier.nico.Abonne;
@@ -9,9 +10,9 @@ import fr.albapretiosa.metier.alain.*;
 public class Dao {
 	public static ArrayList<Abonne> abonnes = initAbo();
 	public static ArrayList<Admin> admins = initAdmin();
-	public static ArrayList<Annonce> annonces;
+	public static ArrayList<Annonce> annonces = initAnnonce();
 	public static ArrayList<Notification> notification = initNotif();
-	public static ArrayList<Commentaire> commentaires;
+	public static ArrayList<Commentaire> commentaires = initComm();
 	
 	
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
@@ -40,9 +41,13 @@ public class Dao {
 			// parrainage = initale de Nom Prenom Alias en majuscule - 3 chiffres aléatoires
 			
 			// abonne 1,2 et 3 utilise le constructeur sans telFixe, le 4 et le 5 l'utilise
+
+			
 			Abonne abonne4 = new Abonne("DupontPremium", "Jack", "Bigboss", "bigboss@gmail.com", "0607717273","0442056322", "password", "DJB-264" );
 			Abonne abonne5 = new Abonne("Sarkozy", "Eric", "Sarkeric", "sarkeric@gmail.com", "0634764903","0442053242", "password", "SES-812" );
 			ArrayList<Abonne> abonnes = new ArrayList<Abonne>();
+
+			
 			abonnes.add(abonne4);
 			abonnes.add(abonne5);
 			return abonnes;
@@ -73,6 +78,10 @@ public class Dao {
 		}
 		
 		public static ArrayList<Annonce> initAnnonce() {
+			ArrayList<Annonce> annonces = new ArrayList<Annonce>();
+			Annonce ann = new Annonce("Manoir DeCruz", 1200, "France", "Hyers", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), "Blablabla", true, true, false, true);
+			Annonce ann1 = new Annonce("Casa Vivaldi", 1200, "France", "Marseille", LocalDate.of(2018,12,12), LocalDate.of(2022,12,12), "Blablabla", true, false, false, true);
+			Annonce ann2 = new Annonce("Chateau Mont Perret", 1200, "France", "Bourg-en-Champagne", LocalDate.of(2019,12,12), LocalDate.of(2021,12,12), "Blablabla", true, true, false, false);
 			return annonces;
 		}
 		
@@ -89,5 +98,12 @@ public class Dao {
 			}
 			
 			return listNotif;
+		}
+		public static ArrayList<Commentaire> initComm() {
+			Commentaire commentaire1 = new Commentaire("Sarkeric", "Ceci est un commentaire, qui se doit d'être asser long pour passer certains test, ça prend de la place", LocalDate.now(), 1);
+			Commentaire commentaire2 = new Commentaire("Sarkeric", "Ceci est un commentaire, asser court", LocalDate.now(), 1);
+			Commentaire commentaire3 = new Commentaire("Sarkeric", "Ceci est un commentaire, qui se doit d'être injurieux pour tester ma méthode de filtrage, alors désolé pour ce qui suit : con CoN pute PUTE s a l o p e ", LocalDate.now(), 1);
+			ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
+			return commentaires;
 		}
 }

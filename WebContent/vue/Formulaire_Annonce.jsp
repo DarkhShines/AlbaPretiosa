@@ -7,27 +7,33 @@
 <html lang="fr">
 
 <head>
-    <!-- basic -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- mobile metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <!-- site metas -->
-    <title>AlbaPretiosa/Déposer annonce</title>
-    <meta name="description" content="Louez une propriété haut de gamme, chateau, luxueuse villa, loft moderne">
-    <meta name="author" content="Zakarya D. Bahou">
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
-    <!-- style css -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/Zak_CSs.css">
-        <!-- style css -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
-    <!-- responsive-->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/responsive.css">
-    <!-- awesome fontfamily -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--[if lt IE 9]>
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- mobile metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<!-- site metas -->
+<title>AlbaPretiosa/Déposer annonce</title>
+<meta name="description"
+	content="Louez une propriété haut de gamme, chateau, luxueuse villa, loft moderne">
+<meta name="author" content="Zakarya D. Bahou">
+<!-- bootstrap css -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
+<!-- style css -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/Zak_CSs.css">
+<!-- style css -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/style.css">
+<!-- responsive-->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/responsive.css">
+<!-- awesome fontfamily -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
@@ -40,7 +46,7 @@
 
 		<div class="sidebar">
 			<!-- Sidebar  -->
-<jsp:include page="/WEB-INF/navbar.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/navbar.jsp"></jsp:include>
 			<div id="content">
 				<!-- header -->
 				<header>
@@ -110,7 +116,8 @@
 							</div>
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
 
-								<form class="main_form" method="post" action="<%=request.getContextPath()%>/CreerAnnonce">
+								<form class="main_form" method="post"
+									action="<%=request.getContextPath()%>/CreerAnnonce">
 									<div class="row">
 
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -157,6 +164,26 @@
 												<option value="Bordeaux">Bordeaux</option>
 											</datalist>
 										</div>
+<!-- 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+											<label for="surface"><strong class="white">Ville</strong></label>
+											<input class="form-control" placeholder="Ville"
+												list="liste_ville" name="ville" required />
+											<datalist id="liste_ville">
+												<option value="Londres">Londres</option>
+												<option value="Manchester">Manchester</option>
+												<option value="Liverpool">Liverpool</option>
+											</datalist>
+										</div>
+										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+											<label for="surface"><strong class="white">Ville</strong></label>
+											<input class="form-control" placeholder="Ville"
+												list="liste_ville" name="ville" required />
+											<datalist id="liste_ville">
+												<option value="Rome">Rome</option>
+												<option value="Florence">Florence</option>
+												<option value="Venise">Venise</option>
+											</datalist>
+										</div> -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
 											<label for="surface"><strong class="white">Option</strong></label>
@@ -184,47 +211,54 @@
 										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
 											<div class="img-box">
 												<figure>
-													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
-														width="3000" height="auto" />
+													<img
+														src="<%=request.getContextPath()%>/assets/images/plus_1.jpg"
+														alt="Ajout d'une photo" width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_1" name="fileName">
+														accept="image/png, image/jpeg, image/jpg" value="img_1"
+														name="fileName">
 												</figure>
 											</div>
 										</div>
 										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
 											<div class="img-box">
 												<figure>
-													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
-														width="3000" height="auto" />
+													<img
+														src="<%=request.getContextPath()%>/assets/images/plus_1.jpg"
+														alt="Ajout d'une photo" width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_2" name="fileName">
+														accept="image/png, image/jpeg, image/jpg" value="img_2"
+														name="fileName">
 												</figure>
 											</div>
 										</div>
 										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
 											<div class="img-box">
 												<figure>
-													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
-														width="3000" height="auto" />
+													<img
+														src="<%=request.getContextPath()%>/assets/images/plus_1.jpg"
+														alt="Ajout d'une photo" width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_3" name="fileName">
+														accept="image/png, image/jpeg, image/jpg" value="img_3"
+														name="fileName">
 												</figure>
 											</div>
 										</div>
 										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
 											<div class="img-box">
 												<figure>
-													<img src="<%=request.getContextPath()%>/assets/images/plus_1.jpg" alt="Ajout d'une photo"
-														width="3000" height="auto" />
+													<img
+														src="<%=request.getContextPath()%>/assets/images/plus_1.jpg"
+														alt="Ajout d'une photo" width="3000" height="auto" />
 													<input type="file"
-														accept="image/png, image/jpeg, image/jpg" value="img_4" name="fileName">
+														accept="image/png, image/jpeg, image/jpg" value="img_4"
+														name="fileName">
 												</figure>
 											</div>
 										</div>
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<input type="submit" class="form-control"
-												placeholder="Valider" />
-												 <input type="reset"
+												placeholder="Valider" /> <input type="reset"
 												class="form-control" placeholder="Reset">
 										</div>
 									</div>
@@ -244,15 +278,18 @@
 								<p>Vous pouvez accéder à votre espace abonné pour consulter
 									la mise en ligne de votre annonces, ainsi que vos annonces déja
 									en ligne. Vous pouvez modifier, supprimer les annonces.</p>
-								<a href="<%=request.getContextPath()%>/vue/ListerAnnonce.jsp">Consulter mes annonces <i
-									class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+								<a href="<%=request.getContextPath()%>/vue/ListerAnnonce.jsp">Consulter
+									mes annonces <i class="fa fa-long-arrow-right"
+									aria-hidden="true"></i>
+								</a>
 							</div>
 						</div>
 						<div
 							class="col-xl-5 col-lg-5 col-md-10 col-sm-12 about_img_boxpdnt">
 							<div class="about_img">
 								<figure class="white">
-									<img src="<%=request.getContextPath()%>/assets/images/nav.jpg" alt="fond noir">
+									<img src="<%=request.getContextPath()%>/assets/images/nav.jpg"
+										alt="fond noir">
 								</figure>
 							</div>
 						</div>
@@ -260,8 +297,7 @@
 				</div>
 			</div>
 		</div>
-		</div>
-			<!-- end about -->
+	</div>
+	<!-- end about -->
 
-<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
-				
+	<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
