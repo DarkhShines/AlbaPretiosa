@@ -12,7 +12,7 @@ public class Dao {
 	public static ArrayList<Admin> admins = initAdmin();
 	public static ArrayList<Annonce> annonces = initAnnonce();
 	public static ArrayList<Notification> notification = initNotif();
-	public static ArrayList<Commentaire> commentaires; 
+	public static ArrayList<Commentaire> commentaires = initComm();
 	
 	
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
@@ -96,5 +96,12 @@ public class Dao {
 			}
 			
 			return listNotif;
+		}
+		public static ArrayList<Commentaire> initComm() {
+			Commentaire commentaire1 = new Commentaire("Sarkeric", "Ceci est un commentaire, qui se doit d'être asser long pour passer certains test, ça prend de la place", LocalDate.now(), 1);
+			Commentaire commentaire2 = new Commentaire("Sarkeric", "Ceci est un commentaire, asser court", LocalDate.now(), 1);
+			Commentaire commentaire3 = new Commentaire("Sarkeric", "Ceci est un commentaire, qui se doit d'être injurieux pour tester ma méthode de filtrage, alors désolé pour ce qui suit : con CoN pute PUTE s a l o p e ", LocalDate.now(), 1);
+			ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
+			return commentaires;
 		}
 }

@@ -16,23 +16,15 @@ import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 
 /**
- * Servlet implementation class ajouteComm
+ * Servlet implementation class ajoutComm
+ * @author Alain Dardot
  */
-@WebServlet("/ajouteComm")
+@WebServlet("/ajoutComm")
 public class AjoutComm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AjoutComm() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+   
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -47,14 +39,15 @@ public class AjoutComm extends HttpServlet {
 		Abonne abonne = (Abonne) session.getAttribute("Abonne");
 		String comm = request.getParameter("commentaire");
 		int idAnnonce = Integer.parseInt(request.getParameter("idAnnonce"));
-		Commentaire commentaire = new Commentaire(abonne.getAlias(), comm , LocalDate.now());
+		Commentaire commentaire = new Commentaire(abonne.getAlias(), comm , LocalDate.now(), idAnnonce);
 		for(Annonce ann : Dao.annonces) {
 			if(ann.getIdAnnonce() == idAnnonce ) {
 				ann.addComm(commentaire.getIdCom());
 			}
 		}
 		Dao.commentaires.add(commentaire);
-		System.out.println("Do Post de AjoutComm départ");
+		response.sendRedirect("vue/consulter.jsp");
+		System.out.println("Do Post de AjoutComm fin");
 	}
 
 }
