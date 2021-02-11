@@ -21,7 +21,7 @@
 		<h1 class="titre-inscription mb-4">Espace Personnel</h1>
 
 		<!-- 							                      INFOS PERSO                                                            -->
-		<form class="form-inscription" action="#" method="post">
+		<form class="form-inscription" action="<%=request.getContextPath()%>/ModificationServlet" method="post">
 			<div class="shadow-sm p-3 mb-5 bg-warning rounded">
 				<h2>Informations Personnelles</h2>
 				<div class="form-row pl-2 pb-2 justify-content-start">
@@ -37,7 +37,7 @@
 				<div class="form-row pl-2 justify-content-start">
 					<div class="form-group col-md-4">
 						<label for="prenom">Prenom</label> <input type="text"
-							class="form-control" id="prenom" name="Prenom"
+							class="form-control" id="prenom" name="prenom"
 							placeholder="prenom" required value="<%= abonne.getPrenom() %>">
 					</div>
 				</div>
@@ -76,23 +76,23 @@
 				</div>
 				<div class="form-row pl-2 justify-content-start">
 					<div class="form-group col-md-4 ">
-						<label for="password">Mot de passe</label> <input type="password"
-							class="form-control" id="password" name="password"
-							placeholder="Mot de passe" required value="<%= abonne.getMdp() %>">
+						<label for="mdp">Mot de passe</label> <input type="password"
+							class="form-control" id="mdp" name="mdp"
+							placeholder="Mot de passe" >
 					</div>
 				</div>
 				<div class="form-row pl-2 justify-content-start">
 					<div class="form-group col-md-4 ">
 						<label for="passwordConfirm">Nouveau mot de passe</label> <input
 							type="password" class="form-control" id="newPassword"
-							name="newPassword" placeholder="Nouveau mot de passe" required>
+							name="newPassword" placeholder="Nouveau mot de passe" >
 					</div>
 				</div>
 				<div class="form-row pl-2 justify-content-start">
 					<div class="form-group col-md-4 ">
 						<label for="passwordConfirm">Confirmer le nouveau mot de passe</label> <input
 							type="password" class="form-control" id="passwordConfirm"
-							name="passwordConfirm" placeholder="Confirmer" required>
+							name="passwordConfirm" placeholder="Confirmer" >
 					</div>
 				</div>
 			</div>
