@@ -115,21 +115,23 @@
 								</h2>
 							</div>
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-
+								<!-- FORMULAIRE DE CREATION D'ANNONCE -->
 								<form class="main_form" method="post"
 									action="<%=request.getContextPath()%>/CreerAnnonce">
 									<div class="row">
-
+											<!-- CHAMPS TITRE -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<label for="titre"><strong class="white">Titre</strong></label>
 											<input class="form-control" placeholder="Titre" type="text"
 												name="titre" required />
 										</div>
+											<!-- CHAMPS SURFACE -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<label for="surface"><strong class="white">Surface
 													en m²</strong></label> <input class="form-control" placeholder="Surface"
 												type="number" name="surface" min="100" max="112100" required />
 										</div>
+										<!-- CHAMPS DATE DEBUT -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<label for="surface"><strong class="white">Début</strong></label>
 											<input class="form-control"
@@ -137,6 +139,7 @@
 												name="creneau_debut" required
 												pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
 										</div>
+											<!-- CHAMPS DATE FIN -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<label for="surface"><strong class="white">Fin</strong></label>
 											<input class="form-control"
@@ -144,6 +147,7 @@
 												name="creneau_fin" required
 												pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
 										</div>
+												<!-- CHAMPS PAYS -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<label for="surface"><strong class="white">Pays</strong></label>
 											<input class="form-control" placeholder="Pays"
@@ -154,6 +158,7 @@
 												<option value="Italie">Italie</option>
 											</datalist>
 										</div>
+										<!-- CHAMPS VILLE -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<label for="surface"><strong class="white">Ville</strong></label>
 											<input class="form-control" placeholder="Ville"
@@ -184,6 +189,7 @@
 												<option value="Venise">Venise</option>
 											</datalist>
 										</div> -->
+										<!-- CHAMPS OPTION -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
 											<label for="surface"><strong class="white">Option</strong></label>
@@ -203,11 +209,13 @@
 
 											</div>
 										</div>
+										<!-- CHAMPS DESCRIPTION-->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<label for="description"><strong class="white">Description</strong></label>
 											<textarea class="textarea" placeholder="Description"
 												name="description"></textarea>
 										</div>
+										<!-- CHAMPS PHOTO-->
 										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
 											<div class="img-box">
 												<figure>
@@ -256,6 +264,7 @@
 												</figure>
 											</div>
 										</div>
+										<!-- VALIDATION-->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<input type="submit" class="form-control"
 												placeholder="Valider" /> <input type="reset"

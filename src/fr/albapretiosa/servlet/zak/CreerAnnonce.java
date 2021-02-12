@@ -4,6 +4,7 @@ package fr.albapretiosa.servlet.zak;
 import java.io.IOException;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
@@ -40,7 +41,7 @@ public class CreerAnnonce extends HttpServlet {
 	 * @param titre
 	 * @throws Exception
 	 */
-	public void controleTitre( String titre ) throws Exception {
+	public void controleTitre( String titre ) throws Exception_Zak {
 		if( titre == null || titre.trim() == "") {
 			throw new Exception_Zak( "Le titre n'est pas renseigné" );
 		}
@@ -58,7 +59,7 @@ public class CreerAnnonce extends HttpServlet {
 	 * @throws Exception
 	 */
 
-	public void controleSurface(int surface) throws Exception{
+	public void controleSurface(int surface) throws Exception_Zak{
 		if( surface == 0 ) {
 			throw new Exception_Zak( "La surface ne peut être égale à 0 ");
 		}
@@ -90,7 +91,7 @@ public class CreerAnnonce extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Abonne a = (Abonne)session.getAttribute("Abonne");	
 
-		String titre 			= request.getParameter("titre").strip();		
+		String titre 			= request.getParameter("titre").strip();
 		int surface 			= Integer.parseInt(request.getParameter("surface").strip());
 		String pays				= request.getParameter("pays").strip();
 		String ville 			= request.getParameter("ville").strip();
@@ -106,6 +107,22 @@ public class CreerAnnonce extends HttpServlet {
 		//		Photo photo_3 			= request.getParameter("img_3");
 		//		Photo photo_4 			= request.getParameter("img_4");
 
+		
+		/*CONTROLE DES DONNEES*/
+		ArrayList<String> messages = new ArrayList<String>();
+		try {
+			controleTitre(titre);
+			
+		}catch(Exception_Zak e){
+			messages.add(e.getMessage());
+		} 
+		try {
+			controleSurface(surface);
+			
+		}catch(Exception_Zak e){
+			messages.add(e.getMessage());
+		} 
+		
 		try {
 			System.out.println("Je rentre dans le try de doPost de CréerAnnonce");
 			Annonce annonce = new Annonce();
@@ -144,7 +161,7 @@ public class CreerAnnonce extends HttpServlet {
 		}catch (NullPointerException npe) {
 
 			request.setAttribute("message", "Votre annonce ne correspond pas à nos critères");
-
+			request.setAttribute("messages", messages);
 			String chemin = this.getServletContext().getInitParameter("pageErreur");
 
 			RequestDispatcher disp = request.getRequestDispatcher(chemin);

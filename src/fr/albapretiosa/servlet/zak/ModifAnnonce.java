@@ -43,6 +43,7 @@ public class ModifAnnonce extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Je suis dans le doPost de la servlet ModifAnnonce");
+		
 		HttpSession session = request.getSession(true);
 		
 		Abonne a = (Abonne)session.getAttribute("Abonne"); 
@@ -51,7 +52,7 @@ public class ModifAnnonce extends HttpServlet {
 		String titre 			= request.getParameter("titre");		
 		int surface 			= Integer.parseInt(request.getParameter("surface").strip());
 		ArrayList<Annonce> ann  = Dao.annonces;
-		int idAnnonce = Integer.parseInt(request.getParameter("ID"));
+		int idAnnonce = Integer.parseInt(request.getParameter("id"));
 		
 		for (int i = 0; i < ann.size(); i++) {
 			if (ann.get(i).getIdAnnonce() == idAnnonce) {
@@ -60,7 +61,7 @@ public class ModifAnnonce extends HttpServlet {
 				}
 		}
 		
-		response.sendRedirect("vue/ListerAnnonce.jsp");
+		response.sendRedirect("vue/#");
 	}
 
 }
