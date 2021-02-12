@@ -21,7 +21,8 @@
 		System.out.println(annonce.getDescription());
 		if(idAnnonce == annonce.getIdAnnonce()){
 			ann = annonce;
-		} 
+		}
+		
 	}
 	
 %>
@@ -90,20 +91,21 @@
 					pour des raisons évidentes.  -->
 					<div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 commEntier">
 						<div class="infocomm">
-							<p>le 01/01, <span class="pseudoSession">DarkhShines</span> a écrit :</p><a class="aleft" href="#"><i class="fas fa-pen imgleft"></i></a><a href="#"><i class="far fa-trash-alt imgright"></i></a><br>
+							<p>le 01/01, <span class="pseudoSession">DarkhShines</span> a écrit :</p><a class="aleft" href="<%=request.getContextPath()%>/modifcomm?idAnnonce=<%= ann.getIdAnnonce()%>"><i class="fas fa-pen imgleft"></i></a><a href="<%=request.getContextPath()%>/suppcomm?idAnnonce=<%= ann.getIdAnnonce()%>"><i class="far fa-trash-alt imgright"></i></a><br>
 						</div>
 						<div class="lecomm">
 							<p>Commentaire 1</p>
 						</div>
 					</div>
 					<!-- L'envoi du commentaire sera géré par une servlet  -->
-						<form method="POST" action="<%=request.getContextPath()%>/AjoutComm">
+						<form method="POST" action="<%=request.getContextPath()%>/ajoutcomm">
 							
 								<p>Commentaire :</p>
 							
 							<div class="divcomm">
 								<textarea name="commentaire" class="areacom" cols="50"></textarea>
-								<button type="submit" class="btn btn-warning"><i class="far fa-paper-plane"></i></button>
+								<!-- <button type="submit" class="btn btn-warning"><i class="far fa-paper-plane"></i></button> -->
+								<a href="<%=request.getContextPath()%>/ajoutcomm?idAnnonce=<%= ann.getIdAnnonce()%>"><i class="far fa-paper-plane"></i></a>
 							</div>
 							
 							

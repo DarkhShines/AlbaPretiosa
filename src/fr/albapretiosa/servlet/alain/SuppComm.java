@@ -16,7 +16,7 @@ import fr.albapretiosa.metier.nico.Abonne;
  * Servlet implementation class SuppComm
  * @author Alain Dardot
  */
-@WebServlet("/SuppComm")
+@WebServlet("/suppcomm")
 public class SuppComm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,16 +24,17 @@ public class SuppComm extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Do Get de SuppComm");
 		HttpSession session = request.getSession(true);
-		Abonne abonne = (Abonne) session.getAttribute("Abonne"); // Je récupère l'abonné en session
+		Abonne abonne = (Abonne) session.getAttribute("Abonne"); // Alain :  Je récupère l'abonné en session
+		int idAnnonce = Integer.parseInt(request.getParameter("idAnnonce"));
 		int idComm = Integer.parseInt(request.getParameter("idComm"));
 		for(Commentaire commentaire : Dao.commentaires) {
-			if(commentaire.getIdCom() == idComm) { // Je cherche dans tout les commentaires lequel à l'ID que je récupère via l'url 
+			if(commentaire.getIdCom() == idComm) { // Alain : Je cherche dans tout les commentaires lequel à l'ID que je récupère via l'url 
 				Dao.commentaires.remove(idComm);
 			}
 		}
 		
 		System.out.println("Do Get de SuppComm fin");
-		response.sendRedirect("vue/consulter.jsp");
+		response.sendRedirect("vue/consulter.jsp?idAnnonce="+idAnnonce+""); // Alain : Je renvoi sur consulter.jsp avec l'ID de l'annonce pour charger la bonne page
 		
 	}
 
