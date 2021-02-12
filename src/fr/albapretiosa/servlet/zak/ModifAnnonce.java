@@ -51,17 +51,17 @@ public class ModifAnnonce extends HttpServlet {
 		
 		String titre 			= request.getParameter("titre");		
 		int surface 			= Integer.parseInt(request.getParameter("surface").strip());
-		ArrayList<Annonce> ann  = Dao.annonces;
 		int idAnnonce = Integer.parseInt(request.getParameter("id"));
 		
-		for (int i = 0; i < ann.size(); i++) {
-			if (ann.get(i).getIdAnnonce() == idAnnonce) {
-				ann.get(i).setTitre(titre);
-				ann.get(i).setSurface(surface);
+		for (Annonce ann : Dao.annonces) {
+			if (ann.getIdAnnonce() == idAnnonce) {
+				ann.setTitre(titre);
+				ann.setSurface(surface);
+				
 				}
 		}
 		
-		response.sendRedirect("vue/#");
+		response.sendRedirect("vue/ListerAnnonce.jsp");
 	}
 
 }
