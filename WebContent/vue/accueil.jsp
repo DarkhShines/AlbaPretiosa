@@ -56,6 +56,7 @@
 	<a href="/AlbaPretiosa/vue/consulter.jsp?idAnnonce=<%= ann.getIdAnnonce()%>"><%= ann.getTitre() %></a>
 	<% } %>
 
+
 	<div class="about">
 		<div class="container">
 			<div class="row">
