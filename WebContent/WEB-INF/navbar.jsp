@@ -3,10 +3,15 @@
 	pageEncoding="utf-8"%>
 <%@ page import="fr.albapretiosa.dao.*"%>
 <%@ page import="fr.albapretiosa.metier.nico.*"%>
+<%@ page import="fr.albapretiosa.metier.alain.*"%>
 <%
+Admin admin = new Admin();
+if(session.getAttribute("Abonne") instanceof Admin){
+	admin = (Admin) session.getAttribute("Abonne");
+}
+Abonne abonne = (Abonne) session.getAttribute("Abonne");
 
 
- Abonne abonne = (Abonne) session.getAttribute("Abonne");
 
 %>
 <!--/ Nav Star /-->
@@ -17,9 +22,6 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="accueil.jsp">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="consulter.jsp">Consulter</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Formulaire_Annonce.jsp">Déposer une annonce</a>
@@ -39,6 +41,14 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="apropos.jsp">A propos</a>
+                </li>
+                 <% if(admin.getAlias() != null) { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="vueAdmin.jsp">VUE ADMIN</a>
+                </li>
+                <% } %>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= request.getContextPath()%>/deconnexion">Deconnexion</a>
                 </li>
             </ul>
         </div>

@@ -19,21 +19,13 @@ import fr.albapretiosa.metier.zak.Annonce;
  * Servlet implementation class ajoutComm
  * @author Alain Dardot
  */
-@WebServlet("/ajoutComm")
+@WebServlet("/ajoutcomm")
 public class AjoutComm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Do Post de AjoutComm");
 		HttpSession session = request.getSession(true);
 		Abonne abonne = (Abonne) session.getAttribute("Abonne");
@@ -46,8 +38,15 @@ public class AjoutComm extends HttpServlet {
 			}
 		}
 		Dao.commentaires.add(commentaire);
-		response.sendRedirect("vue/consulter.jsp");
+		response.sendRedirect("vue/consulter.jsp?idAnnonce="+idAnnonce+"");
 		System.out.println("Do Post de AjoutComm fin");
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

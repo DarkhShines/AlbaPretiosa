@@ -9,7 +9,9 @@ import fr.albapretiosa.metier.nico.Abonne;
 public class Admin extends Abonne {
 
 	
-	
+	public Admin() {
+		
+	}
 	public Admin(String nom, String prenom, String alias, String email, String telPortable, String telFixe, String mdp,
 			String parrainage) {
 		super(nom, prenom, alias, email, telPortable, telFixe, mdp, parrainage);
