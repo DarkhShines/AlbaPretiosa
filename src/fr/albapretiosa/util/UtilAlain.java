@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class UtilAlain {
+	static String errorLocation = "/WEB-INF/Error.jsp";
 	
 	/*  DATE FORMAT EN FRANCAIS  */
 	public static String formatDateFr(LocalDate date) {
@@ -15,5 +16,9 @@ public class UtilAlain {
 			dateEnFr = "Date is null";
 		}
 		return dateEnFr;
+	}
+	
+	public static String getErrorLocation() {
+		return errorLocation;
 	}
 }

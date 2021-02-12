@@ -140,7 +140,7 @@
 					class="btn btn-warning ml-2 mt-2 align-self-end">Confirmer</button>
 					
 				<% if(abonne instanceof Admin){  %>
-					<div class="btn btn-warning ml-2 mt-2 align-self-end divListeAbo"><a href="<%=request.getContextPath()%>/vue/vueAdmin.jsp">Liste Abonnés</a></div>
+					<div class="btn btn-warning ml-2 mt-2 align-self-end divListeAbo"><a class="lienListeAbo" href="<%=request.getContextPath()%>/vue/vueAdmin.jsp">Liste Abonnés</a></div>
 				<%} %>
 			</div>
 		</form>

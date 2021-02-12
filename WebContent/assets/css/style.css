@@ -728,10 +728,26 @@ p {
      display: inline-block;
 }
 /** end Our Client **/
-/* PAGE MODIF Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas PAGE ACCUEIL*/
+/* PAGE MODIF Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas PAGE MODIF*/
 .divListeAbo{
 	display: block !important;
+}
+.lienListeAbo:hover{
+	text-decoration: none !important;
+}
+ /* PAGE ERROR Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas PAGE ERROR*/
+.errordiv{
+	padding-top: 180px  !important;
+	padding-bottom:  180px !important;
+}
+.textError{
+	padding-top: 70px  !important;
+}
+.titreError2{
+	color: #d8b00f;
 	
 }
-
- 
+.titreError{
+	font-size: 50px;
+	color: #d8b00f;
+}
