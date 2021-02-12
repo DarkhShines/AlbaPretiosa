@@ -7,7 +7,7 @@
 	<jsp:include page="/WEB-INF/navbar.jsp" />
 
 
-
+<!-- Ici Zak -->
 	<!--   CAROUSEL CAROUSEL CAROUSEL  -->
 	<div id="carouselExampleIndicators" class="carousel slide"
 		data-ride="carousel">
