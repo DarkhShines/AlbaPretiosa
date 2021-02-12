@@ -59,7 +59,7 @@ public class ConnexionServlet extends HttpServlet {
 			out.println("Connection réussie "+alias);
 			HttpSession session = request.getSession(true);
 			session.setAttribute("Abonne", abonneOk);
-			response.sendRedirect(context+"/vue/infosPersonnelles.jsp");
+			response.sendRedirect(context+"/vue/accueil.jsp");
 		}
 		else{
 			//		request.setAttribute("message", "Identifiants ou mot de passe incorrect.");

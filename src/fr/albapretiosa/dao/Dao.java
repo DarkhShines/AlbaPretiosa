@@ -97,6 +97,15 @@ public class Dao {
 			
 			return listNotif;
 		}
+		
+		public static String listAnnonces() {
+			String annonces = "<ul>";
+			for(Annonce ann : Dao.annonces){
+			annonces += "<li><a href=\"<%= request.getContextPath() +\"/consulter.jsp?ID=" + ann.getIdAnnonce() + ">" +ann.getTitre() + "</a></li>";
+			 } 
+			annonces += "</ul>";
+			return annonces;
+		}
 		public static ArrayList<Commentaire> initComm() {
 			Commentaire commentaire1 = new Commentaire("Sarkeric", "Ceci est un commentaire, qui se doit d'être asser long pour passer certains test, ça prend de la place", LocalDate.now(), 1);
 			Commentaire commentaire2 = new Commentaire("Sarkeric", "Ceci est un commentaire, asser court", LocalDate.now(), 1);

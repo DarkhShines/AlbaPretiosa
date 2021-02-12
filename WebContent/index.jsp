@@ -26,7 +26,7 @@
             
             
             <a href="vue/inscription.jsp">Pas encore de compte ? Cliquez ici !</a>
-            <button type="submit" class="btn-connexion" action="#">Connexion
+            <button type="submit" class="btn-connexion">Connexion
             </button>
         </form>
     </div>

@@ -1,3 +1,5 @@
+<%@page import="fr.albapretiosa.metier.zak.Annonce"%>
+<%@page import="fr.albapretiosa.dao.Dao"%>
 <jsp:include page="/WEB-INF/header.jsp" />
 <title>Consulter une annonce</title>
  <!-- Alain : A l'avenir le titre de cette page sera dynamique,
@@ -10,6 +12,17 @@
 </head>
 
 <body class="main-layout about_page">
+<%
+	Annonce ann = new Annonce();
+	String recup = request.getParameter("idAnnonce");
+	int idAnnonce = Integer.parseInt(recup);
+	for(Annonce annonce : Dao.annonces){
+		if(idAnnonce == annonce.getIdAnnonce()){
+			ann = annonce;
+		} 
+	}
+	
+%>
 <jsp:include page="/WEB-INF/navbar.jsp" />
 <script src="https://kit.fontawesome.com/746f19e510.js"></script>
 	<div class="yellow_bg">
@@ -38,17 +51,25 @@
 							et l'intégralité de cette page sera généré automatiquement lorsqu'une annonce
 							aura été selectionnée. Une page de codé, des milliers de générées. 
 							 -->
-							<h3 class="titreann">Titre de l'annonce</h3>
-							<p>Très beau chateau situé en Angleterre. 5000 chambres, inombrables salles de bain.
-							Encore du blabla blabla
-							<br>Surface totale : 12000 m²
+							<h3 class="titreann"><%= ann.getTitre() %></h3>
+							<p><%= ann.getDescription() %>
+							<br><%= ann.getSurface() %>
 							<br>Petits plus :<br></p>
 						    <ul>
-							  <li>- Lac</li>
-							  <li>- Terrain de Quidditch</li>
-							  <li>- Salle de bal</li>
+						      <% if(ann.isGolf()){ %>
+						      <li>- Golf</li>
+						      <% } %>
+							  <% if(ann.isPiscine()){ %>
+						      <li>- Piscine</li>
+						      <% } %>
+							  <% if(ann.isSpa()){ %>
+						      <li>- Spa</li>
+						      <% } %>
+							  <% if(ann.isTennis()){ %>
+						      <li>- Tennis</li>
+						      <% } %>
 							</ul>
-							<p>Ce bien est disponnible jusqu'au 01/01/2347, offrez vous des vacances !</p>
+							<p>Ce bien est disponnible du <%= ann.getCreneau_debut() %>jusqu'au <%= ann.getCreneau_fin() %>, offrez vous des vacances !</p>
 							<p>Prix à la journée : 21.000 Euro</p>
 							<br>
 							<p>Date de début du séjour : </p>

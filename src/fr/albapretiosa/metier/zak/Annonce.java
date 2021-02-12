@@ -26,7 +26,7 @@ public class Annonce {
 	private int 	  idAnnonce;
 	private int	      idAbonne;
 	private String    titre;
-	private int		  surface;
+	private int		  surface;                                        
 	private String	  pays;
 	private String 	  ville;
 	private LocalDate creneau_debut;
