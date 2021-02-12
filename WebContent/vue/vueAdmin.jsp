@@ -27,7 +27,10 @@
 		<button type="submit" class="btn btn-success">Publier</button>
 	</form>
 </div>
-
+<form class="bannissement" action="<%=request.getContextPath()%>/bannissement" method="post">
+	<%= Dao.selectAbo() %><br>
+	<button type="submit" class="btn btn-warning">Bannir !</button>
+</form>
 
 
 

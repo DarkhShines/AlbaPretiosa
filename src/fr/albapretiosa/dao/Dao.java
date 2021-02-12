@@ -9,6 +9,7 @@ import fr.albapretiosa.metier.alain.*;
 
 public class Dao {
 	public static ArrayList<Abonne> abonnes = initAbo();
+	public static ArrayList<Abonne> abonnesBan = new ArrayList<Abonne>();
 	public static ArrayList<Admin> admins = initAdmin();
 	public static ArrayList<Annonce> annonces = initAnnonce();
 	public static ArrayList<Notification> notification = initNotif();
@@ -41,12 +42,18 @@ public class Dao {
 			// parrainage = initale de Nom Prenom Alias en majuscule - 3 chiffres aléatoires
 			
 			// abonne 1,2 et 3 utilise le constructeur sans telFixe, le 4 et le 5 l'utilise
-			
+			Abonne abonne1 = new Abonne("user1", "user1", "user1", "user1@gmail.com", "0607717273","0442056322", "password", "DJB-264" );
+			Abonne abonne2 = new Abonne("user2", "user2", "user2", "user2@gmail.com", "0634764903","0442053242", "password", "SES-812" );
+			Abonne abonne3 = new Abonne("user3", "user3", "user3", "user3@gmail.com", "0607717273","0442056322", "password", "DJB-264" );
+			Abonne abonne6 = new Abonne("user4", "user4", "user4", "sarkeric@gmail.com", "0634764903","0442053242", "password", "SES-812" );
 			Abonne abonne4 = new Abonne("DupontPremium", "Jack", "Bigboss", "bigboss@gmail.com", "0607717273","0442056322", "password", "DJB-264" );
 			Abonne abonne5 = new Abonne("Sarkozy", "Eric", "Sarkeric", "sarkeric@gmail.com", "0634764903","0442053242", "password", "SES-812" );
 			ArrayList<Abonne> abonnes = new ArrayList<Abonne>();
-			
+			abonnes.add(abonne1);
+			abonnes.add(abonne2);
+			abonnes.add(abonne3);
 			abonnes.add(abonne4);
+			abonnes.add(abonne6);
 			abonnes.add(abonne5);
 			return abonnes;
 		}
@@ -80,9 +87,20 @@ public class Dao {
 			Annonce ann = new Annonce("Manoir DeCruz", 1200, "France", "Hyers", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), "Blablabla", true, true, false, true);
 			Annonce ann1 = new Annonce("Casa Vivaldi", 1200, "France", "Marseille", LocalDate.of(2018,12,12), LocalDate.of(2022,12,12), "Blablabla", true, false, false, true);
 			Annonce ann2 = new Annonce("Chateau Mont Perret", 1200, "France", "Bourg-en-Champagne", LocalDate.of(2019,12,12), LocalDate.of(2021,12,12), "Blablabla", true, true, false, false);
+			annonces.add(ann);
+			annonces.add(ann1);
+			annonces.add(ann2);
 			return annonces;
 		}
-		
+		public static String selectAbo() {
+			String select = "<label for=\"abo\">Choisir un abonné : </label>" + 
+							"<select name=\"abo\" id=\"abo\">";
+			for(Abonne abonne : Dao.abonnes) {
+				select +="    <option value="+abonne.getIdAbonne()+">"+ abonne.getNom()+" , " + abonne.getPrenom() +"</option>\r\n";
+			}
+			select += "</select>";
+			return select;
+		}
 		public static String listNotif() {
 			String listNotif = "";
 			for (Notification notification : notification) {
@@ -101,7 +119,8 @@ public class Dao {
 		public static String listAnnonces() {
 			String annonces = "<ul>";
 			for(Annonce ann : Dao.annonces){
-			annonces += "<li><a href=\"<%= request.getContextPath() +\"/consulter.jsp?ID=" + ann.getIdAnnonce() + ">" +ann.getTitre() + "</a></li>";
+			annonces += "<li><a href=\"/AlbaPretiosa +\"/consulter.jsp?ID=" + ann.getIdAnnonce() + ">" +ann.getTitre() + "</a></li>";
+			annonces += "salut";
 			 } 
 			annonces += "</ul>";
 			return annonces;

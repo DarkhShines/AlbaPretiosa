@@ -1,5 +1,6 @@
 <%@page import="fr.albapretiosa.metier.zak.Annonce"%>
 <%@page import="fr.albapretiosa.dao.Dao"%>
+<%@page import="fr.albapretiosa.util.*"%>
 <jsp:include page="/WEB-INF/header.jsp" />
 <title>Consulter une annonce</title>
  <!-- Alain : A l'avenir le titre de cette page sera dynamique,
@@ -17,6 +18,7 @@
 	String recup = request.getParameter("idAnnonce");
 	int idAnnonce = Integer.parseInt(recup);
 	for(Annonce annonce : Dao.annonces){
+		System.out.println(annonce.getDescription());
 		if(idAnnonce == annonce.getIdAnnonce()){
 			ann = annonce;
 		} 
@@ -69,8 +71,7 @@
 						      <li>- Tennis</li>
 						      <% } %>
 							</ul>
-							<p>Ce bien est disponnible du <%= ann.getCreneau_debut() %>jusqu'au <%= ann.getCreneau_fin() %>, offrez vous des vacances !</p>
-							<p>Prix à la journée : 21.000 Euro</p>
+							<p>Ce bien est disponnible du <%= UtilAlain.formatDateFr(ann.getCreneau_debut()) %> jusqu'au <%= UtilAlain.formatDateFr(ann.getCreneau_fin()) %>, offrez vous des vacances !</p>
 							<br>
 							<p>Date de début du séjour : </p>
 							<input type="date" name="datedebut">
@@ -96,13 +97,13 @@
 						</div>
 					</div>
 					<!-- L'envoi du commentaire sera géré par une servlet  -->
-						<form method="POST" action="traitement_commentaire.java">
+						<form method="POST" action="<%=request.getContextPath()%>/AjoutComm">
 							
 								<p>Commentaire :</p>
 							
 							<div class="divcomm">
 								<textarea name="commentaire" class="areacom" cols="50"></textarea>
-								<button type="button" class="btn btn-warning"><i class="far fa-paper-plane"></i></button>
+								<button type="submit" class="btn btn-warning"><i class="far fa-paper-plane"></i></button>
 							</div>
 							
 							

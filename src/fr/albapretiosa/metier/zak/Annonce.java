@@ -101,7 +101,7 @@ public class Annonce {
 	 * @see package fr.albapretiosa.servlet.zak/CreerAnnonce.java 
 	 * @see WebContent/vue/Formulaire_Annonce.jsp
 	 */
-	public Annonce(String titre, int surface, String pays, String ville, LocalDate creneau_debut, LocalDate creneau_fin, String descritpion, boolean piscine, boolean spa, boolean golf, boolean tennis) {
+	public Annonce(String titre, int surface, String pays, String ville, LocalDate creneau_debut, LocalDate creneau_fin, String description, boolean piscine, boolean spa, boolean golf, boolean tennis) {
 
 		setIdAnnonce(genereIdAnnonce());
 		setTitre(titre);

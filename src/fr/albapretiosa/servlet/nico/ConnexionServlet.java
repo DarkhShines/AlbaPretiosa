@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.albapretiosa.metier.alain.Admin;
 import fr.albapretiosa.metier.nico.Abonne;
+import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.dao.Dao;
 
 
@@ -35,6 +36,7 @@ public class ConnexionServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String context = request.getContextPath();
+		System.out.println(context);
 		ArrayList<Abonne> abonnes = Dao.abonnes;
 		ArrayList<Admin> admins = Dao.admins;
 		Abonne abonneOk = new Abonne();
@@ -42,7 +44,10 @@ public class ConnexionServlet extends HttpServlet {
 		String alias = request.getParameter("alias");
 		String mdp = request.getParameter("mdp");
 		boolean connectionOk = false;
-
+		
+		for(Annonce annonce : Dao.annonces){
+			System.out.println(annonce.getDescription()); 
+		}
 		for (Abonne abonne : abonnes) {
 			if(alias.equals(abonne.getAlias()) && mdp.equals(abonne.getMdp())) {
 				connectionOk = true;
