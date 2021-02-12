@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.albapretiosa.metier.alain.Admin;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.dao.Dao;
-
 
 
 /**
@@ -36,6 +36,7 @@ public class ConnexionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String context = request.getContextPath();
 		ArrayList<Abonne> abonnes = Dao.abonnes;
+		ArrayList<Admin> admins = Dao.admins;
 		Abonne abonneOk = new Abonne();
 		PrintWriter out = response.getWriter();
 		String alias = request.getParameter("alias");
@@ -48,8 +49,15 @@ public class ConnexionServlet extends HttpServlet {
 				abonneOk = abonne;
 			}
 		}
+		for (Admin admin : admins) {
+			if(alias.equals(admin.getAlias()) && mdp.equals(admin.getMdp())) {
+				connectionOk = true;
+				abonneOk = admin;
+			}
+		}
 		if(connectionOk) {
 			out.println("Connection réussie "+alias);
+			System.out.println(abonneOk.getNom());
 			HttpSession session = request.getSession(true);
 			session.setAttribute("Abonne", abonneOk);
 			response.sendRedirect(context+"/vue/infosPersonnelles.jsp");

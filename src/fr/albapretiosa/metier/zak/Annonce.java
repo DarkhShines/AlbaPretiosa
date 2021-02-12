@@ -23,7 +23,6 @@ public class Annonce {
 	private static int	incrementIdAnnonce;
 
 	/*		LISTE DES VARIABLES D'INSTANCES		 */
-	private ArrayList<String> idCommList = new ArrayList<String>();
 	private int 	  idAnnonce;
 	private int	      idAbonne;
 	private String    titre;
@@ -37,6 +36,7 @@ public class Annonce {
 	private boolean   spa;
 	private boolean   golf;
 	private boolean   tennis;
+	private ArrayList<Integer> idCommList = new ArrayList<Integer>();
 
 	Photo photo1     = new Photo();
 	Photo photo2     = new Photo();
@@ -136,14 +136,14 @@ public class Annonce {
 	/**
 	 * @param id
 	 */
-	public void addComm(String id) {
+	public void addComm(int id) {
 		this.idCommList.add(id);
 	}
 	
 	/**
 	 * @param id
 	 */
-	public void deleteComm(String id) {
+	public void deleteComm(int id) {
 		this.idCommList.remove(id);
 	}
 
@@ -386,7 +386,8 @@ public class Annonce {
 	public void setIdAbonne(int idAbonne) {
 		this.idAbonne = idAbonne;
 	}
-
+	
+	
 
 
 }

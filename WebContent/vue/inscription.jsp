@@ -19,7 +19,7 @@
 					</div>
 					<div class="form-group col-md-4">
 						<label for="prenom">Prenom</label> <input type="text"
-							class="form-control" id="prenom" name="Prenom"
+							class="form-control" id="prenom" name="prenom"
 							placeholder="prenom" required>
 					</div>
 				</div>

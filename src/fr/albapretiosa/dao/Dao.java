@@ -7,12 +7,12 @@ import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.metier.alain.*;
 
-
 public class Dao {
 	public static ArrayList<Abonne> abonnes = initAbo();
-	public static ArrayList<Newsletter> newsletter;
-	public static ArrayList<Commentaire> commentaires;
+	public static ArrayList<Admin> admins = initAdmin();
 	public static ArrayList<Annonce> annonces = initAnnonce();
+	public static ArrayList<Notification> notification = initNotif();
+	public static ArrayList<Commentaire> commentaires = initComm();
 	
 	
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
@@ -41,22 +41,40 @@ public class Dao {
 			// parrainage = initale de Nom Prenom Alias en majuscule - 3 chiffres aléatoires
 			
 			// abonne 1,2 et 3 utilise le constructeur sans telFixe, le 4 et le 5 l'utilise
-			Abonne abonne1 = new Abonne("Muscat", "Nicolas", "Dayuum", "dayuum@gmail.com", "0607080910", "password", "NMD-123" );
-			Abonne abonne2 = new Abonne("Dardot", "Alain", "Darkhshines", "darkhshines@gmail.com", "0607030210", "password", "DAD-456" );
-			Abonne abonne3 = new Abonne("IronmanPremium", "Zak", "Kirby", "kirby@gmail.com", "0601101112", "password", "IZK-789" );
+
+			
 			Abonne abonne4 = new Abonne("DupontPremium", "Jack", "Bigboss", "bigboss@gmail.com", "0607717273","0442056322", "password", "DJB-264" );
 			Abonne abonne5 = new Abonne("Sarkozy", "Eric", "Sarkeric", "sarkeric@gmail.com", "0634764903","0442053242", "password", "SES-812" );
 			ArrayList<Abonne> abonnes = new ArrayList<Abonne>();
-			abonnes.add(abonne1);
-			abonnes.add(abonne2);
-			abonnes.add(abonne3);
+
+			
 			abonnes.add(abonne4);
 			abonnes.add(abonne5);
 			return abonnes;
 		}
+		public static ArrayList<Admin> initAdmin() {
+			// parrainage = initale de Nom Prenom Alias en majuscule - 3 chiffres aléatoires
+			
+			// abonne 1,2 et 3 utilise le constructeur sans telFixe, le 4 et le 5 l'utilise
+			Admin Dayuum = new Admin("Muscat", "Nicolas", "Dayuum", "dayuum@gmail.com", "0607080910", "password", "NMD-123" );
+			Admin DarkhShines = new Admin("Dardot", "Alain", "Darkhshines", "darkhshines@gmail.com", "0607030210", "password", "DAD-456" );
+			Admin Zed = new Admin("Bahou", "Zak", "Kirby", "kirby@gmail.com", "0601101112", "password", "IZK-789" );
+			ArrayList<Admin> admins = new ArrayList<Admin>();
+			admins.add(DarkhShines);
+			admins.add(Dayuum);
+			admins.add(Zed);
+			return admins;
+		}
 		
-		public static ArrayList<Newsletter> initNews() {
-			return newsletter;
+		public static ArrayList<Notification> initNotif() {
+			Notification notif1 = new Notification("DarkhShines", 1, "Ouverture de poudlard", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+			Notification notif2 = new Notification("DarkhShines", 2, "Ouverture de numéro 2", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+			Notification notif3 = new Notification("DarkhShines", 3, "Ouverture de numéro 3", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+			ArrayList<Notification> notification = new ArrayList<Notification>();
+			notification.add(notif1);
+			notification.add(notif2);
+			notification.add(notif3);
+			return notification;
 		}
 		
 		public static ArrayList<Annonce> initAnnonce() {
@@ -65,5 +83,27 @@ public class Dao {
 			Annonce ann1 = new Annonce("Casa Vivaldi", 1200, "France", "Marseille", LocalDate.of(2018,12,12), LocalDate.of(2022,12,12), "Blablabla", true, false, false, true);
 			Annonce ann2 = new Annonce("Chateau Mont Perret", 1200, "France", "Bourg-en-Champagne", LocalDate.of(2019,12,12), LocalDate.of(2021,12,12), "Blablabla", true, true, false, false);
 			return annonces;
+		}
+		
+		public static String listNotif() {
+			String listNotif = "";
+			for (Notification notification : notification) {
+				listNotif += "<div class=\"notification-div\">\r\n" + 
+						"	<span class=\"objetNotif\">"+notification.getObjet()+"</span>\r\n" + 
+						"	<br>\r\n" + 
+						"	<p>De : "+notification.getExepditeur()+"<br><br>\r\n" + 
+						"	   Le : notification.getDate()</p><br><br>\r\n" + 
+						"	<p>"+notification.getTexteNotif()+"</p>\r\n" + 
+						"</div>";
+			}
+			
+			return listNotif;
+		}
+		public static ArrayList<Commentaire> initComm() {
+			Commentaire commentaire1 = new Commentaire("Sarkeric", "Ceci est un commentaire, qui se doit d'être asser long pour passer certains test, ça prend de la place", LocalDate.now(), 1);
+			Commentaire commentaire2 = new Commentaire("Sarkeric", "Ceci est un commentaire, asser court", LocalDate.now(), 1);
+			Commentaire commentaire3 = new Commentaire("Sarkeric", "Ceci est un commentaire, qui se doit d'être injurieux pour tester ma méthode de filtrage, alors désolé pour ce qui suit : con CoN pute PUTE s a l o p e ", LocalDate.now(), 1);
+			ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
+			return commentaires;
 		}
 }

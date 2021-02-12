@@ -520,6 +520,15 @@ hr {
 	padding-top: 20px;
 	padding-bottom:20px;
 }
+.commEntier {
+	border: 2px solid white;
+	border-radius: 16px;
+	border-color: #ffc107;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+
+}
 .divcomm {
 	display: flex;
 }
@@ -580,7 +589,29 @@ p {
     position: relative;
     left: 150px;
 }
+/* STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN */
+/* Notification  Notification  Notification  Notification  Notification  Notification  Notification  Notification */
+.notification-div {
+	background-color: #ffc107!important;
+	height: 300px;
+	width: 600px;
+	color: black;
+	border-radius: 16px;
+	margin-left: 40%;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+.objetNotif {
+	text-align: center;
+	font-size: 25px;	
+	padding-top: 15px;
+}
 
+#message {
+	height: 150px;
+	width: 250px;
+}
+	
 /* Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas Style Nicolas */
 
 .content-inscription {

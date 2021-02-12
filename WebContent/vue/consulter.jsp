@@ -66,16 +66,13 @@
 					n'apparraisse que sur ces commentaires. )
 					Un administrateur, lui, pourra supprimé tout les commentaires, mais pas les modifiés
 					pour des raisons évidentes.  -->
-					<div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 listcom">
-						le 01/01, <span class="pseudoSession">DarkhShines</span> a écrit :<br>
-						<div class="commentaire">Commentaire 1<a class="aleft" href="#"><i class="fas fa-pen imgleft"></i></a><a href="#"><i class="far fa-trash-alt imgright"></i></a></div><br>
-						<hr>
-						Hier, <span class="peuso">Dayuum</span> a écrit :<br>
-						<div class="commentaire">Commentaire 2<a href="#"></a></div><br>
-						<hr>
-						11h37, <span class="peuso">Zed</span> a écrit :<br>
-						<div class="commentaire">Commentaire 3<a href="#"></a></div><br>
-						<hr>
+					<div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 commEntier">
+						<div class="infocomm">
+							<p>le 01/01, <span class="pseudoSession">DarkhShines</span> a écrit :</p><a class="aleft" href="#"><i class="fas fa-pen imgleft"></i></a><a href="#"><i class="far fa-trash-alt imgright"></i></a><br>
+						</div>
+						<div class="lecomm">
+							<p>Commentaire 1</p>
+						</div>
 					</div>
 					<!-- L'envoi du commentaire sera géré par une servlet  -->
 						<form method="POST" action="traitement_commentaire.java">
@@ -97,5 +94,5 @@
 	</div>
 
 
-<!-- end form annonce-->
+
 <jsp:include page="/WEB-INF/footer.jsp"/>
