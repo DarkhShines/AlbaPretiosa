@@ -1,5 +1,6 @@
 <jsp:include page="/WEB-INF/header.jsp" />
 <%@ page import="fr.albapretiosa.metier.nico.Abonne"%>
+<%@ page import="fr.albapretiosa.metier.alain.Admin"%>
 <script src="https://kit.fontawesome.com/56455f0e6e.js"
 	crossorigin="anonymous"></script>
 </head>
@@ -131,12 +132,16 @@
 							name="phone-fixe" placeholder="Numéro de téléphone fixe" 
 							value="<%= telFixe %>">
 					</div>
-					<span class="trash-bin"><a href="<%=request.getContextPath()%>/SuppressionServlet"><i class="fas fa-trash-alt"></i></a></span>
+					<span class="trash-bin"><a href="<%=request.getContextPath()%>/SuppressionServlet?alias=<%= abonne.getAlias() %>"><i class="fas fa-trash-alt"></i></a></span>
 				</div>
 			</div>
 			<div class="form-row pl-2 justify-content-start">
 				<button type="submit"
 					class="btn btn-warning ml-2 mt-2 align-self-end">Confirmer</button>
+					
+				<% if(abonne instanceof Admin){  %>
+					<div class="btn btn-warning ml-2 mt-2 align-self-end divListeAbo"><a href="<%=request.getContextPath()%>/vue/vueAdmin.jsp">Liste Abonnés</a></div>
+				<%} %>
 			</div>
 		</form>
 	</div>

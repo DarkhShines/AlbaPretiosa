@@ -32,11 +32,11 @@ public class ModificationServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String context = request.getContextPath();
-//		ArrayList<Abonne> abonnes = Dao.abonnes;
 		String alias = request.getParameter("alias");
 		String mdp = request.getParameter("mdp");
 		String newMdp = request.getParameter("newPassword");
 		String mdpConfirm = request.getParameter("passwordConfirm");
+//		System.out.println("ModificationServlet mdp: "+mdp);
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String email = request.getParameter("email");
@@ -53,8 +53,8 @@ public class ModificationServlet extends HttpServlet {
 				abonne.setParrainage(parrainage);
 				abonne.setTelFixe(telFixe);
 				abonne.setTelPortable(telPortable);
-				if(mdp != null && abonne.getMdp().equals(mdp) && newMdp.equals(mdpConfirm) ) {
-						abonne.setMdp(newMdp); 
+				if(abonne.getMdp().equals(mdp) && newMdp.equals(mdpConfirm)) {
+					abonne.setMdp(newMdp); 
 				}
 			response.sendRedirect(context+"/vue/infosPersonnelles.jsp");
 			}
