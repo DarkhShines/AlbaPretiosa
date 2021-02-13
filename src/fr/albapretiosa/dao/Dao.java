@@ -168,26 +168,11 @@ public class Dao {
 		ArrayList<Annonce> annonces = new ArrayList<Annonce>();
 		ArrayList<String> messages = new ArrayList<String>();
 		Annonce ann = null;
-		try {
-			ann = new Annonce("Manoir DeCruz", 1200, "France", "Hyers", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), "Blablabla", true, true, false, true);
-		} catch (Exception_Zak e2) {
-			// TODO Auto-generated catch block
-			messages.add(e2.getMessage());
-		}
+		ann = new Annonce("Manoir DeCruz", 1200, "France", "Hyers", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), "Blablabla", true, true, false, true);
 		Annonce ann1 = null;
-		try {
-			ann1 = new Annonce("Casa Vivaldi", 1200, "France", "Marseille", LocalDate.of(2018,12,12), LocalDate.of(2022,12,12), "Blablabla", true, false, false, true);
-		} catch (Exception_Zak e1) {
-			// TODO Auto-generated catch block
-			messages.add(e1.getMessage());
-		}
+		ann1 = new Annonce("Casa Vivaldi", 1200, "France", "Marseille", LocalDate.of(2018,12,12), LocalDate.of(2022,12,12), "Blablabla", true, false, false, true);
 		Annonce ann2 = null;
-		try {
-			ann2 = new Annonce("Chateau Mont Perret", 1200, "France", "Bourg-en-Champagne", LocalDate.of(2019,12,12), LocalDate.of(2021,12,12), "Blablabla", true, true, false, false);
-		} catch (Exception_Zak e) {
-			// TODO Auto-generated catch block
-			messages.add(e.getMessage());
-		}
+		ann2 = new Annonce("Chateau Mont Perret", 1200, "France", "Bourg-en-Champagne", LocalDate.of(2019,12,12), LocalDate.of(2021,12,12), "Blablabla", true, true, false, false);
 		annonces.add(ann);
 		annonces.add(ann1);
 		annonces.add(ann2);
