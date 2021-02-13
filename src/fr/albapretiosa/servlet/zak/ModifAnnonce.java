@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import AppException.Exception_Zak;
 import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
@@ -52,12 +53,12 @@ public class ModifAnnonce extends HttpServlet {
 		String titre 			= request.getParameter("titre");		
 		int surface 			= Integer.parseInt(request.getParameter("surface").strip());
 		int idAnnonce = Integer.parseInt(request.getParameter("id"));
+		ArrayList<String> messages = new ArrayList<String>();
 		
 		for (Annonce ann : Dao.annonces) {
 			if (ann.getIdAnnonce() == idAnnonce) {
 				ann.setTitre(titre);
 				ann.setSurface(surface);
-				
 				}
 		}
 		

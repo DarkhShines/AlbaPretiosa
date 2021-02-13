@@ -46,38 +46,38 @@ public class ControleCreation_Modif_Suppr extends HttpServlet {
 		System.out.println("1================  dans ControleurGestion path=" + path );
 		
 		if (path == null || path.equals("/")) 			doAccueil(request, response);
-		else if (path.equals("/abonne/creer"))			doAbonneCreer(request, response);
-		else if (path.equals("/abonne/modifier"))		doAbonneModifier(request, response);
-		else if (path.equals("/abonne/supprimer"))		doAbonneSupprimer(request, response);
+		else if (path.equals("/abonne/creer"))			doCreerAnnonce(request, response);
+		else if (path.equals("/abonne/modifier"))		doModifAnnonce(request, response);
+		else if (path.equals("/abonne/supprimer"))		doSupprimerAnnonce(request, response);
 		else {
-			request.setAttribute("msgErreur", "Gestion : Vous avez tripatouill&eacute; l'url!!! ");
+			request.setAttribute("message", "Gestion : Veuillez ne pas modifer l'URL, merci.. ");
 			disp = request.getRequestDispatcher("/"); 
 			disp.forward(request,response);
 		}
 	}
 
 	private void doAccueil(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		disp = request.getRequestDispatcher("/WEB-INF/vue/gestion/gestion.jsp"); 
+		disp = request.getRequestDispatcher("/WebContent/vue/Formulaire_Annonce.jsp");  
 		disp.forward(request,response);
 	}
 	
 	private void doAbonneAfficheFormulaire(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		disp = request.getRequestDispatcher("/WEB-INF/vue/gestion/formAbonne.jsp"); 
+		disp = request.getRequestDispatcher("/WebContent/vue/ListerAnnonce.jsp");  
 		disp.forward(request,response);
 	}
-	private void doAbonneCreer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	private void doCreerAnnonce(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.setAttribute("message", "Creation OK");
-		disp = request.getRequestDispatcher("/WEB-INF/vue/gestion/formAbonne.jsp"); 
+		disp = request.getRequestDispatcher("/WebContent/vue/Formulaire_Annonce.jsp"); 
 		disp.forward(request,response);
 	}
-	private void doAbonneModifier(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	private void doModifAnnonce(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.setAttribute("message", "Modification OK");
-		disp = request.getRequestDispatcher("/WEB-INF/vue/gestion/formAbonne.jsp"); 
+		disp = request.getRequestDispatcher("/WebContent/vue/ListerAnnonce.jsp"); 
 		disp.forward(request,response);
 	}
-	private void doAbonneSupprimer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	private void doSupprimerAnnonce(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		request.setAttribute("message", "Suppression OK");
-		disp = request.getRequestDispatcher("/WEB-INF/vue/gestion/formAbonne.jsp"); 
+		disp = request.getRequestDispatcher("/WebContent/vue/ListerAnnonce.jsp"); 
 		disp.forward(request,response);
 	}
 
