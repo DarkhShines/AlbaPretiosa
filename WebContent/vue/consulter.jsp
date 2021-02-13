@@ -106,6 +106,7 @@
 								<textarea name="commentaire" class="areacom" cols="50"></textarea>
 								<!-- <button type="submit" class="btn btn-warning"><i class="far fa-paper-plane"></i></button> -->
 								<a href="<%=request.getContextPath()%>/ajoutcomm?idAnnonce=<%= ann.getIdAnnonce()%>"><i class="far fa-paper-plane"></i></a>
+								
 							</div>
 							
 							
