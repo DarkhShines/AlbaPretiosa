@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import fr.albapretiosa.metier.alain.Admin;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.dao.Dao;
+import fr.albapretiosa.util.UtilAlain;
 
 
 /**
@@ -27,7 +29,6 @@ public class ConnexionServlet extends HttpServlet {
 
 	public ConnexionServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,14 +63,15 @@ public class ConnexionServlet extends HttpServlet {
 		}
 		if(connectionOk) {
 			out.println("Connection réussie "+alias);
+			System.out.println(abonneOk.getNom());
 			HttpSession session = request.getSession(true);
 			session.setAttribute("Abonne", abonneOk);
 			response.sendRedirect(context+"/vue/accueil.jsp");
 		}
 		else{
-			//		request.setAttribute("message", "Identifiants ou mot de passe incorrect.");
-			//		RequestDispatcher disp = request.getRequestDispatcher(Erreur.getErrorLocation());
-			//		disp.forward(request, response);
+			request.setAttribute("message", "Identifiants ou mot de passe incorrect.");
+			RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
+			disp.forward(request, response);
 			System.out.println("connexion echouée");
 		}
 	}

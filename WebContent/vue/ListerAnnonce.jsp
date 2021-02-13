@@ -83,8 +83,8 @@
 												<td class="column2"><%=ann.getTitre() %></td>
 												<td class="column3"><%=ann.getCreneau_debut() %></td>
 												<td class="column4"><%=ann.getCreneau_fin() %></td>
-												<td class="column5"><img src="<%=request.getContextPath()%>/assets/images/modifier.png"/></td>
-												<td class="column5"><a href="<%= request.getContextPath() +"/SupprimerAnnonce?ID=" + ann.getIdAnnonce() %>"><img src="<%=request.getContextPath()%>/assets/images/delete.png"/></a></td>
+												<td class="column5"><a href="<%= request.getContextPath() + "/ModifAnnonce?id=" + ann.getIdAnnonce() %>"><img src="<%=request.getContextPath()%>/assets/images/modifier.png"/></a></td>
+												<td class="column5"><a href="<%= request.getContextPath() + "/SupprimerAnnonce?id=" + ann.getIdAnnonce() %>"><img src="<%=request.getContextPath()%>/assets/images/delete.png"/></a></td>
 											</tr>
 											<%
 												}

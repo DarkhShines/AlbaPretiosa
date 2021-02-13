@@ -2,8 +2,10 @@
 package fr.albapretiosa.servlet.zak;
 
 import java.io.IOException;
-
+import fr.albapretiosa.util.*;
+import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
@@ -34,22 +36,27 @@ public class CreerAnnonce extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+
 	/**
 	 * Méthode de contrôle du titre saisi.
 	 * @param titre
 	 * @throws Exception
 	 */
-	public void controleTitre( String titre ) throws Exception {
+	public static void controleTitre( String titre ) throws Exception_Zak {
 		if( titre == null || titre.trim() == "") {
 			throw new Exception_Zak( "Le titre n'est pas renseigné" );
 		}
-		if ( titre != null && titre.trim().length() < 10 ) {
-			throw new Exception_Zak( "Le titre doit contenir au moins 10 caractères." );
-		}
-		if ( titre != null && titre.trim().length() < 100 ) {
-			throw new Exception_Zak( "Le titre ne peut contenir plus de 100 caractères." );
+		else if(titre != null) {
+			if (titre.trim().length() < 10 ) {
+				throw new Exception_Zak( "Le titre doit contenir au moins 10 caractères." );
+			}
+			if (titre.trim().length() < 100 ) {
+				throw new Exception_Zak( "Le titre ne peut contenir plus de 100 caractères." );
+			}
 		}
 	}
+
 
 	/**
 	 * Méthode de controle de la surface
@@ -57,7 +64,7 @@ public class CreerAnnonce extends HttpServlet {
 	 * @throws Exception
 	 */
 
-	public void controleSurface(int surface) throws Exception{
+	public void controleSurface(int surface) throws Exception_Zak{
 		if( surface == 0 ) {
 			throw new Exception_Zak( "La surface ne peut être égale à 0 ");
 		}
@@ -69,8 +76,83 @@ public class CreerAnnonce extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Méthode de controle du pays
+	 * @param pays
+	 * @throws Exception_Zak
+	 */
+	public void controlePays(String pays) throws Exception_Zak {
+		if( pays == null || pays.trim() == "") {
+			throw new Exception_Zak( "Le pays n'est pas renseigné" );
+		}
+		else if(pays != null) {
+			if(pays.trim().toLowerCase() != "france" || pays.trim() != "angleterre" || pays.trim() != "italie") {
+				throw new Exception_Zak("Nous ne proposons pas ce pays dans nos services");
+			}
+			if(pays.trim().length() > 40) {
+				throw new Exception_Zak("Le nom du pays est trop long");
+			}
+		}
+	}
 
+	/**
+	 * @param ville
+	 * @throws Exception_Zak
+	 */
+	public void controleVille(String ville) throws Exception_Zak{
+		if( ville == null || ville.trim() == "") {
+			throw new Exception_Zak( "Le pays n'est pas renseigné" );
+		}
+		else if(ville != null) {
+			if(ville.trim().toLowerCase() != "marseille" || ville.trim().toLowerCase() != "paris" || ville.trim().toLowerCase() != "bordeaux") {
+				throw new Exception_Zak("Nous ne proposons pas cette ville dans nos services");
+			}
+			if(ville.trim().length() > 40) {
+				throw new Exception_Zak("Le nom de la ville est trop long");
+			}
+		}
+	}
 
+	/**
+	 * @param creneau_debut
+	 * @param creneau_fin
+	 * @throws Exception_Zak
+	 */
+	public void controleDate(LocalDate creneau_debut, LocalDate creneau_fin) throws Exception_Zak{
+
+		if(creneau_debut == null) {
+			throw new Exception_Zak("La date de début de location n'est pas renseigné");
+		}
+		if(creneau_fin == null) {
+			throw new Exception_Zak("La date de fin de location n'est pas renseigné");
+		}
+		else if(creneau_debut != null && creneau_fin != null) {
+			if (creneau_debut.isBefore(LocalDate.now())) {
+				throw new Exception_Zak("La date de début de location de peut être antérieur à aujourd'hui");
+			}
+			if(creneau_fin.isBefore(LocalDate.now())) {
+				throw new Exception_Zak("La date de fin de location de peut être antérieur à aujourd'hui");
+			}
+			if(creneau_debut.isAfter(creneau_fin)) {
+				throw new Exception_Zak("La date de fin de location de peut être anterieur à la date de début");
+			}
+		}
+	}
+	
+	/**
+	 * @param description
+	 * @throws Exception_Zak
+	 */
+	public void controleDescription(String description) throws Exception_Zak {
+		if(description != null) {
+			if(description.trim().length() > 250) {
+				throw new Exception_Zak("La description est trop longue");
+			}
+			if(description.trim().length() < 5)
+				throw new Exception_Zak("La description est trop courte");
+			
+		}
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -85,11 +167,11 @@ public class CreerAnnonce extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Je suis dans doPost de CreerAnnonce");
 
-
+		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession(true);
 		Abonne a = (Abonne)session.getAttribute("Abonne");	
 
-		String titre 			= request.getParameter("titre").strip();		
+		String titre 			= request.getParameter("titre").strip();
 		int surface 			= Integer.parseInt(request.getParameter("surface").strip());
 		String pays				= request.getParameter("pays").strip();
 		String ville 			= request.getParameter("ville").strip();
@@ -104,6 +186,43 @@ public class CreerAnnonce extends HttpServlet {
 		//		Photo photo_2 			= request.getParameter("img_2");
 		//		Photo photo_3 			= request.getParameter("img_3");
 		//		Photo photo_4 			= request.getParameter("img_4");
+
+
+
+		/*CONTROLE DES DONNEES*/
+		ArrayList<String> messages = new ArrayList<String>();
+		try {
+			controleTitre(titre);
+
+		}catch(Exception_Zak e){
+			messages.add(e.getMessage());
+		} 
+		try {
+			controleSurface(surface);
+
+		}catch(Exception_Zak e){
+			messages.add(e.getMessage());
+		} 
+		try {
+			controlePays(pays);
+		}catch(Exception_Zak e){
+			messages.add(e.getMessage());
+		}
+		try {
+			controleVille(ville);
+		}catch(Exception_Zak e){
+			messages.add(e.getMessage());
+		}
+		try {
+			controleDate(creneau_debut, creneau_fin);
+		}catch(Exception_Zak e){
+			messages.add(e.getMessage());
+		}
+		try {
+			controleDescription(description);
+		}catch(Exception_Zak e) {
+			messages.add(e.getMessage());
+		}
 
 		try {
 			System.out.println("Je rentre dans le try de doPost de CréerAnnonce");
@@ -142,12 +261,11 @@ public class CreerAnnonce extends HttpServlet {
 			System.out.println("Je sors du doPost de CréerAnnonce");
 		}catch (NullPointerException npe) {
 
-			request.setAttribute("message", "Votre annonce ne correspond pas à nos critères");
-
-			String chemin = this.getServletContext().getInitParameter("pageErreur");
-
-			RequestDispatcher disp = request.getRequestDispatcher(chemin);
+			request.setAttribute("message", "Il y a eu erreur de saisie, consulter liste erreur");
+			request.setAttribute("messages", messages);
+			RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
 			disp.forward(request, response);
+			System.out.println("Erreur Formulaire");
 
 		}
 

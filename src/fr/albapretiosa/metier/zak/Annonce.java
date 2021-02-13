@@ -6,7 +6,10 @@ package fr.albapretiosa.metier.zak;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
+
+import AppException.Exception_Zak;
 import fr.albapretiosa.metier.nico.Abonne;
+import fr.albapretiosa.servlet.zak.CreerAnnonce;
 
 /**
  * @author Zakarya D. Bahou
@@ -61,11 +64,12 @@ public class Annonce {
 	 * @param photo2 Photo de la propriété de l'annonce récupéré dans le formulaire de création d'annonce 
 	 * @param photo3 Photo de la propriété de l'annonce récupéré dans le formulaire de création d'annonce 
 	 * @param photo4 Photo de la propriété de l'annonce récupéré dans le formulaire de création d'annonce 
+	 * @throws Exception_Zak 
 	 * @see package fr.albapretiosa.servlet.zak/CreerAnnonce.java 
 	 * @see WebContent/vue/Formulaire_Annonce.jsp
 	 */
 	public Annonce(String titre, int surface, String pays, String ville, LocalDate creneau_debut, LocalDate creneau_fin,
-			String description, boolean piscine, boolean spa, boolean golf, boolean tennis, Photo photo1, Photo photo2, Photo photo3, Photo photo4) {
+			String description, boolean piscine, boolean spa, boolean golf, boolean tennis, Photo photo1, Photo photo2, Photo photo3, Photo photo4) throws Exception_Zak {
 
 		setIdAnnonce(genereIdAnnonce());
 		setTitre(titre);
@@ -98,10 +102,12 @@ public class Annonce {
 	 * @param spa Option de l'annonce récupéré dans le formulaire de création d'annonce
 	 * @param golf Option de l'annonce récupéré dans le formulaire de création d'annonce 
 	 * @param tennis Option de l'annonce récupéré dans le formulaire de création d'annonce 
+	 * @throws Exception_Zak 
 	 * @see package fr.albapretiosa.servlet.zak/CreerAnnonce.java 
 	 * @see WebContent/vue/Formulaire_Annonce.jsp
 	 */
 	public Annonce(String titre, int surface, String pays, String ville, LocalDate creneau_debut, LocalDate creneau_fin, String description, boolean piscine, boolean spa, boolean golf, boolean tennis) {
+
 
 		setIdAnnonce(genereIdAnnonce());
 		setTitre(titre);
@@ -123,7 +129,6 @@ public class Annonce {
 	public Annonce() {}
 
 
-
 	/**
 	 * METHODE POUR GENERE UN ID ANNONCE AUTO_INCREMENTE COMME REFERENCE UNIQUE
 	 * @return idAnnonce + 1
@@ -139,7 +144,7 @@ public class Annonce {
 	public void addComm(int id) {
 		this.idCommList.add(id);
 	}
-	
+
 	/**
 	 * @param id
 	 */
@@ -157,8 +162,9 @@ public class Annonce {
 	}
 	/**
 	 * @param titre = Le titre à set
+	 * @throws Exception_Zak 
 	 */
-	public void setTitre(String titre) {
+	public void setTitre(String titre){
 		this.titre = titre;
 	}
 	/**
@@ -169,8 +175,9 @@ public class Annonce {
 	}
 	/**
 	 * @param surface = La surface à set
+	 * @throws Exception_Zak 
 	 */
-	public void setSurface(int surface) {
+	public void setSurface(int surface){
 		this.surface = surface;
 	}
 
@@ -386,8 +393,8 @@ public class Annonce {
 	public void setIdAbonne(int idAbonne) {
 		this.idAbonne = idAbonne;
 	}
-	
-	
+
+
 
 
 }

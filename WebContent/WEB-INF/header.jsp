@@ -4,6 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -23,6 +24,8 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/owl.carousel.min.css">
     <!-- style css -->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
+        <!-- style css -->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/Zak_CSs.css">
     <!-- responsive-->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/responsive.css">
     <!-- awesome fontfamily -->
