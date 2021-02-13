@@ -153,7 +153,6 @@ public class CreerAnnonce extends HttpServlet {
 			
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
