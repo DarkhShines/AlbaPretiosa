@@ -2,6 +2,7 @@
 package fr.albapretiosa.servlet.zak;
 
 import java.io.IOException;
+import fr.albapretiosa.util.*;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -118,6 +119,7 @@ public class CreerAnnonce extends HttpServlet {
 	 * @throws Exception_Zak
 	 */
 	public void controleDate(LocalDate creneau_debut, LocalDate creneau_fin) throws Exception_Zak{
+
 		if(creneau_debut == null) {
 			throw new Exception_Zak("La date de début de location n'est pas renseigné");
 		}
@@ -262,10 +264,9 @@ public class CreerAnnonce extends HttpServlet {
 
 			request.setAttribute("message", "Il y a eu erreur de saisie, consulter liste erreur");
 			request.setAttribute("messages", messages);
-			String chemin = this.getServletContext().getInitParameter("pageErreur");
-
-			RequestDispatcher disp = request.getRequestDispatcher(chemin);
+			RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
 			disp.forward(request, response);
+			System.out.println("Erreur Formulaire");
 
 		}
 
