@@ -34,7 +34,7 @@ public class InscriptionServlet extends HttpServlet {
 	}
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception_Nico {
 		String context = request.getContextPath();
 		ArrayList<Abonne> abonnes = Dao.abonnes;
 		PrintWriter out = response.getWriter();
@@ -48,29 +48,26 @@ public class InscriptionServlet extends HttpServlet {
 		String parrainage = request.getParameter("parrainage");
 		boolean inscriptionOk = false;
 		boolean pwOk = false;
-		
-		
-		for (Abonne abonne : abonnes) {
-			if(!alias.equals(abonne.getAlias()) &&  !email.equals(abonne.getEmail())) {
-				inscriptionOk = true;
+
+		try {
+			for (Abonne abonne : abonnes) {
+				if(!alias.equals(abonne.getAlias()) &&  !email.equals(abonne.getEmail())) {
+					inscriptionOk = true;
+				}
 			}
-		}
-		if(mdp.equals(mdpConfirm)) {
-			pwOk = true;
-		}
-		if(inscriptionOk && pwOk) {
-			out.println("Connection réussie "+alias);
-			Abonne abonneOk = new Abonne(nom, prenom, alias, email, telPortable, mdp, parrainage);
-			Dao.abonnes.add(abonneOk);
-			response.sendRedirect(context+"/index.jsp");
-		}
-		else{
+			if(mdp.equals(mdpConfirm)) {
+				pwOk = true;
+			}
+			if(inscriptionOk && pwOk) {
+				out.println("Connection réussie "+alias);
+				Abonne abonneOk = new Abonne(nom, prenom, alias, email, telPortable, mdp, parrainage);
+				Dao.abonnes.add(abonneOk);
+				response.sendRedirect(context+"/index.jsp");
+			}
+		}catch(Exception_Nico en) {
 			request.setAttribute("message", "Inscription échouée");
 			RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
 			disp.forward(request, response);
 		}
 	}
-	
-	
-
 }

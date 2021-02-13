@@ -84,6 +84,7 @@ public class Abonne {
 
 	// SETTER
 	public void setNom(String nom) {
+		controleNom(nom);
 		this.nom = nom;
 	}
 	public void setIdAbonne(int idAbonne) {
@@ -92,18 +93,22 @@ public class Abonne {
 		}
 	}
 	public void setPrenom(String prenom) {
+		controlePrenom(prenom);
 		this.prenom = prenom;
 	}
 	public void setAlias(String alias) {
+		controleAlias(alias);
 		this.alias = alias;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
 	public void setTelPortable(String telPortable) {
+		controleTelPortable(telPortable);
 		this.telPortable = telPortable;
 	}
 	public void setTelFixe(String telFixe) {
+		controleTelFixe(telFixe);
 		this.telFixe = telFixe;
 	}
 	public void setPlatinum(boolean platinum) {
@@ -125,7 +130,15 @@ public class Abonne {
 	}
 
 	// METHODE CONTROLE SAISIE
-
+	                                       // IMPORTANT
+	// WORK IN PROGRESS
+	// J'ai pas reussi a recup le message de mon exception qui est catch dans ma servlet d'inscription, je n'ai que le message
+	// que j'ai mis quand mon response.setAttribute qui est "Inscription Echouée"
+	// je n'ai pas eu le temps de le mettre au poins 
+	// L'exception Exception_Nico extends NullPointerException, car impossible de catch dans le doPost autrement !
+	
+	                                       // IMPORTANT
+	
 	public void controleNom(String nom ) throws Exception_Nico {
 		if( nom == null || nom.trim() == "") {
 			throw new Exception_Nico( "Le nom n'est pas renseigné" );
@@ -137,29 +150,29 @@ public class Abonne {
 			throw new Exception_Nico( "Le nom ne peut contenir plus de 15 caractères." );
 		}
 	}
-	public void controlePrenom(String Prenom ) throws Exception_Nico {
-		if( Prenom == null || Prenom.trim() == "") {
+	public void controlePrenom(String prenom ) throws Exception_Nico {
+		if( prenom == null || prenom.trim() == "") {
 			throw new Exception_Nico( "Le prenom n'est pas renseigné" );
 		}
-		if ( Prenom != null && Prenom.trim().length() < 2 ) {
+		if ( prenom != null && prenom.trim().length() < 2 ) {
 			throw new Exception_Nico( "Le prenom doit contenir au moins 2 caractères." );
 		}
-		if ( Prenom != null && Prenom.trim().length() > 15 ) {
+		if ( prenom != null && prenom.trim().length() > 15 ) {
 			throw new Exception_Nico( "Le prenom ne peut contenir plus de 15 caractères." );
 		}
 	}
-	public void controleAlias(String Alias ) throws Exception_Nico {
-		if( Alias == null || Alias.trim() == "") {
+	public void controleAlias(String alias ) throws Exception_Nico {
+		if ( alias == null || alias.trim() == "") {
 			throw new Exception_Nico( "L'alias n'est pas renseigné" );
 		}
-		if ( Alias != null && Alias.trim().length() < 2 ) {
+		if ( alias != null && alias.trim().length() < 2 ) {
 			throw new Exception_Nico( "L'alias doit contenir au moins 2 caractères." );
 		}
-		if ( Alias != null && Alias.trim().length() > 15 ) {
+		if ( alias != null && alias.trim().length() > 15 ) {
 			throw new Exception_Nico( "L'alias ne peut contenir plus de 15 caractères." );
 		}
 	}
-	public void controleTelportable(String telPortable ) throws Exception_Nico {
+	public void controleTelPortable(String telPortable ) throws Exception_Nico {
 		if( telPortable == null || telPortable.trim() == "") {
 			throw new Exception_Nico( "Le téléphone Portable n'est pas renseigné" );
 		}
@@ -167,7 +180,7 @@ public class Abonne {
 			throw new Exception_Nico( "Le téléphone Portable doit contenir 10 caractères." );
 		}
 	}
-	public void controletelFixe(String telFixe ) throws Exception_Nico {
+	public void controleTelFixe(String telFixe ) throws Exception_Nico {
 		if( telFixe == null || telFixe.trim() == "") {
 			throw new Exception_Nico( "Le téléphone Fixe n'est pas renseigné" );
 		}

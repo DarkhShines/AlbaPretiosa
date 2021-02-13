@@ -1,6 +1,6 @@
 package AppException;
 
-public class Exception_Nico extends Exception{
+public class Exception_Nico extends NullPointerException {
 	private static final long serialVersionUID = 1L;
 
 	public Exception_Nico(String msg){
