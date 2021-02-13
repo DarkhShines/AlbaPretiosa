@@ -27,14 +27,15 @@ public class SuppressionServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// Cela devrait directement passer dans post car c'est une suppression
+		doPost(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String context = request.getContextPath();
 		String alias = request.getParameter("alias");
-//		ArrayList<Abonne> abonnes = Dao.abonnes;
+		// ArrayList<Abonne> abonnes = Dao.abonnes;
 
 		
 		for (Abonne abonne : Dao.abonnes) {
@@ -42,9 +43,9 @@ public class SuppressionServlet extends HttpServlet {
 				System.out.println("je suis dans le if ");
 				abonne.setTelFixe("");
 			}
-		response.sendRedirect(context+"/vue/infosPersonnelles.jsp");
-		System.out.println(Dao.abonnes);
+		
 		}
+		response.sendRedirect(context+"/vue/infosPersonnelles.jsp");
 	}
 
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <jsp:include page="/WEB-INF/header.jsp" />
 <title>Accueil Alba & Pretiosa</title>
 <%@page import="fr.albapretiosa.dao.Dao"%>
@@ -73,5 +74,3 @@
 	</div>
 	<!-- end Our Client -->
 	<jsp:include page="/WEB-INF/footer.jsp" />
-</body>
-</html>

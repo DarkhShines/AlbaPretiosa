@@ -15,7 +15,7 @@ import fr.albapretiosa.metier.nico.Abonne;
 /**
  * Servlet implementation class ModifComm
  */
-@WebServlet("/ModifComm")
+@WebServlet("/modifcomm")
 public class ModifComm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,6 +33,7 @@ public class ModifComm extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Do Get de ModifComm");
 		HttpSession session = request.getSession(true);
+		int idAnnonce = Integer.parseInt(request.getParameter("idAnnonce"));
 		Abonne abonne = (Abonne) session.getAttribute("Abonne"); // Je récupère l'abonné en session
 		String comm = request.getParameter("commentaire"); // La modification du corp du commentaire, qui est la seule variable modifiable suite à l'envoi
 		int idComm = Integer.parseInt(request.getParameter("idComm"));
@@ -43,7 +44,7 @@ public class ModifComm extends HttpServlet {
 		}
 		
 		System.out.println("Do Get de ModifComm fin");
-		response.sendRedirect("vue/consulter.jsp");
+		response.sendRedirect("vue/consulter.jsp?idAnnonce="+idAnnonce+"");
 		
 	}
 

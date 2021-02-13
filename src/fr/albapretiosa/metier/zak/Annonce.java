@@ -29,7 +29,7 @@ public class Annonce {
 	private int 	  idAnnonce;
 	private int	      idAbonne;
 	private String    titre;
-	private int		  surface;
+	private int		  surface;                                        
 	private String	  pays;
 	private String 	  ville;
 	private LocalDate creneau_debut;
@@ -106,7 +106,9 @@ public class Annonce {
 	 * @see package fr.albapretiosa.servlet.zak/CreerAnnonce.java 
 	 * @see WebContent/vue/Formulaire_Annonce.jsp
 	 */
-	public Annonce(String titre, int surface, String pays, String ville, LocalDate creneau_debut, LocalDate creneau_fin, String description, boolean piscine, boolean spa, boolean golf, boolean tennis) throws Exception_Zak {
+
+	public Annonce(String titre, int surface, String pays, String ville, LocalDate creneau_debut, LocalDate creneau_fin, String description, boolean piscine, boolean spa, boolean golf, boolean tennis) {
+
 
 		setIdAnnonce(genereIdAnnonce());
 		setTitre(titre);
@@ -127,7 +129,7 @@ public class Annonce {
 	 */
 	public Annonce() {}
 
-	
+
 	/**
 	 * METHODE POUR GENERE UN ID ANNONCE AUTO_INCREMENTE COMME REFERENCE UNIQUE
 	 * @return idAnnonce + 1
@@ -143,7 +145,7 @@ public class Annonce {
 	public void addComm(int id) {
 		this.idCommList.add(id);
 	}
-	
+
 	/**
 	 * @param id
 	 */
@@ -392,8 +394,8 @@ public class Annonce {
 	public void setIdAbonne(int idAbonne) {
 		this.idAbonne = idAbonne;
 	}
-	
-	
+
+
 
 
 }

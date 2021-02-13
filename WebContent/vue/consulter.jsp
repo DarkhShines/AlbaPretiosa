@@ -1,3 +1,6 @@
+<%@page import="fr.albapretiosa.metier.zak.Annonce"%>
+<%@page import="fr.albapretiosa.dao.Dao"%>
+<%@page import="fr.albapretiosa.util.*"%>
 <jsp:include page="/WEB-INF/header.jsp" />
 <title>Consulter une annonce</title>
  <!-- Alain : A l'avenir le titre de cette page sera dynamique,
@@ -10,6 +13,19 @@
 </head>
 
 <body class="main-layout about_page">
+<%
+	Annonce ann = new Annonce();
+	String recup = request.getParameter("idAnnonce");
+	int idAnnonce = Integer.parseInt(recup);
+	for(Annonce annonce : Dao.annonces){
+		System.out.println(annonce.getDescription());
+		if(idAnnonce == annonce.getIdAnnonce()){
+			ann = annonce;
+		}
+		
+	}
+	
+%>
 <jsp:include page="/WEB-INF/navbar.jsp" />
 <script src="https://kit.fontawesome.com/746f19e510.js"></script>
 	<div class="yellow_bg">
@@ -38,18 +54,25 @@
 							et l'intégralité de cette page sera généré automatiquement lorsqu'une annonce
 							aura été selectionnée. Une page de codé, des milliers de générées. 
 							 -->
-							<h3 class="titreann">Titre de l'annonce</h3>
-							<p>Très beau chateau situé en Angleterre. 5000 chambres, inombrables salles de bain.
-							Encore du blabla blabla
-							<br>Surface totale : 12000 m²
+							<h3 class="titreann"><%= ann.getTitre() %></h3>
+							<p><%= ann.getDescription() %>
+							<br><%= ann.getSurface() %>
 							<br>Petits plus :<br></p>
 						    <ul>
-							  <li>- Lac</li>
-							  <li>- Terrain de Quidditch</li>
-							  <li>- Salle de bal</li>
+						      <% if(ann.isGolf()){ %>
+						      <li>- Golf</li>
+						      <% } %>
+							  <% if(ann.isPiscine()){ %>
+						      <li>- Piscine</li>
+						      <% } %>
+							  <% if(ann.isSpa()){ %>
+						      <li>- Spa</li>
+						      <% } %>
+							  <% if(ann.isTennis()){ %>
+						      <li>- Tennis</li>
+						      <% } %>
 							</ul>
-							<p>Ce bien est disponnible jusqu'au 01/01/2347, offrez vous des vacances !</p>
-							<p>Prix à la journée : 21.000 Euro</p>
+							<p>Ce bien est disponnible du <%= UtilAlain.formatDateFr(ann.getCreneau_debut()) %> jusqu'au <%= UtilAlain.formatDateFr(ann.getCreneau_fin()) %>, offrez vous des vacances !</p>
 							<br>
 							<p>Date de début du séjour : </p>
 							<input type="date" name="datedebut">
@@ -68,20 +91,21 @@
 					pour des raisons évidentes.  -->
 					<div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 commEntier">
 						<div class="infocomm">
-							<p>le 01/01, <span class="pseudoSession">DarkhShines</span> a écrit :</p><a class="aleft" href="#"><i class="fas fa-pen imgleft"></i></a><a href="#"><i class="far fa-trash-alt imgright"></i></a><br>
+							<p>le 01/01, <span class="pseudoSession">DarkhShines</span> a écrit :</p><a class="aleft" href="<%=request.getContextPath()%>/modifcomm?idAnnonce=<%= ann.getIdAnnonce()%>"><i class="fas fa-pen imgleft"></i></a><a href="<%=request.getContextPath()%>/suppcomm?idAnnonce=<%= ann.getIdAnnonce()%>"><i class="far fa-trash-alt imgright"></i></a><br>
 						</div>
 						<div class="lecomm">
 							<p>Commentaire 1</p>
 						</div>
 					</div>
 					<!-- L'envoi du commentaire sera géré par une servlet  -->
-						<form method="POST" action="traitement_commentaire.java">
+						<form method="POST" action="<%=request.getContextPath()%>/ajoutcomm">
 							
 								<p>Commentaire :</p>
 							
 							<div class="divcomm">
 								<textarea name="commentaire" class="areacom" cols="50"></textarea>
-								<button type="button" class="btn btn-warning"><i class="far fa-paper-plane"></i></button>
+								<!-- <button type="submit" class="btn btn-warning"><i class="far fa-paper-plane"></i></button> -->
+								<a href="<%=request.getContextPath()%>/ajoutcomm?idAnnonce=<%= ann.getIdAnnonce()%>"><i class="far fa-paper-plane"></i></a>
 							</div>
 							
 							
