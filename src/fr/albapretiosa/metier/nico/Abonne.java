@@ -2,6 +2,9 @@ package fr.albapretiosa.metier.nico;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import AppException.Exception_Nico;
+import fr.albapretiosa.servlet.nico.InscriptionServlet;
+
 public class Abonne {
 	// PROPRIETE DE CLASSE
 	protected static AtomicInteger genId = new AtomicInteger(1);
@@ -31,7 +34,7 @@ public class Abonne {
 	    setParrainage(parrainage);
 	}
 	public Abonne(String nom, String prenom, String alias, String email, String telPortable,
-			String telFixe, String mdp, String parrainage) {
+			String telFixe, String mdp, String parrainage){
 		super();
 		setNom(nom);
 		setIdAbonne(genId.getAndIncrement()); 
@@ -121,8 +124,18 @@ public class Abonne {
 				+ mdp + ", parrainage=" + parrainage + "]";
 	}
 	
-	
-	
+	// METHODE CONTROLE SAISIE
+		 public void controleNom(String nom ) throws Exception_Nico {
+		        if( nom == null || nom.trim() == "") {
+		            throw new Exception_Nico( "Le Nom n'est pas renseigné" );
+		        }
+		        if ( nom != null && nom.trim().length() < 2 ) {
+		            throw new Exception_Nico( "Le Nom doit contenir au moins 2 caractères." );
+		        }
+		        if ( nom != null && nom.trim().length() > 15 ) {
+		            throw new Exception_Nico( "Le titre ne peut contenir plus de 15 caractères." );
+		        }
+		}
 	
 	
 }

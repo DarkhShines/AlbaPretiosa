@@ -5,13 +5,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import AppException.Exception_Nico;
 import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.nico.Abonne;
+import fr.albapretiosa.util.UtilAlain;
 
 /**
  * Servlet implementation class InscriptionServlet
@@ -19,7 +23,6 @@ import fr.albapretiosa.metier.nico.Abonne;
 @WebServlet("/InscriptionServlet")
 public class InscriptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 
 	public InscriptionServlet() {
 		super();
@@ -62,11 +65,12 @@ public class InscriptionServlet extends HttpServlet {
 			response.sendRedirect(context+"/index.jsp");
 		}
 		else{
-			//		request.setAttribute("message", "Identifiants ou mot de passe incorrect.");
-			//		RequestDispatcher disp = request.getRequestDispatcher(Erreur.getErrorLocation());
-			//		disp.forward(request, response);
-			System.out.println("connexion echouée");
+			request.setAttribute("message", "Inscription échouée");
+			RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
+			disp.forward(request, response);
 		}
 	}
+	
+	
 
 }
