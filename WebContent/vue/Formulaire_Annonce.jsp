@@ -94,6 +94,7 @@
 						<div
 							class="col-xl-5 col-lg-5 col-md-10 col-sm-12 about_img_boxpdnt">
 							<div class="about_box">
+							
 								<h3>Le Formulaire</h3>
 								<p>
 									L'annonce doit comporter les informations suivantes: <br>

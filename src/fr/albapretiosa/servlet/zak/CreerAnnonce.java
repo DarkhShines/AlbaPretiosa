@@ -2,7 +2,7 @@
 package fr.albapretiosa.servlet.zak;
 
 import java.io.IOException;
-
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
@@ -51,6 +51,7 @@ public class CreerAnnonce extends HttpServlet {
 			throw new Exception_Zak( "Le titre ne peut contenir plus de 100 caractères." );
 		}
 	}
+	
 
 	/**
 	 * Méthode de controle de la surface
@@ -71,7 +72,6 @@ public class CreerAnnonce extends HttpServlet {
 	}
 
 
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -86,7 +86,7 @@ public class CreerAnnonce extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Je suis dans doPost de CreerAnnonce");
 
-
+		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession(true);
 		Abonne a = (Abonne)session.getAttribute("Abonne");	
 
@@ -121,6 +121,7 @@ public class CreerAnnonce extends HttpServlet {
 		}catch(Exception_Zak e){
 			messages.add(e.getMessage());
 		} 
+		
 		
 		try {
 			System.out.println("Je rentre dans le try de doPost de CréerAnnonce");
@@ -167,7 +168,7 @@ public class CreerAnnonce extends HttpServlet {
 			disp.forward(request, response);
 
 		}
-
+		
 
 	}
 }
