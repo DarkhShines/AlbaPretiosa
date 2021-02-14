@@ -2,7 +2,6 @@ package fr.albapretiosa.dao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import AppException.ExceptionAlain;
 import AppException.Exception_Zak;
 import fr.albapretiosa.metier.nico.Abonne;
@@ -10,7 +9,7 @@ import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.util.UtilAlain;
 import fr.albapretiosa.metier.alain.*;
 
-public class Dao {
+public class Dao  {
 	public static ArrayList<Abonne> abonnes = initAbo();
 	public static ArrayList<Admin> admins = initAdmin();
 	public static ArrayList<Annonce> annonces = initAnnonce();
@@ -56,7 +55,6 @@ public class Dao {
 		String slide = "";
 		String act = "active";
 		int loop   = 1;
-
 
 		for(Annonce ann : Dao.annonces){
 			if(loop == 1) {
@@ -174,11 +172,11 @@ public class Dao {
 		ArrayList<Annonce> annonces = new ArrayList<Annonce>();
 		ArrayList<String> messages = new ArrayList<String>();
 		Annonce ann = null;
-		ann = new Annonce("Manoir DeCruz", 1200, "France", "Hyers", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), "Blablabla", true, true, false, true);
+		ann = new Annonce("Manoir DeCruz", 1200, "France", "Paris", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), "Blablabla", true, true, false, true);
 		Annonce ann1 = null;
 		ann1 = new Annonce("Casa Vivaldi", 1200, "France", "Marseille", LocalDate.of(2018,12,12), LocalDate.of(2022,12,12), "Blablabla", true, false, false, true);
 		Annonce ann2 = null;
-		ann2 = new Annonce("Chateau Mont Perret", 1200, "France", "Bourg-en-Champagne", LocalDate.of(2019,12,12), LocalDate.of(2021,12,12), "Blablabla", true, true, false, false);
+		ann2 = new Annonce("Chateau Mont Perret", 1200, "France", "Bordeaux", LocalDate.of(2019,12,12), LocalDate.of(2021,12,12), "Blablabla", true, true, false, false);
 		annonces.add(ann);
 		annonces.add(ann1);
 		annonces.add(ann2);
