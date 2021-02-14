@@ -2,13 +2,12 @@ package fr.albapretiosa.dao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import AppException.Exception_Zak;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.metier.alain.*;
 
-public class Dao {
+public class Dao  {
 	public static ArrayList<Abonne> abonnes = initAbo();
 	public static ArrayList<Admin> admins = initAdmin();
 	public static ArrayList<Annonce> annonces = initAnnonce();

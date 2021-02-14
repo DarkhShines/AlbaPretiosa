@@ -57,7 +57,6 @@ public class CreerAnnonce extends HttpServlet {
 		}
 	}
 
-
 	/**
 	 * Méthode de controle de la surface
 	 * @param surface

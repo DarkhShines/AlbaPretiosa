@@ -17,9 +17,7 @@ import fr.albapretiosa.servlet.zak.CreerAnnonce;
  */
 
 public class Annonce {
-
-
-
+	
 	private static final long serialVersionUID = 1L;
 
 	/*		LISTE DES VARIABLES DE CLASSE		 */
