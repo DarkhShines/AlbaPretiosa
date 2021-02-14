@@ -4,7 +4,7 @@ import fr.albapretiosa.metier.nico.Abonne;
 /**
  * 
  * @author Alain
- *
+ * 
  */
 public class Admin extends Abonne {
 
