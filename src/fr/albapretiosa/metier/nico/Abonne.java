@@ -181,10 +181,7 @@ public class Abonne {
 		}
 	}
 	public void controleTelFixe(String telFixe ) throws Exception_Nico {
-		if( telFixe == null || telFixe.trim() == "") {
-			throw new Exception_Nico( "Le téléphone Fixe n'est pas renseigné" );
-		}
-		if ( telFixe != null && telFixe.trim().length() != 10 ) {
+		if ( telFixe != null && telFixe.trim() != "" && telFixe.trim().length() != 10 ) {
 			throw new Exception_Nico( "Le téléphone Fixe doit contenir 10 caractères." );
 		}
 	}

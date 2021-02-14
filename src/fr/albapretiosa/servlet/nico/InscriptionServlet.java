@@ -37,7 +37,6 @@ public class InscriptionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception_Nico {
 		String context = request.getContextPath();
 		ArrayList<Abonne> abonnes = Dao.abonnes;
-		PrintWriter out = response.getWriter();
 		String alias = request.getParameter("alias");
 		String mdp = request.getParameter("mdp");
 		String mdpConfirm = request.getParameter("mdpConfirm");
@@ -59,10 +58,11 @@ public class InscriptionServlet extends HttpServlet {
 				pwOk = true;
 			}
 			if(inscriptionOk && pwOk) {
-				out.println("Connection réussie "+alias);
 				Abonne abonneOk = new Abonne(nom, prenom, alias, email, telPortable, mdp, parrainage);
 				Dao.abonnes.add(abonneOk);
 				response.sendRedirect(context+"/index.jsp");
+			}else {
+				throw new Exception_Nico();
 			}
 		}catch(Exception_Nico en) {
 			request.setAttribute("message", "Inscription échouée");
