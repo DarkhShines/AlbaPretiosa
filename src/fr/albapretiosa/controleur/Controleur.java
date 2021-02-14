@@ -21,7 +21,7 @@ import fr.albapretiosa.util.UtilAlain;
  * Et met en place l'organisation des URLs du site
  * @author ALAIN
  */
-@WebServlet("/accueil")
+@WebServlet("/")
 public class Controleur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher 	disp; // Pour ne pas avoir à l'instancier dans chacunes de mes méthodes.
