@@ -2,6 +2,9 @@ package fr.albapretiosa.metier.alain;
 
 import java.time.LocalDate;
 
+import AppException.ExceptionAlain;
+import fr.albapretiosa.util.UtilAlain;
+
 public class Commentaire {
 	
 	// Alain : Mise en place des variables d'instances..
@@ -23,6 +26,7 @@ public class Commentaire {
 	 * @param commentaire Le corps du message
 	 * @param dateCom Date de création du commentaire. Il est créé quand il est instancié donc c'est toujours "maintenant" 
 	 * @param idAnnonce Permet de savoir quels commentaire appartient a quelle annonce
+	 * @throws ExceptionAlain 
 	 * @see package fr.albapretiosa.servlet.zak/AjoutComm.java 
 	 * @see package fr.albapretiosa.servlet.zak/ModifComm.java	 
 	 * @see package fr.albapretiosa.servlet.zak/SupprComm.java 
@@ -52,8 +56,8 @@ public class Commentaire {
 	public String getCommentaire() {
 		return commentaire;
 	}
-	public void setCommentaire(String commentaire) {
-		this.commentaire = commentaire;
+	public void setCommentaire(String commentaire) throws ExceptionAlain {
+		this.commentaire = UtilAlain.isEmpty(commentaire);
 	}
 	public LocalDate getDateCom() {
 		return dateCom;

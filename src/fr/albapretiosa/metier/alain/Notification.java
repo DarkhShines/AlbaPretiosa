@@ -2,6 +2,9 @@ package fr.albapretiosa.metier.alain;
 
 import java.time.LocalDate;
 
+import AppException.ExceptionAlain;
+import fr.albapretiosa.util.UtilAlain;
+
 /**
  * 
  * @author Alain
@@ -27,6 +30,7 @@ public class Notification {
 	 * @param texteNotif Le corps du message
 	 * @param dateNotif Date de création de la notif. Elle est créée quand elle est instanciée donc c'est toujours "maintenant" 
 	 * @param lu Permet de savoir si la notification a été lue.
+	 * @throws ExceptionAlain 
 	 * @see package fr.albapretiosa.servlet.zak/PublierNotif.java 
 	 * @see WebContent/vue/notification.jsp 
 	 */
@@ -84,8 +88,8 @@ public class Notification {
 	}
 
 
-	public void setObjet(String objet) {
-		this.objet = objet;
+	public void setObjet(String objet) throws ExceptionAlain {
+		this.objet = UtilAlain.isEmpty(objet);
 	}
 
 
@@ -94,8 +98,8 @@ public class Notification {
 	}
 
 
-	public void setTexteNotif(String texteNotif) {
-		this.texteNotif = texteNotif;
+	public void setTexteNotif(String texteNotif) throws ExceptionAlain {
+		this.texteNotif = UtilAlain.isEmpty(texteNotif);
 	}
 
 
