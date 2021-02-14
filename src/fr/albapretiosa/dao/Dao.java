@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import AppException.Exception_Zak;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
+import fr.albapretiosa.util.UtilAlain;
 import fr.albapretiosa.metier.alain.*;
 
 public class Dao {
@@ -14,26 +15,23 @@ public class Dao {
 	public static ArrayList<Annonce> annonces = initAnnonce();
 	public static ArrayList<Notification> notification = initNotif();
 	public static ArrayList<Commentaire> commentaires = initComm();
-	public static Object abonnesBan;
+	public static ArrayList<Abonne> abonnesBan = new ArrayList<Abonne>();
 
 
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
 	// Affiche des commentaires en dur actuellement, doit être MAJ suivant les classes des autres.
-	public String listCom() {
-		String comm ="<div class=\"col-xl-5 col-lg-5 col-md-5 col-sm-12 listcom\"> ";
+	public static String listCom() {
+		String comm ="<div class=\"col-xl-5 col-lg-5 col-md-5 col-sm-12 commEntier\"> ";
 		for (Commentaire commentaire : commentaires) {
-			comm = "le 01/01, <span class=\"pseudoSession\">DarkhShines</span> a écrit :<br> "
-					+ "						<div class=\"commentaire\">Commentaire 1<a class=\"aleft\" href=\"#\"><i class=\"fas fa-pen imgleft\"></i></a><a href=\"#\"><i class=\"far fa-trash-alt imgright\"></i></a></div><br> "
-					+ "						<hr> "
-					+ "						Hier, <span class=\"peuso\">Dayuum</span> a écrit :<br> "
-					+ "						<div class=\"commentaire\">Commentaire 2<a href=\"#\"></a></div><br> "
-					+ "						<hr> "
-					+ "						11h37, <span class=\"peuso\">Zed</span> a écrit :<br> "
-					+ "						<div class=\"commentaire\">Commentaire 3<a href=\"#\"></a></div><br> "
-					+ "						<hr>";
+			comm = "<div class=\"infocomm\">" + 
+					"							<p>Le " + UtilAlain.formatDateFr(commentaire.getDateCom())+ ", <span class=\"pseudoSession\">"+ commentaire.getExpediteur() +"</span> a écrit :</p><a class=\"aleft\" href=\"<%=request.getContextPath()%>/modifcomm?idAnnonce=<%= ann.getIdAnnonce()%>\"><i class=\"fas fa-pen imgleft\"></i></a><a href=\"<%=request.getContextPath()%>/suppcomm?idAnnonce=<%= ann.getIdAnnonce()%>\"><i class=\"far fa-trash-alt imgright\"></i></a><br>" + 
+					"						</div>" + 
+					"						<div class=\"lecomm\">" + 
+					"							<p> " + commentaire.getCommentaire() + "</p>" + 
+					"						</div>";
 		}
 		comm +="</div>";
-		return null;
+		return comm;
 	}
 
 	/**
@@ -123,20 +121,26 @@ public class Dao {
 
 		// abonne 1,2 et 3 utilise le constructeur sans telFixe, le 4 et le 5 l'utilise
 
-
+		Abonne abonne1 = new Abonne("user1", "user1", "user1", "user1@gmail.com", "0607717273","0442056322", "password", "DJB-264" );
+		Abonne abonne2 = new Abonne("user2", "user2", "user2", "user2@gmail.com", "0634764903","0442053242", "password", "SES-812" );
+		Abonne abonne3 = new Abonne("user3", "user3", "user3", "user3@gmail.com", "0607717273","0442056322", "password", "DJB-264" );
+		Abonne abonne6 = new Abonne("user4", "user4", "user4", "sarkeric@gmail.com", "0634764903","0442053242", "password", "SES-812" );
 		Abonne abonne4 = new Abonne("DupontPremium", "Jack", "Bigboss", "bigboss@gmail.com", "0607717273","0442056322", "password", "DJB-264" );
 		Abonne abonne5 = new Abonne("Sarkozy", "Eric", "Sarkeric", "sarkeric@gmail.com", "0634764903","0442053242", "password", "SES-812" );
 		ArrayList<Abonne> abonnes = new ArrayList<Abonne>();
 
-
+		abonnes.add(abonne1);
+		abonnes.add(abonne2);
+		abonnes.add(abonne3);
 		abonnes.add(abonne4);
 		abonnes.add(abonne5);
+		abonnes.add(abonne6);
 		return abonnes;
 	}
 	public static ArrayList<Admin> initAdmin() {
 		// parrainage = initale de Nom Prenom Alias en majuscule - 3 chiffres aléatoires
 
-		// abonne 1,2 et 3 utilise le constructeur sans telFixe, le 4 et le 5 l'utilise
+		Admin Muller = new Admin("Muller", "Dominique", "Muller", "muller@gmail.com", "0607080910", "password", "MDM-123" );
 		Admin Dayuum = new Admin("Muscat", "Nicolas", "Dayuum", "dayuum@gmail.com", "0607080910", "password", "NMD-123" );
 		Admin DarkhShines = new Admin("Dardot", "Alain", "Darkhshines", "darkhshines@gmail.com", "0607030210", "password", "DAD-456" );
 		Admin Zed = new Admin("Bahou", "Zak", "Kirby", "kirby@gmail.com", "0601101112", "password", "IZK-789" );
@@ -144,6 +148,7 @@ public class Dao {
 		admins.add(DarkhShines);
 		admins.add(Dayuum);
 		admins.add(Zed);
+		admins.add(Muller);
 		return admins;
 	}
 
@@ -199,5 +204,37 @@ public class Dao {
 		Commentaire commentaire3 = new Commentaire("Sarkeric", "Ceci est un commentaire, qui se doit d'être injurieux pour tester ma méthode de filtrage, alors désolé pour ce qui suit : con CoN pute PUTE s a l o p e ", LocalDate.now(), 1);
 		ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
 		return commentaires;
+	}
+	public static String selectAbo() {
+		String select = "<label for=\"abo\">Choisir un abonné : </label>" + 
+						"<select name=\"abo\" id=\"abo\">";
+		for(Abonne abonne : Dao.abonnes) {
+			select +="    <option value="+abonne.getIdAbonne()+">"+ abonne.getNom()+" , " + abonne.getPrenom() +"</option>\r\n";
+		}
+		select += "</select>";
+		return select;
+	}
+	
+	public static String listAbo() {
+		String table = "<table style=\"width:100%\">" + 
+				"  <tr>" + 
+				"    <th>Id Abonne</th>" + 
+				"    <th>Nom</th>" + 
+				"    <th>Prenom</th>" + 
+				"    <th>Alias</th>" + 
+				"  </tr>\r\n";
+		for(Abonne abonne : Dao.abonnes) {
+			table += "  <tr>\r\n" + 
+				"    <td>" + abonne.getIdAbonne() + "</td>" + 
+				"    <td>" + abonne.getNom()+ "</td>" + 
+				"    <td>" + abonne.getPrenom()+ "</td>" + 
+				"    <td>" + abonne.getAlias()+ "</td>" ;
+			 
+		}
+				
+				table += "</table>";
+		
+		
+		return table;
 	}
 }

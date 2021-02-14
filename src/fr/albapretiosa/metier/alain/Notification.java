@@ -5,6 +5,7 @@ import java.time.LocalDate;
 /**
  * 
  * @author Alain
+ * @implNote Classe des Notifications. Permet leurs création et leur recherche grace à son Identifiant
  *
  */
 public class Notification {

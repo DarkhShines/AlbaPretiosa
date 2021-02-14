@@ -32,7 +32,7 @@ public class PublierNotif extends HttpServlet {
 		Admin admin = (Admin) session.getAttribute("Abonne");
 		String objet = request.getParameter("objet");
 		String message = request.getParameter("message");
-		
+		/* Une notification n'a que peut de paramètre à entré lors de sa création. L'ID et la date se créant automatiquement pour chaque nouvelle Notification */ 
 		Notification notif = new Notification(admin.getAlias(), admin.getIdAbonne(), objet, message);
 		Dao.notification.add(notif);
 		response.sendRedirect(request.getContextPath()+"/vue/vueAdmin.jsp");
