@@ -4,7 +4,7 @@ package AppException;
  * @author Zakarya D. Bahou
  *
  */
-public class Exception_Zak extends Exception {
+public class Exception_Zak extends NullPointerException {
 
 	public Exception_Zak(String msg) {
 		// TODO Auto-generated constructor stub

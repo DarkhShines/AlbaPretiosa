@@ -126,6 +126,125 @@ public class Annonce {
 	 */
 	public Annonce() {}
 
+	
+	
+
+	/**
+	 * Méthode de contrôle du titre saisi.
+	 * @param titre
+	 * @throws Exception_Zak
+	 */
+	public static void controleTitre( String titre ) throws Exception_Zak {
+		if( titre == null || titre.trim() == "") {
+			throw new Exception_Zak( "Le titre n'est pas renseigné" );
+		}
+		else if(titre != null) {
+			if (titre.trim().length() < 10 ) {
+				throw new Exception_Zak( "Le titre doit contenir au moins 10 caractères." );
+			}
+			if (titre.trim().length() > 100 ) {
+				throw new Exception_Zak( "Le titre ne peut contenir plus de 100 caractères." );
+			}
+		}
+	}
+
+	/**
+	 * Méthode de controle de la surface
+	 * @param surface
+	 * @throws Exception_Zak
+	 */
+
+	public static void controleSurface(int surface) throws Exception_Zak{
+		if( surface == 0 ) {
+			throw new Exception_Zak( "La surface ne peut être égale à 0 ");
+		}
+		if( surface < 0) {
+			throw new Exception_Zak( "La surface ne peut être négative");
+		}
+		if( surface > 112100 ) {
+			throw new Exception_Zak( "La surface ne peut être superieur à 112100m² ");
+		}
+	}
+
+	/**
+	 * Méthode de controle du pays
+	 * @param pays
+	 * @throws Exception_Zak
+	 */
+	public static void controlePays(String pays) throws Exception_Zak {
+		if( pays == null || pays.trim() == "") {
+			throw new Exception_Zak( "Le pays n'est pas renseigné" );
+		}
+		else if(pays != null) {
+			if(!pays.trim().equals("France") && !pays.trim().equals("Angleterre" ) && !pays.trim().equals("Italie")) {
+				throw new Exception_Zak("Nous ne proposons pas ce pays dans nos services");
+			}
+			if(pays.trim().length() > 40) {
+				throw new Exception_Zak("Le nom du pays est trop long");
+			}
+		}
+	}
+
+	/**
+	 * @param ville
+	 * @throws Exception_Zak
+	 */
+	public static void controleVille(String ville) throws Exception_Zak{
+		if( ville == null || ville.trim() == "") {
+			throw new Exception_Zak( "Le pays n'est pas renseigné" );
+		}
+		else if(ville != null) {
+			if(!ville.trim().equals("Marseille") && !ville.trim().equals("Paris") && !ville.trim().equals("Bordeaux")) {
+				throw new Exception_Zak("Nous ne proposons pas cette ville dans nos services");
+			}
+			if(ville.trim().length() > 40) {
+				throw new Exception_Zak("Le nom de la ville est trop long");
+			}
+		}
+	}
+
+	/**
+	 * Méthode de contrôle des dates.
+	 * @param creneau_debut
+	 * @param creneau_fin
+	 * @throws Exception_Zak
+	 */
+	public static void controleDate(LocalDate creneau_debut, LocalDate creneau_fin) throws Exception_Zak{
+
+		if(creneau_debut == null) {
+			throw new Exception_Zak("La date de début de location n'est pas renseigné");
+		}
+		if(creneau_fin == null) {
+			throw new Exception_Zak("La date de fin de location n'est pas renseigné");
+		}
+		else if(creneau_debut != null && creneau_fin != null) {
+			if (creneau_debut.isBefore(LocalDate.now())) {
+				throw new Exception_Zak("La date de début de location de peut être antérieur à aujourd'hui");
+			}
+			if(creneau_fin.isBefore(LocalDate.now())) {
+				throw new Exception_Zak("La date de fin de location de peut être antérieur à aujourd'hui");
+			}
+			if(creneau_debut.isAfter(creneau_fin)) {
+				throw new Exception_Zak("La date de fin de location de peut être anterieur à la date de début");
+			}
+		}
+	}
+	
+	/**
+	 * Méthode de contrôle de la description
+	 * @param description
+	 * @throws Exception_Zak
+	 */
+	public static void controleDescription(String description) throws Exception_Zak {
+		if(description != null) {
+			if(description.trim().length() > 250) {
+				throw new Exception_Zak("La description est trop longue");
+			}
+			if(description.trim().length() < 5)
+				throw new Exception_Zak("La description est trop courte");
+			
+		}
+	}
 
 	/**
 	 * METHODE POUR GENERE UN ID ANNONCE AUTO_INCREMENTE COMME REFERENCE UNIQUE
@@ -163,6 +282,7 @@ public class Annonce {
 	 * @throws Exception_Zak 
 	 */
 	public void setTitre(String titre){
+		controleTitre(titre);
 		this.titre = titre;
 	}
 	/**
@@ -176,6 +296,7 @@ public class Annonce {
 	 * @throws Exception_Zak 
 	 */
 	public void setSurface(int surface){
+		controleSurface(surface);
 		this.surface = surface;
 	}
 
@@ -193,6 +314,7 @@ public class Annonce {
 	 * @param pays = Le pays à set
 	 */
 	public void setPays(String pays) {
+		controlePays(pays);
 		this.pays = pays;
 	}
 
@@ -209,6 +331,7 @@ public class Annonce {
 	 * @param ville = La ville à set
 	 */
 	public void setVille(String ville) {
+		controleVille(ville);
 		this.ville = ville;
 	}
 
@@ -247,6 +370,7 @@ public class Annonce {
 	 * @param description = La description à set
 	 */
 	public void setDescription(String description) {
+		controleDescription(description);
 		this.description = description;
 	}
 
