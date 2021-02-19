@@ -34,7 +34,7 @@ public class InscriptionServlet extends HttpServlet {
 	}
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception_Nico {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String context = request.getContextPath();
 		ArrayList<Abonne> abonnes = Dao.abonnes;
 		String alias = request.getParameter("alias");
@@ -62,10 +62,10 @@ public class InscriptionServlet extends HttpServlet {
 				Dao.abonnes.add(abonneOk);
 				response.sendRedirect(context+"/index.jsp");
 			}else {
-				throw new Exception_Nico();
+				throw new Exception_Nico("Inscription Incorrecte");
 			}
 		}catch(Exception_Nico en) {
-			request.setAttribute("message", "Inscription échouée");
+			request.setAttribute("message", en.getMessage());
 			RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
 			disp.forward(request, response);
 		}
