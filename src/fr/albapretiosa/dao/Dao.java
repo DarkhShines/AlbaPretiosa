@@ -17,6 +17,7 @@ public class Dao  {
 	public static ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
 	public static ArrayList<Abonne> abonnesBan = new ArrayList<Abonne>();
 
+	
 
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
 	// Affiche des commentaires en dur actuellement, doit être MAJ suivant les classes des autres.
