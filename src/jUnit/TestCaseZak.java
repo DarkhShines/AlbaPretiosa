@@ -35,5 +35,6 @@ class TestCaseZak {
 		Annonce	ann = new Annonce("Manoir DeCruz", 1200, "France", "Paris", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), "Blablabla", true, true, false, true);
 		assertThrows(Exception_Zak.class, ()->{ann.setTitre(null);});
 	}
+	
 }
->>>>>>> refs/remotes/origin/Zakarya_1
+

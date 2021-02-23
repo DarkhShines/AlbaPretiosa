@@ -1,12 +1,19 @@
 package fr.albapretiosa.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import AppException.ExceptionAlain;
 import AppException.Exception_Zak;
+
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.util.UtilAlain;
+
 import fr.albapretiosa.metier.alain.*;
 
 public class Dao  {
@@ -16,6 +23,18 @@ public class Dao  {
 	public static ArrayList<Notification> notification = initNotif();
 	public static ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
 	public static ArrayList<Abonne> abonnesBan = new ArrayList<Abonne>();
+	
+	
+	
+	private static final String strNomDriver = "com.mysql.cj.jdbc.Driver" ;
+	private static final String BDD = "schemaalba";
+	private static final String USER = "albauser";
+	private static final String PASSWD = "Password1";
+	private static final String DBURL ="jdbc:mysql://localhost:3306/" + BDD + "?useUnicode=true" +
+			"&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	
+	
+	
 
 	
 
@@ -38,6 +57,7 @@ public class Dao  {
 	/**
 	 * Méthode qui créer un carrousel et y affiche les 3 annonces présentes en dur dans Dao
 	 * @return carousel 
+	 * @author Alain, Nico Zak
 	 */
 	public static String CreateCar() {
 
@@ -237,4 +257,54 @@ public class Dao  {
 		
 		return table;
 	}
+	
+	/* ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN */
+	public static ArrayList<Abonne> getAllAbonnes() {
+		ArrayList<Abonne> abonnes = new ArrayList<Abonne>();
+		try {
+			Class.forName(strNomDriver);
+		 
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+			String reqSql = ConstRequest.GET_ALL_ABONNES;
+			Statement stmt = conn.createStatement();
+			ResultSet aboList = stmt.executeQuery(reqSql);
+			
+			while(aboList.next()) {
+				String nom = aboList.getString("nom");
+				int id = aboList.getInt("idAbonne");
+				String prenom = aboList.getString("prenom");
+				String mail = aboList.getString("email");
+				String alias = aboList.getString("alias");
+				String mobile = aboList.getString("telMobile");
+				String fixe = aboList.getString("telFixe");
+				boolean plat = aboList.getBoolean("platinium");
+				
+
+
+				Abonne abonne = new Abonne();
+				
+				abonne.setNom(nom);
+				abonne.setIdAbonne(id);
+				abonne.setPrenom(prenom);
+				abonne.setEmail(mail);
+				abonne.setAlias(alias);
+				abonne.setTelPortable(mobile);
+				abonne.setTelFixe(fixe);
+				abonne.setPlatinum(plat);
+				System.out.println("Nom recup : " + nom + " GetnomAbo : " + abonne.getNom());
+				abonnes.add(abonne);
+			}
+		aboList.close();
+		conn.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return abonnes;
+	}
+	
 }
