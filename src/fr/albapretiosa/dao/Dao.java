@@ -13,7 +13,7 @@ public class Dao  {
 	public static ArrayList<Annonce> annonces = initAnnonce();
 	public static ArrayList<Notification> notification = initNotif();
 	public static ArrayList<Commentaire> commentaires = initComm();
-	public static Object abonnesBan;
+	public static ArrayList<Abonne> abonnesBan;
 
 
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
