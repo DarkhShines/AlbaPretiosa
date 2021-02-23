@@ -3,6 +3,7 @@ package fr.albapretiosa.servlet.alain;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.alain.Commentaire;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
+import fr.albapretiosa.util.UtilAlain;
 
 /**
  * Servlet implementation class ajoutComm
@@ -26,20 +28,27 @@ public class AjoutComm extends HttpServlet {
    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Do Post de AjoutComm");
-		HttpSession session = request.getSession(true);
-		Abonne abonne = (Abonne) session.getAttribute("Abonne");
-		String comm = request.getParameter("commentaire");
-		int idAnnonce = Integer.parseInt(request.getParameter("idAnnonce"));
-		Commentaire commentaire = new Commentaire(abonne.getAlias(), comm , LocalDate.now(), idAnnonce);
-		for(Annonce ann : Dao.annonces) {
-			if(ann.getIdAnnonce() == idAnnonce ) {
-				ann.addComm(commentaire.getIdCom());
+		try {
+			System.out.println("Do Post de AjoutComm");
+			HttpSession session = request.getSession(true);
+			Abonne abonne = (Abonne) session.getAttribute("Abonne");
+			String comm = request.getParameter("commentaire");
+			int idAnnonce = Integer.parseInt(request.getParameter("idAnnonce"));
+			Commentaire commentaire = new Commentaire(abonne.getAlias(), comm , LocalDate.now(), idAnnonce);
+			for(Annonce ann : Dao.annonces) {
+				if(ann.getIdAnnonce() == idAnnonce ) {
+					ann.addComm(commentaire.getIdCom());
+				}
 			}
+			Dao.commentaires.add(commentaire);
+			response.sendRedirect("vue/consulter.jsp?idAnnonce="+idAnnonce+"");
+			System.out.println("Do Post de AjoutComm fin");
+		} catch (Exception e) {
+			request.setAttribute("message", "Le champ est vide");
+            RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
+            disp.forward(request, response);
 		}
-		Dao.commentaires.add(commentaire);
-		response.sendRedirect("vue/consulter.jsp?idAnnonce="+idAnnonce+"");
-		System.out.println("Do Post de AjoutComm fin");
+		
 	}
 
 	/**
