@@ -16,7 +16,18 @@ public class Dao  {
 	public static ArrayList<Notification> notification = initNotif();
 	public static ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
 	public static ArrayList<Abonne> abonnesBan = new ArrayList<Abonne>();
-
+	
+	
+	
+	private static final String strNomDriver = "com.mysql.cj.jdbc.Driver" ;
+	private static final String BDD = "schemaalba";
+	private static final String USER = "albauser";
+	private static final String PASSWD = "Password1";
+	private static final String DBURL ="jdbc:mysql://localhost:3306/" + BDD + "?useUnicode=true" +
+			"&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	
+	
+	
 
 
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
@@ -38,6 +49,7 @@ public class Dao  {
 	/**
 	 * Méthode qui créer un carrousel et y affiche les 3 annonces présentes en dur dans Dao
 	 * @return carousel 
+	 * @author Alain, Nico Zak
 	 */
 	public static String CreateCar() {
 
