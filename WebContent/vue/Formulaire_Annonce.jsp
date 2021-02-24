@@ -165,31 +165,11 @@
 											<input class="form-control" placeholder="Ville"
 												list="liste_ville" name="ville" required />
 											<datalist id="liste_ville">
-												<option value="Marseille">Marseille</option>
+												<option value="villes">Marseille</option>
 												<option value="Paris">Paris</option>
 												<option value="Bordeaux">Bordeaux</option>
 											</datalist>
 										</div>
-<!-- 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-											<label for="surface"><strong class="white">Ville</strong></label>
-											<input class="form-control" placeholder="Ville"
-												list="liste_ville" name="ville" required />
-											<datalist id="liste_ville">
-												<option value="Londres">Londres</option>
-												<option value="Manchester">Manchester</option>
-												<option value="Liverpool">Liverpool</option>
-											</datalist>
-										</div>
-										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-											<label for="surface"><strong class="white">Ville</strong></label>
-											<input class="form-control" placeholder="Ville"
-												list="liste_ville" name="ville" required />
-											<datalist id="liste_ville">
-												<option value="Rome">Rome</option>
-												<option value="Florence">Florence</option>
-												<option value="Venise">Venise</option>
-											</datalist>
-										</div> -->
 										<!-- CHAMPS OPTION -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 

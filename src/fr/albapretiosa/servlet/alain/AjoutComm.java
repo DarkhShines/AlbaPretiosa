@@ -35,7 +35,7 @@ public class AjoutComm extends HttpServlet {
 			String comm = request.getParameter("commentaire");
 			int idAnnonce = Integer.parseInt(request.getParameter("idAnnonce"));
 			Commentaire commentaire = new Commentaire(abonne.getAlias(), comm , LocalDate.now(), idAnnonce);
-			for(Annonce ann : Dao.annonces) {
+			for(Annonce ann : Dao.getAllAnnonce()) {
 				if(ann.getIdAnnonce() == idAnnonce ) {
 					ann.addComm(commentaire.getIdCom());
 				}

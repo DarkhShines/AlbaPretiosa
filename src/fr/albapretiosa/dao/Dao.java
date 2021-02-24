@@ -210,7 +210,7 @@ public class Dao  {
 		String act = "active";
 		int loop   = 1;
 
-		for(Annonce ann : Dao.annonces){
+		for(Annonce ann : Dao.getAllAnnonce()){
 			if(loop == 1) {
 				car = "carrousel1";
 				slide = "Premier slide";

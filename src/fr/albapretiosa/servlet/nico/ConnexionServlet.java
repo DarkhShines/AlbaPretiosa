@@ -44,7 +44,7 @@ public class ConnexionServlet extends HttpServlet {
 		String mdp = request.getParameter("mdp");
 		boolean connectionOk = false;
 		
-		for(Annonce annonce : Dao.annonces){
+		for(Annonce annonce : Dao.getAllAnnonce()){
 			System.out.println(annonce.getDescription()); 
 		}
 		for (Abonne abonne : abonnes) {
