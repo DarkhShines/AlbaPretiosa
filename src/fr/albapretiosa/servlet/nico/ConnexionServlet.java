@@ -37,31 +37,32 @@ public class ConnexionServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String context = request.getContextPath();
-		ArrayList<Abonne> abonnes = Dao.abonnes;
-		ArrayList<Admin> admins = Dao.admins;
-		Abonne abonneOk = new Abonne();
 		String alias = request.getParameter("alias");
 		String mdp = request.getParameter("mdp");
 		boolean connectionOk = false;
-		
-		for(Annonce annonce : Dao.annonces){
-			System.out.println(annonce.getDescription()); 
+		boolean adminOk		 = false;
+		Abonne abonne = new Abonne();
+		Admin  admin  = new Admin();
+
+		try {
+
+			abonne 		 = Dao.getAbonne(alias, mdp);
+			connectionOk = abonne.getAlias() != null;
+
+		}catch(NullPointerException npe) {
+			admin = Dao.getAdmin(alias, mdp);
+			adminOk 	= admin.getAlias() != null;
 		}
-		for (Abonne abonne : abonnes) {
-			if(alias.equals(abonne.getAlias()) && mdp.equals(abonne.getMdp())) {
-				connectionOk = true;
-				abonneOk = abonne;
-			}
-		}
-		for (Admin admin : admins) {
-			if(alias.equals(admin.getAlias()) && mdp.equals(admin.getMdp())) {
-				connectionOk = true;
-				abonneOk = admin;
-			}
-		}
+
+
 		if(connectionOk) {
 			HttpSession session = request.getSession(true);
-			session.setAttribute("Abonne", abonneOk);
+			session.setAttribute("Abonne", abonne);
+			response.sendRedirect(context+"/vue/accueil.jsp");
+		}
+		else if(adminOk) {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("Abonne", admin);
 			response.sendRedirect(context+"/vue/accueil.jsp");
 		}
 		else{

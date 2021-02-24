@@ -14,6 +14,8 @@ import java.sql.Connection;
 
 import AppException.ExceptionAlain;
 import AppException.Exception_Zak;
+import fr.albapretiosa.dao.ConstRequest;
+import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.util.UtilAlain;
@@ -26,37 +28,37 @@ public class Dao  {
 	public static ArrayList<Notification> notification = initNotif();
 	public static ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
 	public static ArrayList<Abonne> abonnesBan = new ArrayList<Abonne>();
-	
-	
-	
+
+
+
 	private static final String strNomDriver = "com.mysql.cj.jdbc.Driver" ;
 	private static final String BDD = "schemaalba";
 	private static final String USER = "albauser";
 	private static final String PASSWD = "Password1";
 	private static final String DBURL ="jdbc:mysql://localhost:3306/" + BDD + "?useUnicode=true" +
 			"&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	
-	
+
+
 	public static Annonce getAnnonceById(int idAnnonce){
 		Annonce trouve = null;
 		try {
 			Class.forName(strNomDriver);
 			String rqSQL = ConstRequest.GETANNONCE;
-			
+
 			//Créer une connexion et l'ouvrir
 			Connection con = DriverManager.getConnection(DBURL, USER, PASSWD); 
-			
+
 			//Ecrire la requete
 			PreparedStatement pstmt = con.prepareStatement(rqSQL);
-			
+
 			pstmt.setInt(1,  idAnnonce);
-			
+
 			//Executer le statement
 			ResultSet rs   = pstmt.executeQuery();
-			
+
 			System.out.println("Dao PreparedStatement : " + pstmt + "");
-			
-			
+
+
 			if(rs.next()) {
 				int idAnnonce1 = rs.getInt("idAnnonce");
 
@@ -66,12 +68,12 @@ public class Dao  {
 				//Le mettre dans trouve
 				trouve = ann;
 			}
-			
+
 			rs.close();
 			con.close();
-			
+
 		} catch(Exception_Zak e) {
-			
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Driver non trouvé" + e.getMessage());
@@ -81,12 +83,12 @@ public class Dao  {
 					+ " SQLState: " 		+ e.getSQLState()
 					+ " VendorError: " 	+ e.getErrorCode());
 		}
-		
-		
-		
-		
+
+
+
+
 		return trouve;
-		
+
 	}
 
 
@@ -209,6 +211,54 @@ public class Dao  {
 		abonnes.add(abonne6);
 		return abonnes;
 	}
+	public static Abonne getAbonne(String alias, String mdp) {
+
+		Abonne trouve = null;
+		
+		try {
+
+			// verifier la config 
+			Class.forName(strNomDriver);
+
+			// creer une connexion et l'ouvrir
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+
+			// ecrire la requete
+			String recupAbo = ConstRequest.GET_ABO;
+
+			// creer le statement ou preparestatement
+			PreparedStatement pstmt = conn.prepareStatement(recupAbo);
+
+			// renseigner le prepare statement 
+			pstmt.setString(1, alias);
+			pstmt.setString(2, mdp);
+
+			// excuter le statement 
+			ResultSet rs = pstmt.executeQuery();
+
+			// recuperer les donnees avec result set 
+			if(rs.next()) {
+				String aliasAbo 		= rs.getString("alias");
+				String nomAbo			= rs.getString("nomAbo");
+				String prenomAbo		= rs.getString("prenomAbo");
+				int    idAbo			= rs.getInt("idAbo");
+
+				// reconstruire l'objet
+				Abonne abonne = new Abonne(aliasAbo, nomAbo, prenomAbo);
+				abonne.setIdAbonne(idAbo);
+				trouve = abonne;
+			}
+			rs.close();
+			conn.close();
+		}catch(ClassNotFoundException e) {
+			System.err.println("Erreur : " + e);
+		}
+		catch(SQLException s) {
+			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
+		}
+		return trouve;
+	}
+
 	public static ArrayList<Admin> initAdmin() {
 		// parrainage = initale de Nom Prenom Alias en majuscule - 3 chiffres aléatoires
 
@@ -222,6 +272,53 @@ public class Dao  {
 		admins.add(Zed);
 		admins.add(Muller);
 		return admins;
+	}
+	public static Admin getAdmin(String alias, String mdp) {
+
+		Admin trouve = null;
+		
+		try {
+
+			// verifier la config 
+			Class.forName(strNomDriver);
+
+			// creer une connexion et l'ouvrir
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+
+			// ecrire la requete
+			String recupAdmin = ConstRequest.GET_ADMIN;
+
+			// creer le statement ou preparestatement
+			PreparedStatement pstmt = conn.prepareStatement(recupAdmin);
+
+			// renseigner le prepare statement 
+			pstmt.setString(1, alias);
+			pstmt.setString(2, mdp);
+
+			// excuter le statement 
+			ResultSet rs = pstmt.executeQuery();
+
+			// recuperer les donnees avec result set 
+			if(rs.next()) {
+				String aliasAdmin 		= rs.getString("alias");
+				String nomAdmin			= rs.getString("nomAdmin");
+				String prenomAdmin		= rs.getString("prenomAdmin");
+				int    idAdmin			= rs.getInt("idAdmin");
+
+				// reconstruire l'objet
+				Admin admin = new Admin(aliasAdmin, nomAdmin, prenomAdmin);
+				admin.setIdAbonne(idAdmin);
+				trouve = admin;
+			}
+			rs.close();
+			conn.close();
+		}catch(ClassNotFoundException e) {
+			System.err.println("Erreur : " + e);
+		}
+		catch(SQLException s) {
+			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
+		}
+		return trouve;
 	}
 
 	public static ArrayList<Notification> initNotif() {
@@ -279,14 +376,14 @@ public class Dao  {
 	}
 	public static String selectAbo() {
 		String select = "<label for=\"abo\">Choisir un abonné : </label>" + 
-						"<select name=\"abo\" id=\"abo\">";
+				"<select name=\"abo\" id=\"abo\">";
 		for(Abonne abonne : Dao.abonnes) {
 			select +="    <option value="+abonne.getIdAbonne()+">"+ abonne.getNom()+" , " + abonne.getPrenom() +"</option>\r\n";
 		}
 		select += "</select>";
 		return select;
 	}
-	
+
 	public static String listAbo() {
 		String table = "<table style=\"width:100%\">" + 
 				"  <tr>" + 
@@ -297,16 +394,16 @@ public class Dao  {
 				"  </tr>\r\n";
 		for(Abonne abonne : Dao.abonnes) {
 			table += "  <tr>\r\n" + 
-				"    <td>" + abonne.getIdAbonne() + "</td>" + 
-				"    <td>" + abonne.getNom()+ "</td>" + 
-				"    <td>" + abonne.getPrenom()+ "</td>" + 
-				"    <td>" + abonne.getAlias()+ "</td>" ;
-			 
+					"    <td>" + abonne.getIdAbonne() + "</td>" + 
+					"    <td>" + abonne.getNom()+ "</td>" + 
+					"    <td>" + abonne.getPrenom()+ "</td>" + 
+					"    <td>" + abonne.getAlias()+ "</td>" ;
+
 		}
-				
-				table += "</table>";
-		
-		
+
+		table += "</table>";
+
+
 		return table;
 	}
 }

@@ -23,5 +23,9 @@ public class Admin extends Abonne {
 		super(nom, prenom, alias, email, telPortable, mdp, parrainage);
 		// TODO Auto-generated constructor stub
 	}
+	public Admin(String alias, String nom, String prenom) {
+		super(nom, prenom, alias);
+		// TODO Auto-generated constructor stub
+	}
 	
 }
