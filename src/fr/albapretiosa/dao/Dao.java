@@ -2,6 +2,7 @@ package fr.albapretiosa.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -226,9 +227,10 @@ public class Dao  {
 		return commentaires;
 	}
 	public static String selectAbo() {
+		ArrayList<Abonne> abonnes = getAllAbonnes();
 		String select = "<label for=\"abo\">Choisir un abonné : </label>" + 
 						"<select name=\"abo\" id=\"abo\">";
-		for(Abonne abonne : Dao.abonnes) {
+		for(Abonne abonne : abonnes) {
 			select +="    <option value="+abonne.getIdAbonne()+">"+ abonne.getNom()+" , " + abonne.getPrenom() +"</option>\r\n";
 		}
 		select += "</select>";
@@ -306,6 +308,26 @@ public class Dao  {
 		}
 		
 		return abonnes;
+	}
+	
+	public static void banAbo(int id) {
+		try {
+			Class.forName(strNomDriver);
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+		String reqSql = ConstRequest.BAN_ABO;
+		PreparedStatement pstmt = conn.prepareStatement(reqSql);
+		pstmt.setInt(1, id);
+		pstmt.execute();
+		conn.close();
+	
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
 	}
 	
 }
