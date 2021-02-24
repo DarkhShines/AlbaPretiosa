@@ -236,6 +236,7 @@ public class Dao  {
 	}
 	
 	public static String listAbo() {
+		ArrayList<Abonne> abonnes = getAllAbonnes();
 		String table = "<table style=\"width:100%\">" + 
 				"  <tr>" + 
 				"    <th>Id Abonne</th>" + 
@@ -243,7 +244,7 @@ public class Dao  {
 				"    <th>Prenom</th>" + 
 				"    <th>Alias</th>" + 
 				"  </tr>\r\n";
-		for(Abonne abonne : Dao.abonnes) {
+		for(Abonne abonne : abonnes) {
 			table += "  <tr>\r\n" + 
 				"    <td>" + abonne.getIdAbonne() + "</td>" + 
 				"    <td>" + abonne.getNom()+ "</td>" + 
@@ -270,9 +271,9 @@ public class Dao  {
 			ResultSet aboList = stmt.executeQuery(reqSql);
 			
 			while(aboList.next()) {
-				String nom = aboList.getString("nom");
-				int id = aboList.getInt("idAbonne");
-				String prenom = aboList.getString("prenom");
+				String nom = aboList.getString("nomAbo");
+				int id = aboList.getInt("idAbo");
+				String prenom = aboList.getString("prenomAbo");
 				String mail = aboList.getString("email");
 				String alias = aboList.getString("alias");
 				String mobile = aboList.getString("telMobile");
