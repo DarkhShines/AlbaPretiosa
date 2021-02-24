@@ -37,6 +37,7 @@ public class Annonce {
 	private boolean   spa;
 	private boolean   golf;
 	private boolean   tennis;
+	private ArrayList<Integer> idCommList = new ArrayList<Integer>();
 
 	Photo photo1     = new Photo();
 	Photo photo2     = new Photo();
@@ -515,20 +516,6 @@ public class Annonce {
 	public void setIdAbonne(int idAbonne) {
 		this.idAbonne = idAbonne;
 	}
-
-	/**
-     * @param id
-     */
-    public void addComm(int id) {
-        this.idCommList.add(id);
-    }
-
-    /**
-     * @param id
-     */
-    public void deleteComm(int id) {
-        this.idCommList.remove(id);
-    }
 
 
 }
