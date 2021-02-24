@@ -83,7 +83,7 @@ public class ModificationServlet extends HttpServlet {
 				throw new Exception_Nico();
 			}
 		}catch(Exception_Nico en ) {
-			request.setAttribute("message", "Modification Incorrecte");
+			request.setAttribute("message", en.getMessage());
 			RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
 			disp.forward(request, response);
 		}

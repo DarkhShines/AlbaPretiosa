@@ -1,5 +1,11 @@
 package fr.albapretiosa.dao;
 
+
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -7,14 +13,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Connection;
 import AppException.ExceptionAlain;
 import AppException.Exception_Zak;
-
+import fr.albapretiosa.dao.ConstRequest;
+import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.util.UtilAlain;
@@ -28,20 +38,75 @@ public class Dao  {
 	public static ArrayList<Notification> notification = initNotif();
 	public static ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
 	public static ArrayList<Abonne> abonnesBan = new ArrayList<Abonne>();
-	
-	
-	
+
+
+
 	private static final String strNomDriver = "com.mysql.cj.jdbc.Driver" ;
 	private static final String BDD = "schemaalba";
 	private static final String USER = "albauser";
 	private static final String PASSWD = "Password1";
 	private static final String DBURL ="jdbc:mysql://localhost:3306/" + BDD + "?useUnicode=true" +
 			"&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	
-	 
-	
 
-	
+
+	public static Annonce getAnnonceById(int idAnnonce){
+		Annonce trouve = null;
+		try {
+			Class.forName(strNomDriver);
+			String rqSQL = ConstRequest.GETANNONCE;
+
+			//Créer une connexion et l'ouvrir
+			Connection con = DriverManager.getConnection(DBURL, USER, PASSWD); 
+
+			//Ecrire la requete
+			PreparedStatement pstmt = con.prepareStatement(rqSQL);
+
+			pstmt.setInt(1,  idAnnonce);
+
+			//Executer le statement
+			ResultSet rs   = pstmt.executeQuery();
+
+			System.out.println("Dao PreparedStatement : " + pstmt + "");
+
+
+			if(rs.next()) {
+				int idAnnonce1 = rs.getInt("idAnnonce");
+
+				//Reconstruire les objets
+				Annonce ann = new Annonce();
+				ann.setIdAnnonce(idAnnonce1);
+				//Le mettre dans trouve
+				trouve = ann;
+			}
+
+			rs.close();
+			con.close();
+
+		} catch(Exception_Zak e) {
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Driver non trouvé" + e.getMessage());
+		} catch(SQLException e) {
+			System.err.println("Erreur 2 : " 
+					+ " SQLException: " 	+ e.getMessage()
+					+ " SQLState: " 		+ e.getSQLState()
+					+ " VendorError: " 	+ e.getErrorCode());
+		}
+
+
+
+
+		return trouve;
+
+	}
+
+
+
+
+
+
+
 
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
 	// Affiche des commentaires en dur actuellement, doit être MAJ suivant les classes des autres.
@@ -162,6 +227,54 @@ public class Dao  {
 		abonnes.add(abonne6);
 		return abonnes;
 	}
+	public static Abonne getAbonne(String alias, String mdp) {
+
+		Abonne trouve = null;
+
+		try {
+
+			// verifier la config 
+			Class.forName(strNomDriver);
+
+			// creer une connexion et l'ouvrir
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+
+			// ecrire la requete
+			String recupAbo = ConstRequest.GET_ABO;
+
+			// creer le statement ou preparestatement
+			PreparedStatement pstmt = conn.prepareStatement(recupAbo);
+
+			// renseigner le prepare statement 
+			pstmt.setString(1, alias);
+			pstmt.setString(2, mdp);
+
+			// excuter le statement 
+			ResultSet rs = pstmt.executeQuery();
+
+			// recuperer les donnees avec result set 
+			if(rs.next()) {
+				String aliasAbo 		= rs.getString("alias");
+				String nomAbo			= rs.getString("nomAbo");
+				String prenomAbo		= rs.getString("prenomAbo");
+				int    idAbo			= rs.getInt("idAbo");
+
+				// reconstruire l'objet
+				Abonne abonne = new Abonne(aliasAbo, nomAbo, prenomAbo);
+				abonne.setIdAbonne(idAbo);
+				trouve = abonne;
+			}
+			rs.close();
+			conn.close();
+		}catch(ClassNotFoundException e) {
+			System.err.println("Erreur : " + e);
+		}
+		catch(SQLException s) {
+			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
+		}
+		return trouve;
+	}
+
 	public static ArrayList<Admin> initAdmin() {
 		// parrainage = initale de Nom Prenom Alias en majuscule - 3 chiffres aléatoires
 
@@ -175,6 +288,53 @@ public class Dao  {
 		admins.add(Zed);
 		admins.add(Muller);
 		return admins;
+	}
+	public static Admin getAdmin(String alias, String mdp) {
+
+		Admin trouve = null;
+
+		try {
+
+			// verifier la config 
+			Class.forName(strNomDriver);
+
+			// creer une connexion et l'ouvrir
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+
+			// ecrire la requete
+			String recupAdmin = ConstRequest.GET_ADMIN;
+
+			// creer le statement ou preparestatement
+			PreparedStatement pstmt = conn.prepareStatement(recupAdmin);
+
+			// renseigner le prepare statement 
+			pstmt.setString(1, alias);
+			pstmt.setString(2, mdp);
+
+			// excuter le statement 
+			ResultSet rs = pstmt.executeQuery();
+
+			// recuperer les donnees avec result set 
+			if(rs.next()) {
+				String aliasAdmin 		= rs.getString("alias");
+				String nomAdmin			= rs.getString("nomAdmin");
+				String prenomAdmin		= rs.getString("prenomAdmin");
+				int    idAdmin			= rs.getInt("idAdmin");
+
+				// reconstruire l'objet
+				Admin admin = new Admin(aliasAdmin, nomAdmin, prenomAdmin);
+				admin.setIdAbonne(idAdmin);
+				trouve = admin;
+			}
+			rs.close();
+			conn.close();
+		}catch(ClassNotFoundException e) {
+			System.err.println("Erreur : " + e);
+		}
+		catch(SQLException s) {
+			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
+		}
+		return trouve;
 	}
 
 	public static ArrayList<Notification> initNotif() {
@@ -233,14 +393,17 @@ public class Dao  {
 	public static String selectAbo() {
 		ArrayList<Abonne> abonnes = getAllAbonnes();
 		String select = "<label for=\"abo\">Choisir un abonné : </label>" + 
-						"<select name=\"abo\" id=\"abo\">";
+
+				"<select name=\"abo\" id=\"abo\">";
+
 		for(Abonne abonne : abonnes) {
+
 			select +="    <option value="+abonne.getIdAbonne()+">"+ abonne.getNom()+" , " + abonne.getPrenom() +"</option>\r\n";
 		}
 		select += "</select>";
 		return select;
 	}
-	
+
 	public static String listAbo() {
 		ArrayList<Abonne> abonnes = getAllAbonnes();
 		String table = "<table style=\"width:100%\">" + 
@@ -252,30 +415,30 @@ public class Dao  {
 				"  </tr>\r\n";
 		for(Abonne abonne : abonnes) {
 			table += "  <tr>\r\n" + 
-				"    <td>" + abonne.getIdAbonne() + "</td>" + 
-				"    <td>" + abonne.getNom()+ "</td>" + 
-				"    <td>" + abonne.getPrenom()+ "</td>" + 
-				"    <td>" + abonne.getAlias()+ "</td>" ;
-			 
+					"    <td>" + abonne.getIdAbonne() + "</td>" + 
+					"    <td>" + abonne.getNom()+ "</td>" + 
+					"    <td>" + abonne.getPrenom()+ "</td>" + 
+					"    <td>" + abonne.getAlias()+ "</td>" ;
+
 		}
-				
-				table += "</table>";
-		
-		
+
+		table += "</table>";
+
+
 		return table;
 	}
-	
+
 	/* ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN */
 	public static ArrayList<Abonne> getAllAbonnes() {
 		ArrayList<Abonne> abonnes = new ArrayList<Abonne>();
 		try {
 			Class.forName(strNomDriver);
-		 
+
 			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
 			String reqSql = ConstRequest.GET_ALL_ABONNES;
 			Statement stmt = conn.createStatement();
 			ResultSet aboList = stmt.executeQuery(reqSql);
-			
+
 			while(aboList.next()) {
 				String nom = aboList.getString("nomAbo");
 				int id = aboList.getInt("idAbo");
@@ -285,11 +448,11 @@ public class Dao  {
 				String mobile = aboList.getString("telMobile");
 				String fixe = aboList.getString("telFixe");
 				boolean plat = aboList.getBoolean("platinium");
-				
+
 
 
 				Abonne abonne = new Abonne();
-				
+
 				abonne.setNom(nom);
 				abonne.setIdAbonne(id);
 				abonne.setPrenom(prenom);
@@ -301,8 +464,8 @@ public class Dao  {
 				System.out.println("Nom recup : " + nom + " GetnomAbo : " + abonne.getNom());
 				abonnes.add(abonne);
 			}
-		aboList.close();
-		conn.close();
+			aboList.close();
+			conn.close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -310,20 +473,20 @@ public class Dao  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return abonnes;
 	}
-	
+
 	public static void banAbo(int id) {
 		try {
 			Class.forName(strNomDriver);
 			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
-		String reqSql = ConstRequest.BAN_ABO;
-		PreparedStatement pstmt = conn.prepareStatement(reqSql);
-		pstmt.setInt(1, id);
-		pstmt.execute();
-		conn.close();
-	
+			String reqSql = ConstRequest.BAN_ABO;
+			PreparedStatement pstmt = conn.prepareStatement(reqSql);
+			pstmt.setInt(1, id);
+			pstmt.execute();
+			conn.close();
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -331,8 +494,9 @@ public class Dao  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
+
 	}
+
 	public static void ajoutComm(Commentaire comm, Abonne abonne) {
 		try {
 			Class.forName(strNomDriver);
@@ -355,8 +519,13 @@ public class Dao  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
 		 
 		
+
+	public static void ajoutComm() {
+
+
 	}
-	
+
 }

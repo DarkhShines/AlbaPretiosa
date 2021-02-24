@@ -62,6 +62,15 @@ public class Abonne {
 		setMdp(mdp);
 		setParrainage(parrainage);
 	}
+	
+	public Abonne(String alias,String nom, String prenom){
+		super();
+		setIdAbonne(genId.getAndIncrement()); 
+		setAlias(alias);
+		setNom(nom);
+		setPrenom(prenom);
+	}
+	
 	public Abonne() {
 		super();
 	}

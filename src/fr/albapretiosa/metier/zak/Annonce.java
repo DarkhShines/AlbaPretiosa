@@ -255,6 +255,7 @@ public class Annonce {
 		return incrementIdAnnonce;
 	}
 
+
 	/**
 	 * @param id
 	 */
@@ -515,8 +516,6 @@ public class Annonce {
 	public void setIdAbonne(int idAbonne) {
 		this.idAbonne = idAbonne;
 	}
-
-
 
 
 }
