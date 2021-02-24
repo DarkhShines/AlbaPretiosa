@@ -46,7 +46,7 @@ public class Lister_Annonce_Servlet extends HttpServlet {
 		RequestDispatcher disp = request.getRequestDispatcher("");	
 		
 		if(a != null) {
-			for(Annonce an : Dao.annonces) {
+			for(Annonce an : Dao.getAllAnnonce()) {
 				if(an.getIdAbonne() == a.getIdAbonne() ) {
 					annonce_liste.add(an);
 				}

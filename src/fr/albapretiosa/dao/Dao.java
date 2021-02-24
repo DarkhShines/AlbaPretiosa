@@ -4,6 +4,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -16,77 +18,156 @@ import AppException.ExceptionAlain;
 import AppException.Exception_Zak;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
+import fr.albapretiosa.metier.zak.Annonces;
 import fr.albapretiosa.util.UtilAlain;
 import fr.albapretiosa.metier.alain.*;
 
 public class Dao  {
 	public static ArrayList<Abonne> abonnes = initAbo();
 	public static ArrayList<Admin> admins = initAdmin();
-	public static ArrayList<Annonce> annonces = initAnnonce();
+	public static ArrayList<Annonce> anns = initAnnonce();
+	public static Annonces annonces		 = getAllAnnonce();
 	public static ArrayList<Notification> notification = initNotif();
 	public static ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
 	public static ArrayList<Abonne> abonnesBan = new ArrayList<Abonne>();
-	
-	
-	
+
+
+
 	private static final String strNomDriver = "com.mysql.cj.jdbc.Driver" ;
 	private static final String BDD = "schemaalba";
 	private static final String USER = "albauser";
 	private static final String PASSWD = "Password1";
 	private static final String DBURL ="jdbc:mysql://localhost:3306/" + BDD + "?useUnicode=true" +
 			"&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	
-	
-	public static Annonce getAnnonceById(int idAnnonce){
+
+	/**
+	 * Methode pour récupérer toute les annonces
+	 * @return annonces de type Annonces
+	 */
+	public static Annonces getAllAnnonce() {
+		Annonces annonces = new Annonces();
+
+		try {
+			Class.forName(strNomDriver);
+
+			//Créer une connexion et l'ouvrir
+			System.out.println("Connexion");
+			Connection con = DriverManager.getConnection(DBURL, USER, PASSWD); 			// Objet qui créer de la connection avec la BD
+			System.out.println("Connexion Ok");
+			//Ecrire la requete
+			String rqSQL = ConstRequest.GETALLANNONCE;
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(rqSQL);
+
+			while(rs.next()) {
+				int idAnnonce 		= rs.getInt("idAnnonce");
+				String titreAnnonce  = rs.getString("titreAnnonce");
+				int surfaceAnnonce 	= rs.getInt("surfaceAnnonce");
+				String creneau_debut = rs.getString("creneau_debut");
+				String creneau_fin = rs.getString("creneau_fin");
+				String description = rs.getString("description");
+				int idAbo			= rs.getInt("idAbo");
+				int idVille			= rs.getInt("idVille");
+
+				annonces.add(new Annonce(idAnnonce, titreAnnonce, surfaceAnnonce, creneau_debut, creneau_fin, description, idAbo, idVille));
+
+			}
+			rs.close();
+			con.close();
+
+
+		} catch(ClassNotFoundException e){ 						
+			System.err.println("Erreur 1 : " + e); 
+		} catch (SQLException s){ 								
+			System.err.println("Erreur 2 : " 
+					+ " SQLException: " 	+ s.getMessage()
+					+ " SQLState: " 		+ s.getSQLState()
+					+ " VendorError: " 	+ s.getErrorCode());
+		}
+
+
+		return annonces;
+
+	}
+
+
+	/**
+	 * Methode pour récupérer une annonce par son ID
+	 * A utiliser dans la liste des annonces
+	 * @param idAnnonce / Parametre qui me sert à recuperer une annonce
+	 * @return
+	 * @throws Exception_Zak
+	 * @author Zakarya D. Bahou
+	 */
+	public static Annonce getAnnonceById(int idAnnonce) throws Exception_Zak{
 		Annonce trouve = null;
 		try {
 			Class.forName(strNomDriver);
 			String rqSQL = ConstRequest.GETANNONCE;
-			
+
 			//Créer une connexion et l'ouvrir
 			Connection con = DriverManager.getConnection(DBURL, USER, PASSWD); 
-			
+
 			//Ecrire la requete
 			PreparedStatement pstmt = con.prepareStatement(rqSQL);
-			
+
 			pstmt.setInt(1,  idAnnonce);
-			
+
 			//Executer le statement
 			ResultSet rs   = pstmt.executeQuery();
-			
+
 			System.out.println("Dao PreparedStatement : " + pstmt + "");
-			
-			
+
+
 			if(rs.next()) {
 				int idAnnonce1 = rs.getInt("idAnnonce");
 
 				//Reconstruire les objets
 				Annonce ann = new Annonce();
 				ann.setIdAnnonce(idAnnonce1);
+
 				//Le mettre dans trouve
 				trouve = ann;
 			}
-			
+
 			rs.close();
 			con.close();
-			
-		} catch(Exception_Zak e) {
-			
+			pstmt.close();
+
+		} catch (SQLIntegrityConstraintViolationException e) {
+			String erreur = "*** Application - getAnnonceById - ERROR - SQLIntegrityConstraintViolationException"
+					+ " Erreur : " + e.getMessage()
+					+ " State : " + e.getSQLState()
+					+ " Code Erreur : " + e.getErrorCode()
+					+ " Cause : " + e.getCause();
+
+			System.out.println(erreur);	
+
+			if		(e.getErrorCode() == 1062) throw new Exception_Zak(9901," Erreur : Annonce dupliqué ");
+			else if (e.getErrorCode() == 1452) throw new Exception_Zak(9902, " Le numero abonné non existant ");
+			else if (e.getErrorCode() == 1048) {
+				if(e.getMessage().contains("idAnnonce")) 		 throw new Exception_Zak(9903, " ID annonce est obligatoire ");
+				else if (e.getMessage().contains("idAbonne")) 	 throw new Exception_Zak(9904, " Abonne obligatoire ");
+			}
+		} catch (SQLException e) {
+			System.out.println("*** Application - getAnnonceById - ERROR - SQLException"
+					+ " Erreur : " 		+ e.getMessage()
+					+ " State : "		+ e.getSQLState()
+					+ " Code Erreur : " + e.getErrorCode()
+					+ " Cause : " 		+ e.getCause());
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Driver non trouvé" + e.getMessage());
-		} catch(SQLException e) {
-			System.err.println("Erreur 2 : " 
-					+ " SQLException: " 	+ e.getMessage()
-					+ " SQLState: " 		+ e.getSQLState()
-					+ " VendorError: " 	+ e.getErrorCode());
+			System.out.println( "*** Application - getAnnonceById - ERROR - ClassNotFoundException"
+					+ " Erreur : " + e.getMessage()
+					+ " Cause : " + e.getCause());
+		} finally {
+			System.out.println("Sortie du getAnnonceById");
 		}
-		
-		
-		
-		
+
+
+
+
 		return trouve;
-		
+
 	}
 
 
@@ -279,14 +360,14 @@ public class Dao  {
 	}
 	public static String selectAbo() {
 		String select = "<label for=\"abo\">Choisir un abonné : </label>" + 
-						"<select name=\"abo\" id=\"abo\">";
+				"<select name=\"abo\" id=\"abo\">";
 		for(Abonne abonne : Dao.abonnes) {
 			select +="    <option value="+abonne.getIdAbonne()+">"+ abonne.getNom()+" , " + abonne.getPrenom() +"</option>\r\n";
 		}
 		select += "</select>";
 		return select;
 	}
-	
+
 	public static String listAbo() {
 		String table = "<table style=\"width:100%\">" + 
 				"  <tr>" + 
@@ -297,16 +378,16 @@ public class Dao  {
 				"  </tr>\r\n";
 		for(Abonne abonne : Dao.abonnes) {
 			table += "  <tr>\r\n" + 
-				"    <td>" + abonne.getIdAbonne() + "</td>" + 
-				"    <td>" + abonne.getNom()+ "</td>" + 
-				"    <td>" + abonne.getPrenom()+ "</td>" + 
-				"    <td>" + abonne.getAlias()+ "</td>" ;
-			 
+					"    <td>" + abonne.getIdAbonne() + "</td>" + 
+					"    <td>" + abonne.getNom()+ "</td>" + 
+					"    <td>" + abonne.getPrenom()+ "</td>" + 
+					"    <td>" + abonne.getAlias()+ "</td>" ;
+
 		}
-				
-				table += "</table>";
-		
-		
+
+		table += "</table>";
+
+
 		return table;
 	}
 }

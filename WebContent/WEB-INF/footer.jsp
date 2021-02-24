@@ -13,7 +13,7 @@
                                 <li> <a href="#">Accueil</a></li>
                                 <li> <a href="consulter.jsp">Consulter les annonces</a></li>
                                 <li> <a href="DepotAnnonce.jsp">Déposer une annonce</a></li>
-                                <li> <a href="espaceabonne.jsp">Mon espace</a></li>
+                                <li> <a href="Espace_Abonne.jsp">Mon espace</a></li>
                                 <li> <a href="apropos.jsp">A propos</a></li>
                             </ul>
                         </div>

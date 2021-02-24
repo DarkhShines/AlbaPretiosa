@@ -55,7 +55,7 @@ public class ModifAnnonce extends HttpServlet {
 		int idAnnonce = Integer.parseInt(request.getParameter("id"));
 		ArrayList<String> messages = new ArrayList<String>();
 		
-		for (Annonce ann : Dao.annonces) {
+		for (Annonce ann : Dao.getAllAnnonce()) {
 			if (ann.getIdAnnonce() == idAnnonce) {
 				ann.setTitre(titre);
 				ann.setSurface(surface);

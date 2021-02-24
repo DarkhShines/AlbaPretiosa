@@ -128,6 +128,12 @@ public class Annonce {
 	
 	
 
+	public Annonce(int idAnnonce, String titreAnnonce, int surfaceAnnonce, String creneau_debut, String creneau_fin,
+			String description2, int idAbo, int idVille) {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	/**
 	 * Méthode de contrôle du titre saisi.
 	 * @param titre
