@@ -255,6 +255,20 @@ public class Annonce {
 	}
 
 
+	/**
+	 * @param id
+	 */
+	public void addComm(int id) {
+		this.idCommList.add(id);
+	}
+ 
+	/**
+	 * @param id
+	 */
+	public void deleteComm(int id) {
+		this.idCommList.remove(id);
+	}
+
 	/*		LES GETTER ET SETTER		 */
 
 	/**
