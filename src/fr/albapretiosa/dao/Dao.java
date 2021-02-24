@@ -1,13 +1,17 @@
 package fr.albapretiosa.dao;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
+
 import AppException.ExceptionAlain;
 import AppException.Exception_Zak;
 
@@ -329,7 +333,29 @@ public class Dao  {
 		}
 		 
 	}
-	public static void ajoutComm() {
+	public static void ajoutComm(Commentaire comm, Abonne abonne) {
+		try {
+			Class.forName(strNomDriver);
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+			String reqSql = ConstRequest.ADD_COMMENTAIRE;
+			
+			PreparedStatement pstmt = conn.prepareStatement(reqSql);
+			pstmt.setString(1, comm.getCommentaire());
+			pstmt.setInt(2, abonne.getIdAbonne());
+			pstmt.setInt(3, comm.getIdAnnonce());
+			pstmt.setInt(4, comm.getIdCom());
+			
+			pstmt.setString(5, comm.getDateCom().toString());
+			pstmt.execute();
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
 		
 	}
 	

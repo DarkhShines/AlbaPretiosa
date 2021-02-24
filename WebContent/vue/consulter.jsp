@@ -94,14 +94,14 @@
 						<%= Dao.listCom() %>
 					</div>
 					<!-- L'envoi du commentaire sera géré par une servlet  -->
-						<form method="POST" action="<%=request.getContextPath()%>/ajoutcomm">
+						<form method="POST" action="<%=request.getContextPath()%>/ajoutcomm?idAnnonce=<%= ann.getIdAnnonce()%>">
 							
 								<p>Commentaire :</p>
 							
 							<div class="divcomm">
 								<textarea name="commentaire" class="areacom" cols="50"></textarea>
 								<!-- <button type="submit" class="btn btn-warning"><i class="far fa-paper-plane"></i></button> -->
-								<a href="<%=request.getContextPath()%>/ajoutcomm?idAnnonce=<%= ann.getIdAnnonce()%>"><i class="far fa-paper-plane"></i></a>
+								<button type="submit" class="btn btn-warning"><i class="far fa-paper-plane"></i></button>
 								
 							</div>
 							
