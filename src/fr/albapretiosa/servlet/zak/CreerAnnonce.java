@@ -2,8 +2,10 @@
 package fr.albapretiosa.servlet.zak;
 
 import java.io.IOException;
-
+import fr.albapretiosa.util.*;
+import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
@@ -34,41 +36,6 @@ public class CreerAnnonce extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	/**
-	 * Méthode de contrôle du titre saisi.
-	 * @param titre
-	 * @throws Exception
-	 */
-	public void controleTitre( String titre ) throws Exception {
-		if( titre == null || titre.trim() == "") {
-			throw new Exception_Zak( "Le titre n'est pas renseigné" );
-		}
-		if ( titre != null && titre.trim().length() < 10 ) {
-			throw new Exception_Zak( "Le titre doit contenir au moins 10 caractères." );
-		}
-		if ( titre != null && titre.trim().length() < 100 ) {
-			throw new Exception_Zak( "Le titre ne peut contenir plus de 100 caractères." );
-		}
-	}
-
-	/**
-	 * Méthode de controle de la surface
-	 * @param surface
-	 * @throws Exception
-	 */
-
-	public void controleSurface(int surface) throws Exception{
-		if( surface == 0 ) {
-			throw new Exception_Zak( "La surface ne peut être égale à 0 ");
-		}
-		if( surface < 0) {
-			throw new Exception_Zak( "La surface ne peut être négative");
-		}
-		if( surface > 112100 ) {
-			throw new Exception_Zak( "La surface ne peut être superieur à 112100m² ");
-		}
-	}
-
 
 
 	/**
@@ -85,11 +52,11 @@ public class CreerAnnonce extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Je suis dans doPost de CreerAnnonce");
 
-
+		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession(true);
 		Abonne a = (Abonne)session.getAttribute("Abonne");	
 
-		String titre 			= request.getParameter("titre").strip();		
+		String titre 			= request.getParameter("titre").strip();
 		int surface 			= Integer.parseInt(request.getParameter("surface").strip());
 		String pays				= request.getParameter("pays").strip();
 		String ville 			= request.getParameter("ville").strip();
@@ -104,50 +71,31 @@ public class CreerAnnonce extends HttpServlet {
 		//		Photo photo_2 			= request.getParameter("img_2");
 		//		Photo photo_3 			= request.getParameter("img_3");
 		//		Photo photo_4 			= request.getParameter("img_4");
+		boolean creationOk = false;
+
 
 		try {
 			System.out.println("Je rentre dans le try de doPost de CréerAnnonce");
-			Annonce annonce = new Annonce();
-			System.out.println("Pas 0");
-			annonce.setIdAbonne(a.getIdAbonne());
-			System.out.println("Pas 1");
-			annonce.setIdAnnonce(Annonce.genereIdAnnonce());
-			System.out.println("Pas 2");
-			annonce.setTitre(titre);
-			System.out.println("Pas 3");
-			annonce.setSurface(surface);
-			System.out.println("Pas 4");
-			annonce.setPays(pays);
-			System.out.println("Pas 5");
-			annonce.setVille(ville);
-			System.out.println("Pas 6");
-			annonce.setCreneau_debut(creneau_debut);
-			System.out.println("Pas 7");
-			annonce.setCreneau_fin(creneau_fin);
-			System.out.println("Pas 8");
-			annonce.setDescription(description);
-			System.out.println("Pas 9");
-			annonce.setPiscine(piscine);
-			System.out.println("Pas 10");
-			annonce.setSpa(spa);
-			System.out.println("Pas 11");
-			annonce.setGolf(golf);
-			System.out.println("Pas 12");
-			annonce.setTennis(tennis);
-			System.out.println("Pas 13");
-
+				for(Annonce ann : Dao.annonces) {
+					if(!titre.equals(ann.getTitre())) {
+						creationOk = true;
+					}
+				}
+				if(creationOk) {
+			Annonce annonce = new Annonce(titre, surface, pays, ville, creneau_debut, creneau_fin, description, piscine, spa, tennis, golf);
 			Dao.annonces.add(annonce);
-			System.out.println("Pas 14");
 			response.sendRedirect("vue/Formulaire_Annonce.jsp");
 			System.out.println("Je sors du doPost de CréerAnnonce");
-		}catch (NullPointerException npe) {
+				}
+				else {
+					throw new Exception_Zak("Le titre existe déja");
+				}
+		}catch (Exception_Zak npe) {
 
-			request.setAttribute("message", "Votre annonce ne correspond pas à nos critères");
-
-			String chemin = this.getServletContext().getInitParameter("pageErreur");
-
-			RequestDispatcher disp = request.getRequestDispatcher(chemin);
+			request.setAttribute("message", "Création de l'annonce non éffectué");
+			RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
 			disp.forward(request, response);
+			System.out.println("Erreur Formulaire");
 
 		}
 

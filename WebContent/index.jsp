@@ -21,8 +21,7 @@
                 <input type="password" name="mdp" id="mdp" required>
                 <label for="mdp">Mot de passe</label>
             </div>
-            <!-- Le lien qui suit ne sera pas présent sur la version finale, mais il vous permet aujourd'hui d'accéder à la partie connecté du site. -->
-            <a href="vue/consulter.jsp">Lien vers le site</a><br>
+           
             
             
             <a href="vue/inscription.jsp">Pas encore de compte ? Cliquez ici !</a>

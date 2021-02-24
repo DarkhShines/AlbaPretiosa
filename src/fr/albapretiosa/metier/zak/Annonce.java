@@ -6,7 +6,10 @@ package fr.albapretiosa.metier.zak;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
+
+import AppException.Exception_Zak;
 import fr.albapretiosa.metier.nico.Abonne;
+import fr.albapretiosa.servlet.zak.CreerAnnonce;
 
 /**
  * @author Zakarya D. Bahou
@@ -14,9 +17,7 @@ import fr.albapretiosa.metier.nico.Abonne;
  */
 
 public class Annonce {
-
-
-
+	
 	private static final long serialVersionUID = 1L;
 
 	/*		LISTE DES VARIABLES DE CLASSE		 */
@@ -36,7 +37,6 @@ public class Annonce {
 	private boolean   spa;
 	private boolean   golf;
 	private boolean   tennis;
-	private ArrayList<Integer> idCommList = new ArrayList<Integer>();
 
 	Photo photo1     = new Photo();
 	Photo photo2     = new Photo();
@@ -61,11 +61,12 @@ public class Annonce {
 	 * @param photo2 Photo de la propriété de l'annonce récupéré dans le formulaire de création d'annonce 
 	 * @param photo3 Photo de la propriété de l'annonce récupéré dans le formulaire de création d'annonce 
 	 * @param photo4 Photo de la propriété de l'annonce récupéré dans le formulaire de création d'annonce 
+	 * @throws Exception_Zak 
 	 * @see package fr.albapretiosa.servlet.zak/CreerAnnonce.java 
 	 * @see WebContent/vue/Formulaire_Annonce.jsp
 	 */
 	public Annonce(String titre, int surface, String pays, String ville, LocalDate creneau_debut, LocalDate creneau_fin,
-			String description, boolean piscine, boolean spa, boolean golf, boolean tennis, Photo photo1, Photo photo2, Photo photo3, Photo photo4) {
+			String description, boolean piscine, boolean spa, boolean golf, boolean tennis, Photo photo1, Photo photo2, Photo photo3, Photo photo4) throws Exception_Zak {
 
 		setIdAnnonce(genereIdAnnonce());
 		setTitre(titre);
@@ -98,10 +99,12 @@ public class Annonce {
 	 * @param spa Option de l'annonce récupéré dans le formulaire de création d'annonce
 	 * @param golf Option de l'annonce récupéré dans le formulaire de création d'annonce 
 	 * @param tennis Option de l'annonce récupéré dans le formulaire de création d'annonce 
+	 * @throws Exception_Zak 
 	 * @see package fr.albapretiosa.servlet.zak/CreerAnnonce.java 
 	 * @see WebContent/vue/Formulaire_Annonce.jsp
 	 */
 	public Annonce(String titre, int surface, String pays, String ville, LocalDate creneau_debut, LocalDate creneau_fin, String description, boolean piscine, boolean spa, boolean golf, boolean tennis) {
+
 
 		setIdAnnonce(genereIdAnnonce());
 		setTitre(titre);
@@ -122,7 +125,125 @@ public class Annonce {
 	 */
 	public Annonce() {}
 
+	
+	
 
+	/**
+	 * Méthode de contrôle du titre saisi.
+	 * @param titre
+	 * @throws Exception_Zak
+	 */
+	public static void controleTitre( String titre ) throws Exception_Zak {
+		if( titre == null || titre.trim() == "") {
+			throw new Exception_Zak( "Le titre n'est pas renseigné" );
+		}
+		else if(titre != null) {
+			if (titre.trim().length() < 10 ) {
+				throw new Exception_Zak( "Le titre doit contenir au moins 10 caractères." );
+			}
+			if (titre.trim().length() > 100 ) {
+				throw new Exception_Zak( "Le titre ne peut contenir plus de 100 caractères." );
+			}
+		}
+	}
+
+	/**
+	 * Méthode de controle de la surface
+	 * @param surface
+	 * @throws Exception_Zak
+	 */
+
+	public static void controleSurface(int surface) throws Exception_Zak{
+		if( surface == 0 ) {
+			throw new Exception_Zak( "La surface ne peut être égale à 0 ");
+		}
+		if( surface < 0) {
+			throw new Exception_Zak( "La surface ne peut être négative");
+		}
+		if( surface > 112100 ) {
+			throw new Exception_Zak( "La surface ne peut être superieur à 112100m² ");
+		}
+	}
+
+	/**
+	 * Méthode de controle du pays
+	 * @param pays
+	 * @throws Exception_Zak
+	 */
+	public static void controlePays(String pays) throws Exception_Zak {
+		if( pays == null || pays.trim() == "") {
+			throw new Exception_Zak( "Le pays n'est pas renseigné" );
+		}
+		else if(pays != null) {
+			if(!pays.trim().equals("France") && !pays.trim().equals("Angleterre" ) && !pays.trim().equals("Italie")) {
+				throw new Exception_Zak("Nous ne proposons pas ce pays dans nos services");
+			}
+			if(pays.trim().length() > 40) {
+				throw new Exception_Zak("Le nom du pays est trop long");
+			}
+		}
+	}
+
+	/**
+	 * @param ville
+	 * @throws Exception_Zak
+	 */
+	public static void controleVille(String ville) throws Exception_Zak{
+		if( ville == null || ville.trim() == "") {
+			throw new Exception_Zak( "Le pays n'est pas renseigné" );
+		}
+		else if(ville != null) {
+			if(!ville.trim().equals("Marseille") && !ville.trim().equals("Paris") && !ville.trim().equals("Bordeaux")) {
+				throw new Exception_Zak("Nous ne proposons pas cette ville dans nos services");
+			}
+			if(ville.trim().length() > 40) {
+				throw new Exception_Zak("Le nom de la ville est trop long");
+			}
+		}
+	}
+
+	/**
+	 * Méthode de contrôle des dates.
+	 * @param creneau_debut
+	 * @param creneau_fin
+	 * @throws Exception_Zak
+	 */
+	public static void controleDate(LocalDate creneau_debut, LocalDate creneau_fin) throws Exception_Zak{
+
+		if(creneau_debut == null) {
+			throw new Exception_Zak("La date de début de location n'est pas renseigné");
+		}
+		if(creneau_fin == null) {
+			throw new Exception_Zak("La date de fin de location n'est pas renseigné");
+		}
+		else if(creneau_debut != null && creneau_fin != null) {
+			if (creneau_debut.isBefore(LocalDate.now())) {
+				throw new Exception_Zak("La date de début de location de peut être antérieur à aujourd'hui");
+			}
+			if(creneau_fin.isBefore(LocalDate.now())) {
+				throw new Exception_Zak("La date de fin de location de peut être antérieur à aujourd'hui");
+			}
+			if(creneau_debut.isAfter(creneau_fin)) {
+				throw new Exception_Zak("La date de fin de location de peut être anterieur à la date de début");
+			}
+		}
+	}
+	
+	/**
+	 * Méthode de contrôle de la description
+	 * @param description
+	 * @throws Exception_Zak
+	 */
+	public static void controleDescription(String description) throws Exception_Zak {
+		if(description != null) {
+			if(description.trim().length() > 250) {
+				throw new Exception_Zak("La description est trop longue");
+			}
+			if(description.trim().length() < 5)
+				throw new Exception_Zak("La description est trop courte");
+			
+		}
+	}
 
 	/**
 	 * METHODE POUR GENERE UN ID ANNONCE AUTO_INCREMENTE COMME REFERENCE UNIQUE
@@ -133,19 +254,6 @@ public class Annonce {
 		return incrementIdAnnonce;
 	}
 
-	/**
-	 * @param id
-	 */
-	public void addComm(int id) {
-		this.idCommList.add(id);
-	}
-	
-	/**
-	 * @param id
-	 */
-	public void deleteComm(int id) {
-		this.idCommList.remove(id);
-	}
 
 	/*		LES GETTER ET SETTER		 */
 
@@ -157,8 +265,10 @@ public class Annonce {
 	}
 	/**
 	 * @param titre = Le titre à set
+	 * @throws Exception_Zak 
 	 */
-	public void setTitre(String titre) {
+	public void setTitre(String titre){
+		controleTitre(titre);
 		this.titre = titre;
 	}
 	/**
@@ -169,8 +279,10 @@ public class Annonce {
 	}
 	/**
 	 * @param surface = La surface à set
+	 * @throws Exception_Zak 
 	 */
-	public void setSurface(int surface) {
+	public void setSurface(int surface){
+		controleSurface(surface);
 		this.surface = surface;
 	}
 
@@ -188,6 +300,7 @@ public class Annonce {
 	 * @param pays = Le pays à set
 	 */
 	public void setPays(String pays) {
+		controlePays(pays);
 		this.pays = pays;
 	}
 
@@ -204,6 +317,7 @@ public class Annonce {
 	 * @param ville = La ville à set
 	 */
 	public void setVille(String ville) {
+		controleVille(ville);
 		this.ville = ville;
 	}
 
@@ -242,6 +356,7 @@ public class Annonce {
 	 * @param description = La description à set
 	 */
 	public void setDescription(String description) {
+		controleDescription(description);
 		this.description = description;
 	}
 
@@ -386,8 +501,8 @@ public class Annonce {
 	public void setIdAbonne(int idAbonne) {
 		this.idAbonne = idAbonne;
 	}
-	
-	
+
+
 
 
 }

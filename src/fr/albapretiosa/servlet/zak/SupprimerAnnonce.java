@@ -33,9 +33,21 @@ public class SupprimerAnnonce extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("Je suis dans la methode get de SupprimerAnnonce");
-		int idAnnonce = Integer.parseInt(request.getParameter("ID"));
+		
+		int idAnnonce = Integer.parseInt(request.getParameter("id"));
+		
 		ArrayList<Annonce> annonces = Dao.annonces;
+		
 		System.out.println(idAnnonce);
 		
 		for (int i = 0; i < annonces.size(); i++) {
@@ -45,15 +57,6 @@ public class SupprimerAnnonce extends HttpServlet {
 		}
 		
 		response.sendRedirect("vue/ListerAnnonce.jsp");
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
 	}
 
 }

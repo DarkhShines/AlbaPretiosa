@@ -80,6 +80,11 @@
      text-decoration: none;
      outline: none !important;
 }
+#white{
+	font-size: 25px;
+	color: white;
+	text-align: center;
+}
 
  img {
      max-width: 100%;
@@ -674,7 +679,8 @@ p {
 }
  .about .about_img {
      height: 100%;
-     background: #d8b00f;
+     background-image:url("../images/noir.jpg");
+     background-size: cover;
      margin-top: 90px;
 }
  .about .about_img figure {
