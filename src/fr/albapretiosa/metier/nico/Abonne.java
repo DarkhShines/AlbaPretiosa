@@ -23,7 +23,8 @@ public class Abonne {
 	private String 	telFixe;
 	private boolean platinum;
 	private String	mdp;
-	private String 	parrainage; 
+	private String 	parrainage;
+	private boolean isBan;
 
 	// CONSTRUCTEUR 
 	/**
@@ -61,6 +62,7 @@ public class Abonne {
 		setTelFixe(telFixe);
 		setMdp(mdp);
 		setParrainage(parrainage);
+		setBan(false);
 	}
 	
 	public Abonne(String alias,String nom, String prenom){
@@ -106,6 +108,9 @@ public class Abonne {
 	public String getParrainage() {
 		return parrainage;
 	}
+	public boolean isBan() {
+		return isBan;
+	}
 
 	// SETTER
 	public void setNom(String nom) {
@@ -145,7 +150,9 @@ public class Abonne {
 	public void setParrainage(String parrainage) {
 		this.parrainage = parrainage;
 	}
-
+	public void setBan(boolean isBan) {
+		this.isBan = isBan;
+	}
 	// METHODE 
 	@Override
 	public String toString() {

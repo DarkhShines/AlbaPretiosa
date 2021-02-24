@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,7 +23,7 @@ import java.sql.Connection;
 
 import AppException.ExceptionAlain;
 import AppException.Exception_Zak;
-
+import AppException.Exception_Nico;
 import fr.albapretiosa.dao.ConstRequest;
 import fr.albapretiosa.dao.Dao;
 
@@ -32,7 +32,6 @@ import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.util.UtilAlain;
-
 import fr.albapretiosa.metier.alain.*;
 
 public class Dao  {
@@ -278,7 +277,44 @@ public class Dao  {
 		}
 		return trouve;
 	}
+	public static Abonne creerAbonne(Abonne abonne) throws Exception_Nico{
+		try {
+			Class.forName(strNomDriver);
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+			String creerAbonne = ConstRequest.CREATE_ABO;
 
+			PreparedStatement pstmt 	= conn.prepareStatement(creerAbonne);
+
+
+			pstmt.setInt	(1,  abonne.getIdAbonne());
+			pstmt.setString	(2,  abonne.getNom());
+			pstmt.setString	(3,  abonne.getPrenom());
+			pstmt.setString	(4,  abonne.getAlias());
+			pstmt.setString	(5,  abonne.getEmail());
+			pstmt.setString	(6,  abonne.getTelPortable());
+			pstmt.setString	(7,  abonne.getTelFixe());
+			pstmt.setBoolean(8,  abonne.isPlatinum());
+			pstmt.setString	(9,  abonne.getMdp());
+			pstmt.setString	(10, abonne.getParrainage());
+			pstmt.setBoolean(11, abonne.isBan());
+
+			pstmt.executeUpdate();
+
+			pstmt.close();
+
+			conn.close();
+		}catch(ClassNotFoundException e) {
+			System.err.println("Erreur : " + e);
+		}catch(SQLIntegrityConstraintViolationException e) {
+			if(e.getErrorCode() == 1062) {
+				throw new Exception_Nico("Cet abonne existe déjà");
+			}
+		}catch(SQLException s) {
+			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
+		}
+
+		return abonne;
+	}
 	public static ArrayList<Admin> initAdmin() {
 		// parrainage = initale de Nom Prenom Alias en majuscule - 3 chiffres aléatoires
 
