@@ -260,12 +260,97 @@ public class Dao  {
 				String aliasAbo 		= rs.getString("alias");
 				String nomAbo			= rs.getString("nomAbo");
 				String prenomAbo		= rs.getString("prenomAbo");
+				String telFixe			= rs.getString("telFixe");
+				String telMobile		= rs.getString("telMobile");
+				String parrainage		= rs.getString("code_parrainage");
+				String email			= rs.getString("email");
 				int    idAbo			= rs.getInt("idAbo");
+				int    diff 			= 1;
 
 				// reconstruire l'objet
-				Abonne abonne = new Abonne(aliasAbo, nomAbo, prenomAbo);
+				Abonne abonne = new Abonne(nomAbo, prenomAbo, aliasAbo, email, telMobile, telFixe, parrainage, diff);
 				abonne.setIdAbonne(idAbo);
 				trouve = abonne;
+			}
+			rs.close();
+			conn.close();
+		}catch(ClassNotFoundException e) {
+			System.err.println("Erreur : " + e);
+		}
+		catch(SQLException s) {
+			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
+		}
+		return trouve;
+	}
+	public static String getAbonneMdp(String alias) {
+
+		String trouve = null;
+
+		try {
+
+			// verifier la config 
+			Class.forName(strNomDriver);
+
+			// creer une connexion et l'ouvrir
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+
+			// ecrire la requete
+			String recupAbo = ConstRequest.GET_ABO_MDP;
+
+			// creer le statement ou preparestatement
+			PreparedStatement pstmt = conn.prepareStatement(recupAbo);
+
+			// renseigner le prepare statement 
+			pstmt.setString(1, alias);
+
+			// excuter le statement 
+			ResultSet rs = pstmt.executeQuery();
+
+			// recuperer les donnees avec result set 
+			if(rs.next()) {
+
+				String mdp				= rs.getString("mdp");
+
+				trouve = mdp;
+			}
+			rs.close();
+			conn.close();
+		}catch(ClassNotFoundException e) {
+			System.err.println("Erreur : " + e);
+		}
+		catch(SQLException s) {
+			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
+		}
+		return trouve;
+	}
+	public static String getAdminMdp(String alias) {
+
+		String trouve = null;
+
+		try {
+
+			// verifier la config 
+			Class.forName(strNomDriver);
+
+			// creer une connexion et l'ouvrir
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+
+			// ecrire la requete
+			String recupAdmin = ConstRequest.GET_ADMIN_MDP;
+
+			// creer le statement ou preparestatement
+			PreparedStatement pstmt = conn.prepareStatement(recupAdmin);
+
+			// renseigner le prepare statement 
+			pstmt.setString(1, alias);
+
+			// excuter le statement 
+			ResultSet rs = pstmt.executeQuery();
+
+			// recuperer les donnees avec result set 
+			if(rs.next()) {
+				String mdp	= rs.getString("mdp");
+				trouve 		= mdp;
 			}
 			rs.close();
 			conn.close();
@@ -298,6 +383,40 @@ public class Dao  {
 			pstmt.setString	(10, abonne.getParrainage());
 			pstmt.setBoolean(11, abonne.isBan());
 
+			pstmt.executeUpdate();
+
+			pstmt.close();
+
+			conn.close();
+		}catch(ClassNotFoundException e) {
+			System.err.println("Erreur : " + e);
+		}catch(SQLIntegrityConstraintViolationException e) {
+			if(e.getErrorCode() == 1062) {
+				throw new Exception_Nico("Cet abonne existe déjà");
+			}
+		}catch(SQLException s) {
+			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
+		}
+
+		return abonne;
+	}
+	public static Abonne modifAbonne(Abonne abonne) throws Exception_Nico{
+		try {
+			Class.forName(strNomDriver);
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+			
+			String modifAbonne = ConstRequest.MODIF_ABO;
+			PreparedStatement pstmt 	= conn.prepareStatement(modifAbonne);
+
+			pstmt.setString	(1,  abonne.getNom());
+			pstmt.setString	(2,  abonne.getPrenom());
+			pstmt.setString	(3,  abonne.getEmail());
+			pstmt.setString	(4,  abonne.getTelPortable());
+			pstmt.setString	(5,  abonne.getTelFixe());
+			if(abonne.getMdp() != null)pstmt.setString (6,  abonne.getMdp());
+			pstmt.setString	(7,	 abonne.getParrainage());
+			pstmt.setString	(8,	 abonne.getAlias());
+			System.out.println("Affichage du statement"+pstmt);
 			pstmt.executeUpdate();
 
 			pstmt.close();
@@ -359,10 +478,14 @@ public class Dao  {
 				String aliasAdmin 		= rs.getString("alias");
 				String nomAdmin			= rs.getString("nomAdmin");
 				String prenomAdmin		= rs.getString("prenomAdmin");
+				String telFixe			= rs.getString("telFixe");
+				String telMobile		= rs.getString("telMobile");
+				String parrainage		= rs.getString("parrainage");
+				String email			= rs.getString("email");
 				int    idAdmin			= rs.getInt("idAdmin");
-
+				int	   diff				= 1;
 				// reconstruire l'objet
-				Admin admin = new Admin(aliasAdmin, nomAdmin, prenomAdmin);
+				Admin admin = new Admin(nomAdmin, prenomAdmin, aliasAdmin, email, telMobile, telFixe, parrainage, diff );
 				admin.setIdAbonne(idAdmin);
 				trouve = admin;
 			}
@@ -376,7 +499,42 @@ public class Dao  {
 		}
 		return trouve;
 	}
+	public static Admin modifAdmin(Admin admin) throws Exception_Nico{
+		try {
+			Class.forName(strNomDriver);
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+			String modifAdmin = ConstRequest.MODIF_ADMIN;
 
+			PreparedStatement pstmt 	= conn.prepareStatement(modifAdmin);
+
+			pstmt.setString	(1,  admin.getNom());
+			pstmt.setString	(2,  admin.getPrenom());
+			pstmt.setString	(3,  admin.getEmail());
+			pstmt.setString	(4,  admin.getTelPortable());
+			pstmt.setString	(5,  admin.getTelFixe());
+			pstmt.setString	(6,  admin.getMdp());
+			pstmt.setString	(7,	 admin.getParrainage());
+			pstmt.setString	(8,	 admin.getAlias());
+
+			pstmt.executeUpdate();
+
+			pstmt.close();
+
+			conn.close();
+		}catch(ClassNotFoundException e) {
+			System.err.println("Erreur : " + e);
+		}catch(SQLIntegrityConstraintViolationException e) {
+			if(e.getErrorCode() == 1062) {
+				throw new Exception_Nico("Cet abonne existe déjà");
+			}
+		}catch(SQLException s) {
+			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
+		}
+
+		return admin;
+	}
+	
+	
 	public static ArrayList<Notification> initNotif() {
 		Notification notif1 = new Notification("DarkhShines", 1, "Ouverture de poudlard", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
 		Notification notif2 = new Notification("DarkhShines", 2, "Ouverture de numéro 2", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
@@ -468,7 +626,7 @@ public class Dao  {
 		return table;
 	}
 
-	/* ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN */
+
 	public static ArrayList<Abonne> getAllAbonnes() {
 		ArrayList<Abonne> abonnes = new ArrayList<Abonne>();
 		try {
@@ -515,6 +673,51 @@ public class Dao  {
 		}
 
 		return abonnes;
+	}
+	public static ArrayList<Admin> getAllAdmin() {
+		ArrayList<Admin> admins = new ArrayList<Admin>();
+		try {
+			Class.forName(strNomDriver);
+
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+			String reqSql = ConstRequest.GET_ALL_ADMIN;
+			Statement stmt = conn.createStatement();
+			ResultSet adminList = stmt.executeQuery(reqSql);
+
+			while(adminList.next()) {
+				String nom 		= adminList.getString("nomAdmin");
+				int id 			= adminList.getInt("idAdmin");
+				String prenom 	= adminList.getString("prenomAdmin");
+				String mail 	= adminList.getString("email");
+				String alias 	= adminList.getString("alias");
+				String mobile 	= adminList.getString("telMobile");
+				String fixe 	= adminList.getString("telFixe");
+				boolean plat 	= adminList.getBoolean("platinium");
+
+				Admin admin = new Admin();
+
+				admin.setNom(nom);
+				admin.setIdAbonne(id);
+				admin.setPrenom(prenom);
+				admin.setEmail(mail);
+				admin.setAlias(alias);
+				admin.setTelPortable(mobile);
+				admin.setTelFixe(fixe);
+				admin.setPlatinum(plat);
+				System.out.println("Nom recup : " + nom + " GetnomAdmin : " + admin.getNom());
+				admins.add(admin);
+			}
+			adminList.close();
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return admins;
 	}
 
 	public static void banAbo(int id) {

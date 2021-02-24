@@ -47,6 +47,17 @@ public class Abonne {
 		setMdp(mdp);
 		setParrainage(parrainage);
 	}
+	public Abonne(String nom, String prenom, String alias, String email, String telPortable, String telFixe, String parrainage, int diff) {
+		super();
+		setNom(nom);
+		setIdAbonne(genId.getAndIncrement()); 
+		setPrenom(prenom);
+		setAlias(alias);
+		setEmail(email);
+		setTelPortable(telPortable);
+		setTelFixe(telFixe);
+		setParrainage(parrainage);
+	}
 	/**
 	 * @param telFixe téléphone fixe de l'abonné
 	 */
@@ -72,7 +83,6 @@ public class Abonne {
 		setNom(nom);
 		setPrenom(prenom);
 	}
-	
 	public Abonne() {
 		super();
 	}
@@ -138,8 +148,7 @@ public class Abonne {
 		this.telPortable = telPortable;
 	}
 	public void setTelFixe(String telFixe) {
-		controleTelFixe(telFixe);
-		this.telFixe = telFixe;
+		this.telFixe = controleTelFix(telFixe);
 	}
 	public void setPlatinum(boolean platinum) {
 		this.platinum = platinum;
@@ -236,5 +245,13 @@ public class Abonne {
 		if ( telFixe != null && telFixe.trim() != "" && telFixe.trim().length() != 10 ) {
 			throw new Exception_Nico( "Le téléphone Fixe doit contenir 10 caractères." );
 		}
+	}
+	public String controleTelFix(String telFixe) {
+		String resultat= "";
+		if(telFixe == null)resultat = "";
+		if(telFixe.length() == 10 )resultat = telFixe;
+		else if (telFixe.trim().equals(""))resultat = telFixe;
+		else if (telFixe.length() != 10 ) throw new Exception_Nico("Le téléphone Fixe doit contenir 10 caractères. message 2");
+		return resultat;
 	}
 }

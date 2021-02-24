@@ -47,9 +47,13 @@ public class ModificationServlet extends HttpServlet {
 		String telFixe = request.getParameter("phone-fixe");
 		String parrainage = request.getParameter("parrainage");
 		boolean modificationOk = false;
+		ArrayList<Abonne> abonnes = Dao.getAllAbonnes();
+		ArrayList<Admin> admins   = Dao.getAllAdmin();
+		String aboMdp = Dao.getAbonneMdp(alias);
+		String adminMdp = Dao.getAdminMdp(alias);
 
 		try {
-			for (Abonne abonne : Dao.abonnes) {
+			for (Abonne abonne : abonnes) {
 				if(alias.equals(abonne.getAlias())) {
 					abonne.setEmail(email);
 					abonne.setNom(nom);
@@ -57,13 +61,14 @@ public class ModificationServlet extends HttpServlet {
 					abonne.setParrainage(parrainage);
 					abonne.setTelFixe(telFixe);
 					abonne.setTelPortable(telPortable);
-					if(abonne.getMdp().equals(mdp) && newMdp.equals(mdpConfirm)) {
+					if(aboMdp.equals(mdp) && newMdp.equals(mdpConfirm)) {
 						abonne.setMdp(newMdp); 
 					}
+					Dao.modifAbonne(abonne);
 					modificationOk = true;
 				}
 			}
-			for (Admin admin : Dao.admins) {
+			for (Admin admin : admins) {
 				if(alias.equals(admin.getAlias())) {
 					admin.setEmail(email);
 					admin.setNom(nom);
@@ -71,9 +76,10 @@ public class ModificationServlet extends HttpServlet {
 					admin.setParrainage(parrainage);
 					admin.setTelFixe(telFixe);
 					admin.setTelPortable(telPortable);
-					if(admin.getMdp().equals(mdp) && newMdp.equals(mdpConfirm)) {
+					if(adminMdp.equals(mdp) && newMdp.equals(mdpConfirm)) {
 						admin.setMdp(newMdp); 
 					}
+					Dao.modifAdmin(admin);
 					modificationOk = true;
 				}
 			}
