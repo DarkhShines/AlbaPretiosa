@@ -1,9 +1,18 @@
 package fr.albapretiosa.dao;
 
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -14,11 +23,16 @@ import java.sql.Connection;
 
 import AppException.ExceptionAlain;
 import AppException.Exception_Zak;
+
 import fr.albapretiosa.dao.ConstRequest;
 import fr.albapretiosa.dao.Dao;
+
+
+
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 import fr.albapretiosa.util.UtilAlain;
+
 import fr.albapretiosa.metier.alain.*;
 
 public class Dao  {
@@ -90,6 +104,12 @@ public class Dao  {
 		return trouve;
 
 	}
+
+
+
+
+
+
 
 
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
@@ -214,7 +234,7 @@ public class Dao  {
 	public static Abonne getAbonne(String alias, String mdp) {
 
 		Abonne trouve = null;
-		
+
 		try {
 
 			// verifier la config 
@@ -276,7 +296,7 @@ public class Dao  {
 	public static Admin getAdmin(String alias, String mdp) {
 
 		Admin trouve = null;
-		
+
 		try {
 
 			// verifier la config 
@@ -375,9 +395,13 @@ public class Dao  {
 		return commentaires;
 	}
 	public static String selectAbo() {
+		ArrayList<Abonne> abonnes = getAllAbonnes();
 		String select = "<label for=\"abo\">Choisir un abonné : </label>" + 
+
 				"<select name=\"abo\" id=\"abo\">";
-		for(Abonne abonne : Dao.abonnes) {
+
+		for(Abonne abonne : abonnes) {
+
 			select +="    <option value="+abonne.getIdAbonne()+">"+ abonne.getNom()+" , " + abonne.getPrenom() +"</option>\r\n";
 		}
 		select += "</select>";
@@ -385,6 +409,7 @@ public class Dao  {
 	}
 
 	public static String listAbo() {
+		ArrayList<Abonne> abonnes = getAllAbonnes();
 		String table = "<table style=\"width:100%\">" + 
 				"  <tr>" + 
 				"    <th>Id Abonne</th>" + 
@@ -392,7 +417,7 @@ public class Dao  {
 				"    <th>Prenom</th>" + 
 				"    <th>Alias</th>" + 
 				"  </tr>\r\n";
-		for(Abonne abonne : Dao.abonnes) {
+		for(Abonne abonne : abonnes) {
 			table += "  <tr>\r\n" + 
 					"    <td>" + abonne.getIdAbonne() + "</td>" + 
 					"    <td>" + abonne.getNom()+ "</td>" + 
@@ -406,4 +431,77 @@ public class Dao  {
 
 		return table;
 	}
+
+	/* ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN ALAIN */
+	public static ArrayList<Abonne> getAllAbonnes() {
+		ArrayList<Abonne> abonnes = new ArrayList<Abonne>();
+		try {
+			Class.forName(strNomDriver);
+
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+			String reqSql = ConstRequest.GET_ALL_ABONNES;
+			Statement stmt = conn.createStatement();
+			ResultSet aboList = stmt.executeQuery(reqSql);
+
+			while(aboList.next()) {
+				String nom = aboList.getString("nomAbo");
+				int id = aboList.getInt("idAbo");
+				String prenom = aboList.getString("prenomAbo");
+				String mail = aboList.getString("email");
+				String alias = aboList.getString("alias");
+				String mobile = aboList.getString("telMobile");
+				String fixe = aboList.getString("telFixe");
+				boolean plat = aboList.getBoolean("platinium");
+
+
+
+				Abonne abonne = new Abonne();
+
+				abonne.setNom(nom);
+				abonne.setIdAbonne(id);
+				abonne.setPrenom(prenom);
+				abonne.setEmail(mail);
+				abonne.setAlias(alias);
+				abonne.setTelPortable(mobile);
+				abonne.setTelFixe(fixe);
+				abonne.setPlatinum(plat);
+				System.out.println("Nom recup : " + nom + " GetnomAbo : " + abonne.getNom());
+				abonnes.add(abonne);
+			}
+			aboList.close();
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return abonnes;
+	}
+
+	public static void banAbo(int id) {
+		try {
+			Class.forName(strNomDriver);
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+			String reqSql = ConstRequest.BAN_ABO;
+			PreparedStatement pstmt = conn.prepareStatement(reqSql);
+			pstmt.setInt(1, id);
+			pstmt.execute();
+			conn.close();
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	public static void ajoutComm() {
+
+	}
+
 }
