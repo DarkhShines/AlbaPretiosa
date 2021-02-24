@@ -1,7 +1,17 @@
 package fr.albapretiosa.dao;
 
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Connection;
+
+
 import AppException.ExceptionAlain;
 import AppException.Exception_Zak;
 import fr.albapretiosa.metier.nico.Abonne;
@@ -27,7 +37,57 @@ public class Dao  {
 			"&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	
 	
-	
+	public static Annonce getAnnonceById(int idAnnonce){
+		Annonce trouve = null;
+		try {
+			Class.forName(strNomDriver);
+			String rqSQL = ConstRequest.GETANNONCE;
+			
+			//Créer une connexion et l'ouvrir
+			Connection con = DriverManager.getConnection(DBURL, USER, PASSWD); 
+			
+			//Ecrire la requete
+			PreparedStatement pstmt = con.prepareStatement(rqSQL);
+			
+			pstmt.setInt(1,  idAnnonce);
+			
+			//Executer le statement
+			ResultSet rs   = pstmt.executeQuery();
+			
+			System.out.println("Dao PreparedStatement : " + pstmt + "");
+			
+			
+			if(rs.next()) {
+				int idAnnonce1 = rs.getInt("idAnnonce");
+
+				//Reconstruire les objets
+				Annonce ann = new Annonce();
+				ann.setIdAnnonce(idAnnonce1);
+				//Le mettre dans trouve
+				trouve = ann;
+			}
+			
+			rs.close();
+			con.close();
+			
+		} catch(Exception_Zak e) {
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Driver non trouvé" + e.getMessage());
+		} catch(SQLException e) {
+			System.err.println("Erreur 2 : " 
+					+ " SQLException: " 	+ e.getMessage()
+					+ " SQLState: " 		+ e.getSQLState()
+					+ " VendorError: " 	+ e.getErrorCode());
+		}
+		
+		
+		
+		
+		return trouve;
+		
+	}
 
 
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
