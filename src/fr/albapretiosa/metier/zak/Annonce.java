@@ -261,7 +261,7 @@ public class Annonce {
 	public void addComm(int id) {
 		this.idCommList.add(id);
 	}
-
+ 
 	/**
 	 * @param id
 	 */
