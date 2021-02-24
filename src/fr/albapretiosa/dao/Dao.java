@@ -329,5 +329,8 @@ public class Dao  {
 		}
 		 
 	}
+	public static void ajoutComm() {
+		
+	}
 	
 }
