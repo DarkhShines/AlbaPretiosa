@@ -15,9 +15,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
@@ -111,6 +111,7 @@ public class Dao  {
 	// Alain : Listera les commentaires d'une annonce (si commentaires il y a) 
 	// Affiche des commentaires en dur actuellement, doit être MAJ suivant les classes des autres.
 	public static String listCom() {
+		ArrayList<Commentaire> commentaires = getAllComm();
 		String comm ="<div class=\"col-xl-5 col-lg-5 col-md-5 col-sm-12 commEntier\"> ";
 		for (Commentaire commentaire : commentaires) {
 			comm = "<div class=\"infocomm\">" + 
@@ -520,12 +521,98 @@ public class Dao  {
 			e.printStackTrace();
 		}
 		}
-		 
+	public static void publierNotif( Notification notif, Admin admin) {
+		try {
+			Class.forName(strNomDriver);
+			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+			String reqSql = ConstRequest.PUBLIER_NOTIF;
+			
+			PreparedStatement pstmt = conn.prepareStatement(reqSql);
+			pstmt.setString(1, notif.getIdNotif());
+			pstmt.setString(2, notif.getObjet());
+			pstmt.setString(3, notif.getTexteNotif());
+			pstmt.setString(4, notif.getDateNotif().toString());
+			pstmt.setInt(5, notif.getIdExpediteur());
+			
+			pstmt.execute();
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+	public static ArrayList<Notification> getAllNotif() {
+		ArrayList<Notification> notifs = new ArrayList<Notification>();
+		
+			try {
+				Class.forName(strNomDriver);
+				Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+				String reqSql = ConstRequest.GET_ALL_NOTIF;
+				Statement stmt = conn.createStatement();
+				ResultSet notifList = stmt.executeQuery(reqSql);
+				while (notifList.next()) {
+					
+					String idNotif = notifList.getString("idNotif");
+					String objetNotif = notifList.getString("objetNotif");
+					String textNotif = notifList.getString("textNotif");
+					LocalDate date = LocalDate.parse(notifList.getString("dateNotif"));
+					int idAdmin = notifList.getInt("idAdmin");
+
+					Notification notif = new Notification(idAdmin, objetNotif, textNotif);
+					notifs.add(notif);
+				}
+				conn.close();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return notifs;
+}
 		
 
-	public static void ajoutComm() {
-
-
+	public static ArrayList<Commentaire> getAllComm() {
+			ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
+			
+				try {
+					Class.forName(strNomDriver);
+					Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
+					String reqSql = ConstRequest.GET_ALL_COMM;
+					Statement stmt = conn.createStatement();
+					ResultSet comList = stmt.executeQuery(reqSql);
+					while (comList.next()) {
+						
+						String comm = comList.getString("com");
+						String dateComm = comList.getString("dateCom");
+						LocalDate date = LocalDate.parse(dateComm);
+						int idAbo = comList.getInt("idAbo");
+						String expediteur = getAliasFromId(idAbo);
+						int idAnnonce = comList.getInt("idAnnonce");
+						Commentaire commentaire = new Commentaire(expediteur, comm, date, idAnnonce);
+						commentaires.add(commentaire);
+					}
+					conn.close();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return commentaires;
+	}
+	private static String getAliasFromId(int idAbo) {
+		ArrayList<Abonne> abonnes = getAllAbonnes();
+		String expediteur = "";
+		for (Abonne abonne : abonnes) {
+			if(idAbo == abonne.getIdAbonne()) expediteur = abonne.getAlias();
+		}
+		return expediteur;
 	}
 
 }

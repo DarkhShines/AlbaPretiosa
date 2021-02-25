@@ -38,7 +38,7 @@ public class PublierNotif extends HttpServlet {
 			String message = request.getParameter("message");
 			/* Une notification n'a que peut de paramètre à entré lors de sa création. L'ID et la date se créant automatiquement pour chaque nouvelle Notification */ 
 			Notification notif = new Notification(admin.getAlias(), admin.getIdAbonne(), objet, message);
-			Dao.notification.add(notif);
+			Dao.publierNotif(notif, admin);
 			response.sendRedirect(request.getContextPath()+"/vue/vueAdmin.jsp");
 		} catch (Exception e) {
 			request.setAttribute("message", "Un champ est vide");

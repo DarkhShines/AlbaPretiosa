@@ -3,7 +3,6 @@ package fr.albapretiosa.servlet.alain;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +13,7 @@ import javax.servlet.http.HttpSession;
 import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.alain.Commentaire;
 import fr.albapretiosa.metier.nico.Abonne;
-import fr.albapretiosa.metier.zak.Annonce;
-import fr.albapretiosa.util.UtilAlain;
+
 
 /**
  * Servlet implementation class ajoutComm
