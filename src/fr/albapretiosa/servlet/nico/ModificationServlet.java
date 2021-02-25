@@ -35,18 +35,19 @@ public class ModificationServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String context = request.getContextPath();
-		String alias = request.getParameter("alias");
-		String mdp = request.getParameter("mdp");
-		String newMdp = request.getParameter("newPassword");
-		String mdpConfirm = request.getParameter("passwordConfirm");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-		String email = request.getParameter("email");
-		String telPortable = request.getParameter("phone");
-		String telFixe = request.getParameter("phone-fixe");
-		String parrainage = request.getParameter("parrainage");
-		boolean modificationOk = false;
+		String context 			= request.getContextPath();
+		String alias 			= request.getParameter("alias");
+		String mdp 				= request.getParameter("mdp");
+		System.out.println(mdp);
+		String newMdp 			= request.getParameter("newPassword");
+		String mdpConfirm 		= request.getParameter("passwordConfirm");
+		String nom 				= request.getParameter("nom");
+		String prenom 			= request.getParameter("prenom");
+		String email 			= request.getParameter("email");
+		String telPortable 		= request.getParameter("phone");
+		String telFixe 			= request.getParameter("phone-fixe");
+		String parrainage 		= request.getParameter("parrainage");
+		boolean modificationOk 	= false;
 		ArrayList<Abonne> abonnes = Dao.getAllAbonnes();
 		ArrayList<Admin> admins   = Dao.getAllAdmin();
 		String aboMdp = Dao.getAbonneMdp(alias);
@@ -61,11 +62,21 @@ public class ModificationServlet extends HttpServlet {
 					abonne.setParrainage(parrainage);
 					abonne.setTelFixe(telFixe);
 					abonne.setTelPortable(telPortable);
-					if(aboMdp.equals(mdp) && newMdp.equals(mdpConfirm)) {
-						abonne.setMdp(newMdp); 
+					if(mdp == null || mdp.trim().equals("")) {
+						System.out.println("je suis dans le else de la modif servlet");
+						
+						Dao.modifAbonne(abonne, false);
+						modificationOk = true;
+						
 					}
-					Dao.modifAbonne(abonne);
-					modificationOk = true;
+					else if (mdp != null) {
+						if(aboMdp.equals(mdp) && newMdp.equals(mdpConfirm)) {
+							abonne.setMdp(newMdp); 
+							System.out.println("je suis ici");
+						}
+						Dao.modifAbonne(abonne, true);
+						modificationOk = true;
+					}
 				}
 			}
 			for (Admin admin : admins) {

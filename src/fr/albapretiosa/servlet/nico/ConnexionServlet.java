@@ -43,29 +43,30 @@ public class ConnexionServlet extends HttpServlet {
 		boolean adminOk		 = false;
 		Abonne abonne = new Abonne();
 		Admin  admin  = new Admin();
-
 		try {
+			try {
 
-			abonne 		 = Dao.getAbonne(alias, mdp);
-			connectionOk = abonne.getAlias() != null;
+				abonne 		 = Dao.getAbonne(alias, mdp);
+				connectionOk = abonne.getAlias() != null;
 
+			}catch(NullPointerException npe) {
+				admin = Dao.getAdmin(alias, mdp);
+				adminOk 	= admin.getAlias() != null;
+			}
+
+
+			if(connectionOk) {
+				HttpSession session = request.getSession(true);
+				session.setAttribute("Abonne", abonne);
+				response.sendRedirect(context+"/vue/accueil.jsp");
+			}
+			else if(adminOk) {
+				HttpSession session = request.getSession(true);
+				session.setAttribute("Abonne", admin);
+				response.sendRedirect(context+"/vue/accueil.jsp");
+			}
 		}catch(NullPointerException npe) {
-			admin = Dao.getAdmin(alias, mdp);
-			adminOk 	= admin.getAlias() != null;
-		}
 
-
-		if(connectionOk) {
-			HttpSession session = request.getSession(true);
-			session.setAttribute("Abonne", abonne);
-			response.sendRedirect(context+"/vue/accueil.jsp");
-		}
-		else if(adminOk) {
-			HttpSession session = request.getSession(true);
-			session.setAttribute("Abonne", admin);
-			response.sendRedirect(context+"/vue/accueil.jsp");
-		}
-		else{
 			request.setAttribute("message", "Identifiants ou mot de passe incorrect.");
 			RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
 			disp.forward(request, response);

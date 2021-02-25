@@ -17,5 +17,6 @@ public class ConstRequest{
 	protected static final String ADD_COMMENTAIRE 	= "insert into commentaire (com, idAbo, idAnnonce) values(?, ?, ?)";
 	protected static final String CREATE_ABO		= "insert into abonne (idAbo, nomAbo, prenomAbo, alias, email, telMobile, telFixe, platinium, mdp, code_parrainage, isBan) values(?,?,?,?,?,?,?,?,?,?,?)";
 	protected static final String MODIF_ABO			= "update abonne set nomAbo = ?, prenomAbo = ? , email = ?, telMobile = ?, telFixe = ?, mdp = ?, code_parrainage = ? where alias = ?";
+	protected static final String MODIF_ABO_2		= "update abonne set nomAbo = ?, prenomAbo = ? , email = ?, telMobile = ?, telFixe = ?, code_parrainage = ? where alias = ?";
 	protected static final String MODIF_ADMIN		= "update admin set nomAdmin = ?, prenomAdmin = ?, email = ?, telMobile = ?, telFixe = ?, mdp = ?, parrainage = ? where alias = ?";
 }

@@ -400,28 +400,47 @@ public class Dao  {
 
 		return abonne;
 	}
-	public static Abonne modifAbonne(Abonne abonne) throws Exception_Nico{
+	public static Abonne modifAbonne(Abonne abonne, boolean choix) throws Exception_Nico{
 		try {
 			Class.forName(strNomDriver);
 			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
 			
-			String modifAbonne = ConstRequest.MODIF_ABO;
-			PreparedStatement pstmt 	= conn.prepareStatement(modifAbonne);
+			if(choix) {
+				String modifAbonne = ConstRequest.MODIF_ABO;
+				PreparedStatement pstmt 	= conn.prepareStatement(modifAbonne);
+				
+				pstmt.setString	(1,  abonne.getNom());
+				pstmt.setString	(2,  abonne.getPrenom());
+				pstmt.setString	(3,  abonne.getEmail());
+				pstmt.setString	(4,  abonne.getTelPortable());
+				pstmt.setString	(5,  abonne.getTelFixe());
+				pstmt.setString (6,  abonne.getMdp());
+				pstmt.setString	(7,	 abonne.getParrainage());
+				pstmt.setString	(8,	 abonne.getAlias());
+				System.out.println("Affichage du statement"+pstmt);
+				pstmt.executeUpdate();
+	
+				pstmt.close();
+	
+				conn.close();
+			}else {
+				String modifAbonne = ConstRequest.MODIF_ABO_2;
+				PreparedStatement pstmt 	= conn.prepareStatement(modifAbonne);
+				
+				pstmt.setString	(1,  abonne.getNom());
+				pstmt.setString	(2,  abonne.getPrenom());
+				pstmt.setString	(3,  abonne.getEmail());
+				pstmt.setString	(4,  abonne.getTelPortable());
+				pstmt.setString	(5,  abonne.getTelFixe());
+				pstmt.setString	(6,	 abonne.getParrainage());
+				pstmt.setString	(7,	 abonne.getAlias());
+				System.out.println("Affichage du statement"+pstmt);
+				pstmt.executeUpdate();
 
-			pstmt.setString	(1,  abonne.getNom());
-			pstmt.setString	(2,  abonne.getPrenom());
-			pstmt.setString	(3,  abonne.getEmail());
-			pstmt.setString	(4,  abonne.getTelPortable());
-			pstmt.setString	(5,  abonne.getTelFixe());
-			if(abonne.getMdp() != null)pstmt.setString (6,  abonne.getMdp());
-			pstmt.setString	(7,	 abonne.getParrainage());
-			pstmt.setString	(8,	 abonne.getAlias());
-			System.out.println("Affichage du statement"+pstmt);
-			pstmt.executeUpdate();
+				pstmt.close();
 
-			pstmt.close();
-
-			conn.close();
+				conn.close();
+			}
 		}catch(ClassNotFoundException e) {
 			System.err.println("Erreur : " + e);
 		}catch(SQLIntegrityConstraintViolationException e) {
@@ -475,9 +494,9 @@ public class Dao  {
 
 			// recuperer les donnees avec result set 
 			if(rs.next()) {
-				String aliasAdmin 		= rs.getString("alias");
 				String nomAdmin			= rs.getString("nomAdmin");
 				String prenomAdmin		= rs.getString("prenomAdmin");
+				String aliasAdmin 		= rs.getString("alias");
 				String telFixe			= rs.getString("telFixe");
 				String telMobile		= rs.getString("telMobile");
 				String parrainage		= rs.getString("parrainage");
