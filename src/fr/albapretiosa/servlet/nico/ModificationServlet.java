@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.cj.Session;
+
 import AppException.Exception_Nico;
 import fr.albapretiosa.metier.alain.Admin;
 import fr.albapretiosa.metier.nico.Abonne;
@@ -35,23 +37,23 @@ public class ModificationServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String context 			= request.getContextPath();
-		String alias 			= request.getParameter("alias");
-		String mdp 				= request.getParameter("mdp");
-		System.out.println(mdp);
-		String newMdp 			= request.getParameter("newPassword");
-		String mdpConfirm 		= request.getParameter("passwordConfirm");
-		String nom 				= request.getParameter("nom");
-		String prenom 			= request.getParameter("prenom");
-		String email 			= request.getParameter("email");
-		String telPortable 		= request.getParameter("phone");
-		String telFixe 			= request.getParameter("phone-fixe");
-		String parrainage 		= request.getParameter("parrainage");
-		boolean modificationOk 	= false;
-		ArrayList<Abonne> abonnes = Dao.getAllAbonnes();
-		ArrayList<Admin> admins   = Dao.getAllAdmin();
-		String aboMdp = Dao.getAbonneMdp(alias);
-		String adminMdp = Dao.getAdminMdp(alias);
+		String context 				= request.getContextPath();
+		Abonne abonneSession 		= null;
+		String alias 				= request.getParameter("alias");
+		String mdp 					= request.getParameter("mdp");
+		String newMdp 				= request.getParameter("newPassword");
+		String mdpConfirm 			= request.getParameter("passwordConfirm");
+		String nom 					= request.getParameter("nom");
+		String prenom 				= request.getParameter("prenom");
+		String email 				= request.getParameter("email");
+		String telPortable 			= request.getParameter("phone");
+		String telFixe 				= request.getParameter("phone-fixe");
+		String parrainage 			= request.getParameter("parrainage");
+		boolean modificationOk 		= false;
+		ArrayList<Abonne> abonnes 	= Dao.getAllAbonnes();
+		ArrayList<Admin> admins   	= Dao.getAllAdmin();
+		String aboMdp 				= Dao.getAbonneMdp(alias);
+		String adminMdp 			= Dao.getAdminMdp(alias);
 
 		try {
 			for (Abonne abonne : abonnes) {
@@ -63,19 +65,21 @@ public class ModificationServlet extends HttpServlet {
 					abonne.setTelFixe(telFixe);
 					abonne.setTelPortable(telPortable);
 					if(mdp == null || mdp.trim().equals("")) {
-						System.out.println("je suis dans le else de la modif servlet");
-						
 						Dao.modifAbonne(abonne, false);
 						modificationOk = true;
-						
+						abonneSession  = abonne;
+
 					}
 					else if (mdp != null) {
 						if(aboMdp.equals(mdp) && newMdp.equals(mdpConfirm)) {
 							abonne.setMdp(newMdp); 
-							System.out.println("je suis ici");
+							Dao.modifAbonne(abonne, true);
+							modificationOk = true;
+							abonneSession  = abonne;
+						}else {
+							throw new Exception_Nico("Les mots de passe sont incorrects");
 						}
-						Dao.modifAbonne(abonne, true);
-						modificationOk = true;
+
 					}
 				}
 			}
@@ -87,14 +91,26 @@ public class ModificationServlet extends HttpServlet {
 					admin.setParrainage(parrainage);
 					admin.setTelFixe(telFixe);
 					admin.setTelPortable(telPortable);
-					if(adminMdp.equals(mdp) && newMdp.equals(mdpConfirm)) {
-						admin.setMdp(newMdp); 
+					if(mdp == null || mdp.trim().equals("")) {
+						Dao.modifAdmin(admin, false);
+						modificationOk = true;
+						abonneSession  = admin;
 					}
-					Dao.modifAdmin(admin);
-					modificationOk = true;
+					else if (mdp != null) {
+						if(adminMdp.equals(mdp) && newMdp.equals(mdpConfirm)) {
+							admin.setMdp(newMdp); 
+							Dao.modifAdmin(admin, true);
+							modificationOk = true;
+							abonneSession  = admin;
+						}else {
+							throw new Exception_Nico("Les mots de passe sont incorrects");
+						}
+					}
 				}
 			}
 			if(modificationOk) {
+				HttpSession session = (HttpSession) request.getSession(true);
+				session.setAttribute("Abonne", abonneSession);
 				response.sendRedirect(context+"/vue/infosPersonnelles.jsp");
 			}else {
 				throw new Exception_Nico();

@@ -518,28 +518,47 @@ public class Dao  {
 		}
 		return trouve;
 	}
-	public static Admin modifAdmin(Admin admin) throws Exception_Nico{
+	public static Admin modifAdmin(Admin admin, boolean choix) throws Exception_Nico{
 		try {
 			Class.forName(strNomDriver);
 			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
-			String modifAdmin = ConstRequest.MODIF_ADMIN;
-
-			PreparedStatement pstmt 	= conn.prepareStatement(modifAdmin);
-
-			pstmt.setString	(1,  admin.getNom());
-			pstmt.setString	(2,  admin.getPrenom());
-			pstmt.setString	(3,  admin.getEmail());
-			pstmt.setString	(4,  admin.getTelPortable());
-			pstmt.setString	(5,  admin.getTelFixe());
-			pstmt.setString	(6,  admin.getMdp());
-			pstmt.setString	(7,	 admin.getParrainage());
-			pstmt.setString	(8,	 admin.getAlias());
-
-			pstmt.executeUpdate();
-
-			pstmt.close();
-
-			conn.close();
+			
+			if(choix) {
+				String modifAdmin = ConstRequest.MODIF_ADMIN;
+				PreparedStatement pstmt 	= conn.prepareStatement(modifAdmin);
+	
+				pstmt.setString	(1,  admin.getNom());
+				pstmt.setString	(2,  admin.getPrenom());
+				pstmt.setString	(3,  admin.getEmail());
+				pstmt.setString	(4,  admin.getTelPortable());
+				pstmt.setString	(5,  admin.getTelFixe());
+				pstmt.setString	(6,  admin.getMdp());
+				pstmt.setString	(7,	 admin.getParrainage());
+				pstmt.setString	(8,	 admin.getAlias());
+	
+				pstmt.executeUpdate();
+	
+				pstmt.close();
+	
+				conn.close();
+			}else {
+				String modifAdmin = ConstRequest.MODIF_ADMIN_2;
+				PreparedStatement pstmt 	= conn.prepareStatement(modifAdmin);
+	
+				pstmt.setString	(1,  admin.getNom());
+				pstmt.setString	(2,  admin.getPrenom());
+				pstmt.setString	(3,  admin.getEmail());
+				pstmt.setString	(4,  admin.getTelPortable());
+				pstmt.setString	(5,  admin.getTelFixe());
+				pstmt.setString	(6,	 admin.getParrainage());
+				pstmt.setString	(7,	 admin.getAlias());
+	
+				pstmt.executeUpdate();
+	
+				pstmt.close();
+	
+				conn.close();
+			}
 		}catch(ClassNotFoundException e) {
 			System.err.println("Erreur : " + e);
 		}catch(SQLIntegrityConstraintViolationException e) {

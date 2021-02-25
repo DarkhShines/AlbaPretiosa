@@ -19,4 +19,5 @@ public class ConstRequest{
 	protected static final String MODIF_ABO			= "update abonne set nomAbo = ?, prenomAbo = ? , email = ?, telMobile = ?, telFixe = ?, mdp = ?, code_parrainage = ? where alias = ?";
 	protected static final String MODIF_ABO_2		= "update abonne set nomAbo = ?, prenomAbo = ? , email = ?, telMobile = ?, telFixe = ?, code_parrainage = ? where alias = ?";
 	protected static final String MODIF_ADMIN		= "update admin set nomAdmin = ?, prenomAdmin = ?, email = ?, telMobile = ?, telFixe = ?, mdp = ?, parrainage = ? where alias = ?";
+	protected static final String MODIF_ADMIN_2		= "update admin set nomAdmin = ?, prenomAdmin = ?, email = ?, telMobile = ?, telFixe = ?, parrainage = ? where alias = ?";
 }
