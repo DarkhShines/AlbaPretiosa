@@ -26,15 +26,12 @@
 			<div class="row">
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
 					<div class="about_box">
-						<h3>Best Food</h3>
-						<p>Contrary to popular belief, Lorem Ipsum is not simply
-							random text. It has roots in a piece of classical Latin
-							literature from 45 BC, making it over 2000 years old. Richard
-							McClintock, a Latin professor at Hampden-Sydney College in
-							Virginia, looked up one of the more obscureContrary to popular
-							belief, Lorem Ipsum is not simply random text. It has roots in a
-							piece of classical Latin literature from 45 BC, making it over
-							2000 years old. Richard</p>
+						<h3>Le rang Platinium</h3>
+						<p>
+							Le rang platinium est l'ultime récompense de vos efforts et de vos investissements sur ce site. 
+							Il vous est accordé lorsque vous avez prouvé votre valeur et guider notre communautée. Vous pensez être à la hauteur de ce rang ? Demandez
+							à un de nos administrateurs d'étudier votre profil. 
+						</p>
 					</div>
 				</div>
 				<div class="col-xl-5 col-lg-5 col-md-10 col-sm-12 about_img_boxpdnt">
@@ -58,13 +55,11 @@
 				<div class="col-md-6 offset-md-3">
 					<div class="Client_box">
 						<img src="../assets/images/client.jpg" alt="#" />
-						<h3>Roock Due</h3>
-						<p>There are many variations of passages of Lorem Ipsum
-							available, but the majority have suffered alteration in some
-							form, by injected humour, or randomised words which dont look
-							even slightly believable. If you are going to use a passage of
-							Lorem Ipsum, you need to be sure there isnt anything embarrassing
-							hidden in the middle of text.</p>
+						<h3>Le manoir de Cruz</h3>
+						<p>
+							Il est la propriété de notre ami [abonne.getAlias], Tous ses visiteurs ont étendu leurs séjour afin de profiter quelques instants de plus dans cet
+							incroyable Manoir. Cliquez sur <a href="<%=request.getContextPath()%>/consulter.jsp?idAnnonce=1>" class="platinium">ce lien</a> afin de le reserver !
+						</p>
 						<i><img src="../assets/images/client_icon.png" alt="#" /></i>
 					</div>
 				</div>

@@ -49,17 +49,14 @@ public class InscriptionServlet extends HttpServlet {
 		boolean pwOk = false;
 
 		try {
-			for (Abonne abonne : abonnes) {
-				if(!alias.equals(abonne.getAlias()) &&  !email.equals(abonne.getEmail())) {
-					inscriptionOk = true;
-				}
-			}
+			Abonne abonne = new Abonne(nom,prenom,alias,email,telPortable,"",mdp,parrainage);
+			Dao.creerAbonne(abonne);
+			inscriptionOk = abonne.getAlias() != null;
+			
 			if(mdp.equals(mdpConfirm)) {
 				pwOk = true;
 			}
 			if(inscriptionOk && pwOk) {
-				Abonne abonneOk = new Abonne(nom, prenom, alias, email, telPortable, mdp, parrainage);
-				Dao.abonnes.add(abonneOk);
 				response.sendRedirect(context+"/index.jsp");
 			}else {
 				throw new Exception_Nico("Inscription Incorrecte");

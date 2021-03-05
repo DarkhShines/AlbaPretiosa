@@ -526,9 +526,7 @@ hr {
 	padding-bottom:20px;
 }
 .commEntier {
-	border: 2px solid white;
-	border-radius: 16px;
-	border-color: #ffc107;
+
 	padding-top: 15px;
 	padding-bottom: 15px;
 	margin-bottom: 15px;
@@ -536,6 +534,16 @@ hr {
 }
 .divcomm {
 	display: flex;
+}
+.infocomm {
+	border: 2px solid white;
+	border-radius: 16px;
+	border-color: #ffc107;
+	margin-bottom: 20px;
+	padding: 5px;
+}
+.platinium {
+	color: #ffc107;
 }
 /* STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN STYLE ALAIN */
 /* A propos A propos A propos A propos A propos A propos A propos A propos A propos A propos A propos*/

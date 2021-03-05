@@ -91,7 +91,7 @@
 					Un administrateur, lui, pourra supprimé tout les commentaires, mais pas les modifiés
 					pour des raisons évidentes.  -->
 					<div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 commEntier">
-						<%= Dao.listCom() %>
+						<%= Dao.listCom(idAnnonce) %>
 					</div>
 					<!-- L'envoi du commentaire sera géré par une servlet  -->
 						<form method="POST" action="<%=request.getContextPath()%>/ajoutcomm?idAnnonce=<%= ann.getIdAnnonce()%>">
