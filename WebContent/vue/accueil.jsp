@@ -14,10 +14,8 @@
 				<div class="col-md-12">
 					<div class="title">
 						<div class="bg-warning rounded col-8 mt-3 mb-3">
-							<h2 class="title-span">About Our Food & Restaurant</h2>
-							<span class="span-middle">It is a long established fact
-								that a reader will be distracted by the readable content of a <br>
-								page when looking at its layout. The point of using Lorem
+							<h2 class="title-span">A propos de nous</h2>
+							<span class="span-middle">Nous sommes heureux de vous présenter notre site internet. Vous serez comme chez vous !
 							</span>
 						</div>
 					</div>

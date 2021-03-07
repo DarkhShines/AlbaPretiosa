@@ -14,6 +14,7 @@ public class ConstRequest{
 
 	protected static final String GET_ALL_ABONNES = "select nomAbo, idAbo, prenomAbo, alias, email, telMobile, telFixe, platinium from Abonne";
 	protected static final String BAN_ABO = "delete from abonne where idAbo = ?";
+	protected static final String DELETE_COM = "delete from commentaire where idCom = ?";
 
 	protected static final String ADD_COMMENTAIRE = "insert into commentaire (com, idAbo, idAnnonce, idCom, dateCom) values(?, ?, ?, ?, ?)";
 	protected static final String GET_ALL_COMM = "select idCom, com, dateCom, idAbo, idAnnonce from commentaire";

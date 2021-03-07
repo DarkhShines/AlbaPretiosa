@@ -34,21 +34,21 @@ import fr.albapretiosa.util.UtilAlain;
 import fr.albapretiosa.metier.alain.*;
 
 public class Dao  {
-	public static ArrayList<Abonne> abonnes = initAbo();
-	public static ArrayList<Admin> admins = initAdmin();
-	public static ArrayList<Annonce> annonces = initAnnonce();
-	public static ArrayList<Notification> notification = initNotif();
-	public static ArrayList<Commentaire> commentaires = new ArrayList<Commentaire>();
-	public static ArrayList<Abonne> abonnesBan = new ArrayList<Abonne>();
+	public static ArrayList<Abonne> abonnes    			 = initAbo();
+	public static ArrayList<Admin> admins 				 = initAdmin();
+	public static ArrayList<Annonce> annonces			 = initAnnonce();
+	public static ArrayList<Notification> notification	 = initNotif();
+	public static ArrayList<Commentaire> commentaires 	 = new ArrayList<Commentaire>();
+	public static ArrayList<Abonne> abonnesBan 			 = new ArrayList<Abonne>();
 
 
 
 	private static final String strNomDriver = "com.mysql.cj.jdbc.Driver" ;
-	private static final String BDD = "schemaalba";
-	private static final String USER = "albauser";
-	private static final String PASSWD = "Password1";
-	private static final String DBURL ="jdbc:mysql://localhost:3306/" + BDD + "?useUnicode=true" +
-			"&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private static final String BDD 		 = "schemaalba";
+	private static final String USER 		 = "albauser";
+	private static final String PASSWD 		 = "Password1";
+	private static final String DBURL		 ="jdbc:mysql://localhost:3306/" + BDD + "?useUnicode=true" +
+											  "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 
 	public static Annonce getAnnonceById(int idAnnonce){
@@ -95,12 +95,7 @@ public class Dao  {
 					+ " SQLState: " 		+ e.getSQLState()
 					+ " VendorError: " 	+ e.getErrorCode());
 		}
-
-
-
-
 		return trouve;
-
 	}
 
 
@@ -119,7 +114,7 @@ public class Dao  {
 			if(idAnnonce == commentaire.getIdAnnonce()) {
 				System.out.println(1);
 				comm += "<div class=\"infocomm\">" + 
-						"<p>Le " + UtilAlain.formatDateFr(commentaire.getDateCom())+ ", <span class=\"pseudoSession\">"+ commentaire.getExpediteur() +"</span> a écrit :</p><a class=\"aleft\" href=\"<%=request.getContextPath()%>/modifcomm?idAnnonce=<%= ann.getIdAnnonce()%>\"><i class=\"fas fa-pen imgleft\"></i></a><a href=\"<%=request.getContextPath()%>/suppcomm?idAnnonce=<%= ann.getIdAnnonce()%>\"><i class=\"far fa-trash-alt imgright\"></i></a><br>" + 
+						"<p>Le " + UtilAlain.formatDateFr(commentaire.getDateCom())+ ", <span class=\"pseudoSession\">"+ commentaire.getExpediteur() +"</span> a écrit :</p><br>" + 
 						"<p> " + commentaire.getCommentaire() + "</p>" + 
 						"</div>";
 			}
