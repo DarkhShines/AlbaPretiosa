@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,20 +50,24 @@ public class ModifAnnonce extends HttpServlet {
 		
 		HttpSession session = request.getSession(true);
 		
-		Abonne a = (Abonne)session.getAttribute("Abonne"); 
+		int idAnnonce = Integer.parseInt(request.getParameter("id")); 
 		
 		
-		String titre 			= request.getParameter("titre");		
+		String titre 			= request.getParameter("titre");	
+		
 		int surface 			= Integer.parseInt(request.getParameter("surface").strip());
+		
 		LocalDate creneauDebut  = LocalDate.parse(request.getParameter("datedebut"));
+		
 		LocalDate creneauFin    = LocalDate.parse(request.getParameter("datefin"));
+		
 		String description		= request.getParameter("description"); 
 		
-		int idAnnonce = Integer.parseInt(request.getParameter("id"));
+		
 
 		
 		for (Annonce ann : Dao.getAllAnnonce()) {
-			if (ann.getIdAnnonce() == idAnnonce) {
+			if ( idAnnonce == ann.getIdAnnonce()) {
 				ann.setTitre(titre);
 				ann.setSurface(surface);
 				ann.setCreneauDebut(creneauDebut);
@@ -71,8 +76,11 @@ public class ModifAnnonce extends HttpServlet {
 				Dao.updateAnnonce(ann);
 				}
 		}
+
+		String chemin = "vue/ListerAnnonce.jsp";
 		
-		response.sendRedirect("vue/ListerAnnonce.jsp");
+		RequestDispatcher disp1 = request.getRequestDispatcher(chemin);
+		disp1.forward(request, response);
 	}
 
 }

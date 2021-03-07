@@ -59,27 +59,13 @@
 							<p><%= ann.getDescription() %>
 							<br><%= ann.getSurface() %>
 							<br>Petits plus :<br></p>
-<%-- 						    <ul>
-						      <% if(ann.getOptions()){ %>
-						      <li>- Golf</li>
-						      <% } %>
-							  <% if(ann.isPiscine()){ %>
-						      <li>- Piscine</li>
-						      <% } %>
-							  <% if(ann.isSpa()){ %>
-						      <li>- Spa</li>
-						      <% } %>
-							  <% if(ann.isTennis()){ %>
-						      <li>- Tennis</li>
-						      <% } %>
-							</ul> --%>
 							<p>Ce bien est disponnible du <%= UtilAlain.formatDateFr(ann.getCreneauDebut()) %> jusqu'au <%= UtilAlain.formatDateFr(ann.getCreneauFin()) %>, offrez vous des vacances !</p>
 							<br>
 							<p>Date de début du séjour : </p>
-							<input type="date" name="datedebut">
+							<input type="date" name="datedebut" value="<%= ann.getCreneauDebut()%>">
 							<br><br>
 							<p>Date de fin du séjour : </p>
-							<input type="date" name="datefin"><br><br>
+							<input type="date" name="datefin" value="<%= ann.getCreneauFin()%>"><br><br>
 							<button type="button" class="btn btn-warning">Réserver</button>
 						</div>
 					</div>

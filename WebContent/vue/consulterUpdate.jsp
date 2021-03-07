@@ -1,6 +1,7 @@
 <%@page import="fr.albapretiosa.metier.zak.Annonce"%>
 <%@page import="fr.albapretiosa.metier.alain.Commentaire"%>
 <%@page import="fr.albapretiosa.dao.Dao"%>
+<%@page import="fr.albapretiosa.servlet.zak.ModifierAnnonceExistante"%>
 <%@page import="fr.albapretiosa.util.*"%>
 <jsp:include page="/WEB-INF/header.jsp" />
 <title>Modifier une annonce</title>
@@ -16,17 +17,7 @@
 </head>
 
 <body class="main-layout about_page">
-	<%
-		Annonce ann = new Annonce();
-	String recup = request.getParameter("idAnnonce");
-	int idAnnonce = Integer.parseInt(recup);
-	for (Annonce annonce : Dao.getAllAnnonce()) {
-		if (idAnnonce == annonce.getIdAnnonce()) {
-			ann = annonce;
-		}
-
-	}
-	%>
+<% Annonce an = (Annonce) request.getAttribute("an"); %>
 	<jsp:include page="/WEB-INF/navbar.jsp" />
 	<script src="https://kit.fontawesome.com/746f19e510.js"></script>
 	<div class="yellow_bg">
@@ -56,50 +47,26 @@
 							et l'intégralité de cette page sera généré automatiquement lorsqu'une annonce
 							aura été selectionnée. Une page de codé, des milliers de générées. 
 							 -->
-								<form>
-									<input type="text" name="titre" /> 
-									<input type="number" name="surface" />
-									<input type="text" name="description" /> 
+								<form method="Post" action="<%=request.getContextPath()%>/ModifAnnonce?id=<%= an.getIdAnnonce()%>">
+								
+									<p>Titre</p>
+									<input type="text" name="titre" value="<%= an.getTitre()%>"/> 
+									<br><p>Surface</p>
+									<input type="number" name="surface" value="<%= an.getSurface()%>"/>
+									<br><p>Description</p>
+									<input type="text" name="description" value="<%= an.getDescription()%>" /> 
 
 									<br>
 									<p>Date de début du séjour :</p>
-									<input type="date" name="datedebut"> <br>
+									<input type="date" name="datedebut" value="<%= an.getCreneauDebut()%>"> <br>
 									<br>
 									<p>Date de fin du séjour :</p>
-									<input type="date" name="datefin"><br>
+									<input type="date" name="datefin" value="<%= an.getCreneauFin()%>"><br>
 									<br>
-									<button type="button" class="btn btn-warning">Modifier</button>
+									<button type="submit" class="btn btn-warning" >Modifier</button>
 								</form>
 							</div>
 						</div>
-						<!-- Alain : La section commentaire, permettant d'ajouter, de modifié, de supprimé
-					mais également de listé bien entendu. Chaque utilisateur aura un controle total
-					sur ces propres commentaires. Dans l'exemple ci-dessous on imagine que "DarkhShines"
-					est connecté, lui permettant les actions sur ces commentaires ( les boutons
-					n'apparraisse que sur ces commentaires. )
-					Un administrateur, lui, pourra supprimé tout les commentaires, mais pas les modifiés
-					pour des raisons évidentes.  -->
-						<div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 commEntier">
-							<%=Dao.listCom()%>
-						</div>
-						<!-- L'envoi du commentaire sera géré par une servlet  -->
-						<form method="POST"
-							action="<%=request.getContextPath()%>/ajoutcomm">
-
-							<p>Commentaire :</p>
-
-							<div class="divcomm">
-								<textarea name="commentaire" class="areacom" cols="50"></textarea>
-								<!-- <button type="submit" class="btn btn-warning"><i class="far fa-paper-plane"></i></button> -->
-								<a
-									href="<%=request.getContextPath()%>/ajoutcomm?idAnnonce=<%=ann.getIdAnnonce()%>"><i
-									class="far fa-paper-plane"></i></a>
-
-							</div>
-
-
-
-						</form>
 					</div>
 				</div>
 			</div>

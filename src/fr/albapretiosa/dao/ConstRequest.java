@@ -23,7 +23,7 @@ public class ConstRequest{
 	
 	protected static final String DELETEANNONCE		= "delete from annonce where idAnnonce = ?";
 	
-	protected static final String UPDATEANNONCE		= "update annonce set titreAnnonce = ? , surfaceAnnonce = ? , set creneau_debut = ? , set creneau_fin = ? , set description = ? where idAbo = ?  ";
+	protected static final String UPDATEANNONCE		= "update annonce set titreAnnonce = ? , surfaceAnnonce = ? , creneau_debut = ? , creneau_fin = ? , description = ? where idAnnonce = ?  ";
 
 	protected static final String GET_ABO 			= "select idAbo, alias, nomAbo, prenomAbo from abonne where alias = ? and mdp = ?";
 	protected static final String GET_ADMIN 		= "select idAdmin, alias, nomAdmin, prenomAdmin from admin where alias = ? and mdp = ?";

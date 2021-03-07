@@ -146,6 +146,7 @@ public class Dao  {
 			}
 			rs.close();
 			con.close();
+			pstmt.close();
 
 
 		} catch(ClassNotFoundException e){ 	
@@ -359,11 +360,12 @@ public class Dao  {
 			test.setString(3, annonce.getCreneauDebut().toString());
 			test.setString(4, annonce.getCreneauFin().toString());
 			test.setString(5, annonce.getDescription());
+			
 			test.setInt(6, annonce.getIdAnnonce());
 
 
 			//Executer le statement
-			test.executeQuery();
+			test.execute();
 
 			System.out.println("Dao statement : " + test);
 
