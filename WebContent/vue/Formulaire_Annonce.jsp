@@ -94,7 +94,7 @@
 						<div
 							class="col-xl-5 col-lg-5 col-md-10 col-sm-12 about_img_boxpdnt">
 							<div class="about_box">
-							
+
 								<h3>Le Formulaire</h3>
 								<p>
 									L'annonce doit comporter les informations suivantes: <br>
@@ -120,13 +120,13 @@
 								<form class="main_form" method="post"
 									action="<%=request.getContextPath()%>/CreerAnnonce">
 									<div class="row">
-											<!-- CHAMPS TITRE -->
+										<!-- CHAMPS TITRE -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<label for="titre"><strong class="white">Titre</strong></label>
 											<input class="form-control" placeholder="Titre" type="text"
 												name="titre" required />
 										</div>
-											<!-- CHAMPS SURFACE -->
+										<!-- CHAMPS SURFACE -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<label for="surface"><strong class="white">Surface
 													en m²</strong></label> <input class="form-control" placeholder="Surface"
@@ -140,7 +140,7 @@
 												name="creneau_debut" required
 												pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
 										</div>
-											<!-- CHAMPS DATE FIN -->
+										<!-- CHAMPS DATE FIN -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<label for="surface"><strong class="white">Fin</strong></label>
 											<input class="form-control"
@@ -148,24 +148,13 @@
 												name="creneau_fin" required
 												pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
 										</div>
-												<!-- CHAMPS PAYS -->
-										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-											<label for="surface"><strong class="white">Pays</strong></label>
-											<input class="form-control" placeholder="Pays"
-												list="liste_pays" name="pays" required />
-											<datalist id="liste_pays">
-												<option value="France">France</option>
-												<option value="Angleterre">Angleterre</option>
-												<option value="Italie">Italie</option>
-											</datalist>
-										</div>
 										<!-- CHAMPS VILLE -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 											<label for="surface"><strong class="white">Ville</strong></label>
 											<input class="form-control" placeholder="Ville"
 												list="liste_ville" name="ville" required />
 											<datalist id="liste_ville">
-												<option value="villes">Marseille</option>
+												<option value="Marseille">Marseille</option>
 												<option value="Paris">Paris</option>
 												<option value="Bordeaux">Bordeaux</option>
 											</datalist>
@@ -173,7 +162,7 @@
 										<!-- CHAMPS OPTION -->
 										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
-											<label for="surface"><strong class="white">Option</strong></label>
+											<label for="option"><strong class="white">Options</strong></label>
 											<div class="checkbox">
 												<label for="spa"><strong class="white">SPA</strong></label>
 												<input class="form-control" placeholder="Option"
@@ -268,7 +257,7 @@
 								<p>Vous pouvez accéder à votre espace abonné pour consulter
 									la mise en ligne de votre annonces, ainsi que vos annonces déja
 									en ligne. Vous pouvez modifier, supprimer les annonces.</p>
-								<a href="<%=request.getContextPath()%>/vue/ListerAnnonce.jsp">Consulter
+								<a href="<%=request.getContextPath()%>/Lister_Annonce_Servlet">Consulter
 									mes annonces <i class="fa fa-long-arrow-right"
 									aria-hidden="true"></i>
 								</a>

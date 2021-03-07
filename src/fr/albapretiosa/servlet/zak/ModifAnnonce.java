@@ -1,6 +1,7 @@
 package fr.albapretiosa.servlet.zak;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import AppException.Exception_Zak;
 import fr.albapretiosa.dao.Dao;
+import fr.albapretiosa.dao.Dao2;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 
@@ -52,13 +54,21 @@ public class ModifAnnonce extends HttpServlet {
 		
 		String titre 			= request.getParameter("titre");		
 		int surface 			= Integer.parseInt(request.getParameter("surface").strip());
+		LocalDate creneauDebut  = LocalDate.parse(request.getParameter("datedebut"));
+		LocalDate creneauFin    = LocalDate.parse(request.getParameter("datefin"));
+		String description		= request.getParameter("description"); 
+		
 		int idAnnonce = Integer.parseInt(request.getParameter("id"));
-		ArrayList<String> messages = new ArrayList<String>();
+
 		
 		for (Annonce ann : Dao.getAllAnnonce()) {
 			if (ann.getIdAnnonce() == idAnnonce) {
 				ann.setTitre(titre);
 				ann.setSurface(surface);
+				ann.setCreneauDebut(creneauDebut);
+				ann.setCreneauFin(creneauFin);
+				ann.setDescription(description);
+				Dao.updateAnnonce(ann);
 				}
 		}
 		

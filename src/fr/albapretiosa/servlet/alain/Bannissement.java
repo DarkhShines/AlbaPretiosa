@@ -29,22 +29,8 @@ public class Bannissement extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idAbo = Integer.parseInt(request.getParameter("abo"));
-		Abonne abo = new Abonne();
 		System.out.println(idAbo);
-		ArrayList<Abonne> abos = Dao.abonnes;
-		for(Abonne abonne : abos) {
-			System.out.println(abonne.getIdAbonne() + " " + abonne.getAlias());
-			  if(idAbo == abonne.getIdAbonne()) {
-				abo = abonne;
-//				// Alain : Je ne supprime pas l'abo, je le mets simplement dans une autre liste qui ne peut etre utilisée pour se connecter. 
-//				// Mais qui permet de garder les informations de ce compte au cas ou.
-			}
-		}
-		System.out.println("avant remove");
-		Dao.abonnes.remove(abo);
-		System.out.println("après remove");
-		Dao.abonnesBan.add(abo);
-		System.out.println("après add");
+		Dao.banAbo(idAbo);
 		response.sendRedirect(request.getContextPath()+"/vue/vueAdmin.jsp");
 	}
 

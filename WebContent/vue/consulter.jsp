@@ -18,7 +18,7 @@
 	Annonce ann = new Annonce();
 	String recup = request.getParameter("idAnnonce");
 	int idAnnonce = Integer.parseInt(recup);
-	for(Annonce annonce : Dao.annonces){
+	for(Annonce annonce : Dao.getAllAnnonce()){
 		System.out.println(annonce.getDescription());
 		if(idAnnonce == annonce.getIdAnnonce()){
 			ann = annonce;
@@ -59,8 +59,8 @@
 							<p><%= ann.getDescription() %>
 							<br><%= ann.getSurface() %>
 							<br>Petits plus :<br></p>
-						    <ul>
-						      <% if(ann.isGolf()){ %>
+<%-- 						    <ul>
+						      <% if(ann.getOptions()){ %>
 						      <li>- Golf</li>
 						      <% } %>
 							  <% if(ann.isPiscine()){ %>
@@ -72,8 +72,8 @@
 							  <% if(ann.isTennis()){ %>
 						      <li>- Tennis</li>
 						      <% } %>
-							</ul>
-							<p>Ce bien est disponnible du <%= UtilAlain.formatDateFr(ann.getCreneau_debut()) %> jusqu'au <%= UtilAlain.formatDateFr(ann.getCreneau_fin()) %>, offrez vous des vacances !</p>
+							</ul> --%>
+							<p>Ce bien est disponnible du <%= UtilAlain.formatDateFr(ann.getCreneauDebut()) %> jusqu'au <%= UtilAlain.formatDateFr(ann.getCreneauFin()) %>, offrez vous des vacances !</p>
 							<br>
 							<p>Date de début du séjour : </p>
 							<input type="date" name="datedebut">

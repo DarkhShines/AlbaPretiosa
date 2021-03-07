@@ -3,13 +3,15 @@
  */
 package fr.albapretiosa.metier.zak;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Random;
+
+import javax.servlet.RequestDispatcher;
 
 import AppException.Exception_Zak;
+import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.nico.Abonne;
-import fr.albapretiosa.servlet.zak.CreerAnnonce;
+import fr.albapretiosa.util.UtilAlain;
 
 /**
  * @author Zakarya D. Bahou
@@ -17,31 +19,21 @@ import fr.albapretiosa.servlet.zak.CreerAnnonce;
  */
 
 public class Annonce {
-	
-	private static final long serialVersionUID = 1L;
 
 	/*		LISTE DES VARIABLES DE CLASSE		 */
-	private static int	incrementIdAnnonce;
+	private static int	incrementIdAnnonce = 105;
 
 	/*		LISTE DES VARIABLES D'INSTANCES		 */
 	private int 	  idAnnonce;
-	private int	      idAbonne;
+	private Abonne	  abonne;
 	private String    titre;
 	private int		  surface;                                        
-	private String	  pays;
-	private String 	  ville;
-	private LocalDate creneau_debut;
-	private LocalDate creneau_fin;
+	private LocalDate creneauDebut;
+	private LocalDate creneauFin;
 	private String	  description;
-	private boolean   piscine;
-	private boolean   spa;
-	private boolean   golf;
-	private boolean   tennis;
+	private Options	  options;
+	private Ville	  ville;
 
-	Photo photo1     = new Photo();
-	Photo photo2     = new Photo();
-	Photo photo3     = new Photo();
-	Photo photo4     = new Photo();
 
 
 	/*		LES CONSTRUCTEURS		 */
@@ -50,13 +42,9 @@ public class Annonce {
 	 * @param idAnnonce Identifiant unique de l'annonce
 	 * @param titre Titre de l'annonce récupéré dans le formulaire de création d'annonce
 	 * @param surface Surface de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce
-	 * @param creneau_debut Date de mise en location de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce
-	 * @param creneau_fin Date de fin de location de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce
+	 * @param creneauDebut Date de mise en location de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce
+	 * @param creneauFin Date de fin de location de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce
 	 * @param description Description de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce 
-	 * @param piscine Option de l'annonce récupéré dans le formulaire de création d'annonce 
-	 * @param spa Option de l'annonce récupéré dans le formulaire de création d'annonce 
-	 * @param golf Option de l'annonce récupéré dans le formulaire de création d'annonce 
-	 * @param tennis Option de l'annonce récupéré dans le formulaire de création d'annonce 
 	 * @param photo1 Photo de la propriété de l'annonce récupéré dans le formulaire de création d'annonce 
 	 * @param photo2 Photo de la propriété de l'annonce récupéré dans le formulaire de création d'annonce 
 	 * @param photo3 Photo de la propriété de l'annonce récupéré dans le formulaire de création d'annonce 
@@ -65,25 +53,16 @@ public class Annonce {
 	 * @see package fr.albapretiosa.servlet.zak/CreerAnnonce.java 
 	 * @see WebContent/vue/Formulaire_Annonce.jsp
 	 */
-	public Annonce(String titre, int surface, String pays, String ville, LocalDate creneau_debut, LocalDate creneau_fin,
-			String description, boolean piscine, boolean spa, boolean golf, boolean tennis, Photo photo1, Photo photo2, Photo photo3, Photo photo4) throws Exception_Zak {
+	public Annonce(String titre, int surface, LocalDate creneauDebut, LocalDate creneauFin,
+			String description, Photo photo1, Photo photo2, Photo photo3, Photo photo4) throws Exception_Zak {
 
 		setIdAnnonce(genereIdAnnonce());
 		setTitre(titre);
 		setSurface(surface);
-		setPays(pays);
-		setVille(ville);
-		setCreneau_debut(creneau_debut);
-		setCreneau_fin(creneau_fin);
+		setCreneauDebut(creneauDebut);
+		setCreneauFin(creneauFin);
 		setDescription(description);
-		setPiscine(piscine);
-		setSpa(spa);
-		setGolf(golf);
-		setTennis(tennis);
-		setPhoto1(photo1);
-		setPhoto2(photo2);
-		setPhoto3(photo3);
-		setPhoto4(photo4);
+
 	}
 
 
@@ -92,45 +71,111 @@ public class Annonce {
 	 * @param idAnnonce Identifiant unique de l'annonce
 	 * @param titre Titre de l'annonce récupéré dans le formulaire de création d'annonce 
 	 * @param surface Surface de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce
-	 * @param creneau_debut Date de mise en location de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce 
-	 * @param creneau_fin Date de fin de location de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce 
+	 * @param creneauDebut Date de mise en location de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce 
+	 * @param creneauFin Date de fin de location de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce 
 	 * @param description Description de la propriété de l'annonce, récupéré dans le formulaire de création d'annonce
-	 * @param piscine Option de l'annonce récupéré dans le formulaire de création d'annonce 
-	 * @param spa Option de l'annonce récupéré dans le formulaire de création d'annonce
-	 * @param golf Option de l'annonce récupéré dans le formulaire de création d'annonce 
-	 * @param tennis Option de l'annonce récupéré dans le formulaire de création d'annonce 
 	 * @throws Exception_Zak 
 	 * @see package fr.albapretiosa.servlet.zak/CreerAnnonce.java 
 	 * @see WebContent/vue/Formulaire_Annonce.jsp
 	 */
-	public Annonce(String titre, int surface, String pays, String ville, LocalDate creneau_debut, LocalDate creneau_fin, String description, boolean piscine, boolean spa, boolean golf, boolean tennis) {
+	public Annonce(String titre, int surface, Ville ville, LocalDate creneauDebut, LocalDate creneauFin, String description, Options options) {
 
 
 		setIdAnnonce(genereIdAnnonce());
 		setTitre(titre);
 		setSurface(surface);
-		setPays(pays);
-		setVille(ville);
-		setCreneau_debut(creneau_debut);
-		setCreneau_fin(creneau_fin);
+		setCreneauDebut(creneauDebut);
+		setCreneauFin(creneauFin);
 		setDescription(description);
-		setPiscine(piscine);
-		setSpa(spa);
-		setGolf(golf);
-		setTennis(tennis);
+		setVille(ville);
+		setOptions(options);
 	}
 
-	/**
-	 * CONSTRUCTEUR PAR DEFAUT
-	 */
-	public Annonce() {}
 
-	
-	
+	public Annonce(int idAnnonce, String titreAnnonce, int surfaceAnnonce, LocalDate creneauDebut,
+			LocalDate creneauFin, String description, Abonne abonne, Ville ville) {
+		setIdAnnonce(idAnnonce);
+		setTitre(titreAnnonce);
+		setSurface(surfaceAnnonce);
+		setCreneauDebut(creneauDebut);
+		setCreneauFin(creneauFin);
+		setDescription(description);
+		setVille(ville);
+		setAbonne(abonne);
+	}
 
-	public Annonce(int idAnnonce, String titreAnnonce, int surfaceAnnonce, String creneau_debut, String creneau_fin,
-			String description2, int idAbo, int idVille) {
+
+
+
+	public Annonce(String titre, int surface,  LocalDate creneauDebut,
+			LocalDate creneauFin, String description, Abonne abonne, Ville ville, Options options) {
+		setIdAnnonce(genereIdAnnonce());
+		setTitre(titre);
+		setSurface(surface);
+		setCreneauDebut(creneauDebut);
+		setCreneauFin(creneauFin);
+		setDescription(description);
+		setVille(ville);
+		setAbonne(abonne);
+	}
+
+
+	public Annonce(String titre, int surface, String libelle, LocalDate creneauDebut, LocalDate creneauFin,
+			String description, Options options) {
+		setIdAnnonce(genereIdAnnonce());
+		setTitre(titre);
+		setSurface(surface);
+		setCreneauDebut(creneauDebut);
+		setCreneauFin(creneauFin);
+		setDescription(description);
+	}
+
+
+	public Annonce() {
 		// TODO Auto-generated constructor stub
+	}
+
+
+	public Annonce(String titre2, int surface2, LocalDate creneauDebut, LocalDate creneauFin, String description,
+			Abonne abonne, String alias, String libelle, Options options2) {
+		setIdAnnonce(genereIdAnnonce());
+		setTitre(titre);
+		setSurface(surface);
+		setCreneauDebut(creneauDebut);
+		setCreneauFin(creneauFin);
+		setDescription(description);
+		setAbonne(abonne);
+		
+	}
+
+
+	public Annonce(String titre, int surface, LocalDate creneauDebut, LocalDate creneauFin, String description,
+			Abonne a, Ville ville2) {
+		setIdAnnonce(genereIdAnnonce());
+		setTitre(titre);
+		setSurface(surface);
+		setCreneauDebut(creneauDebut);
+		setCreneauFin(creneauFin);
+		setDescription(description);
+		setAbonne(a);
+		setVille(ville2);
+	}
+
+
+
+
+	public Annonce(String titre, int surface, Date dateDebut, Date dateFin, String description) {
+		// TODO Auto-generated constructor stub
+		setTitre(titre);
+		setSurface(surface);
+		setCreneauDebut(creneauDebut);
+		setCreneauFin(creneauFin);
+		setDescription(description);
+	}
+
+
+	public Annonce(int idAnnonce) {
+		setIdAnnonce(idAnnonce);
 	}
 
 
@@ -210,26 +255,26 @@ public class Annonce {
 
 	/**
 	 * Méthode de contrôle des dates.
-	 * @param creneau_debut
-	 * @param creneau_fin
+	 * @param creneauDebut
+	 * @param creneauFin
 	 * @throws Exception_Zak
 	 */
-	public static void controleDate(LocalDate creneau_debut, LocalDate creneau_fin) throws Exception_Zak{
+	public static void controleDate(LocalDate creneauDebut, LocalDate creneauFin) throws Exception_Zak{
 
-		if(creneau_debut == null) {
+		if(creneauDebut == null) {
 			throw new Exception_Zak("La date de début de location n'est pas renseigné");
 		}
-		if(creneau_fin == null) {
+		if(creneauFin == null) {
 			throw new Exception_Zak("La date de fin de location n'est pas renseigné");
 		}
-		else if(creneau_debut != null && creneau_fin != null) {
-			if (creneau_debut.isBefore(LocalDate.now())) {
+		else if(creneauDebut != null && creneauFin != null) {
+			if (creneauDebut.isBefore(LocalDate.now())) {
 				throw new Exception_Zak("La date de début de location de peut être antérieur à aujourd'hui");
 			}
-			if(creneau_fin.isBefore(LocalDate.now())) {
+			if(creneauFin.isBefore(LocalDate.now())) {
 				throw new Exception_Zak("La date de fin de location de peut être antérieur à aujourd'hui");
 			}
-			if(creneau_debut.isAfter(creneau_fin)) {
+			if(creneauDebut.isAfter(creneauFin)) {
 				throw new Exception_Zak("La date de fin de location de peut être anterieur à la date de début");
 			}
 		}
@@ -250,13 +295,35 @@ public class Annonce {
 			
 		}
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Annonce [idAnnonce =" + idAnnonce + ", Abonne =" + abonne + ", titre =" + titre + ", surface =" + surface
+				+ ", creneauDebut =" + creneauDebut + ", creneauFin =" + creneauFin + ", description =" + description
+				+ ", options =" + options + ", ville=" + ville + "]";
+	}
+
 
 	/**
 	 * METHODE POUR GENERE UN ID ANNONCE AUTO_INCREMENTE COMME REFERENCE UNIQUE
 	 * @return idAnnonce + 1
 	 */
 	public static int genereIdAnnonce(){
-		incrementIdAnnonce ++;
+		try {
+			incrementIdAnnonce ++;
+			for (int i = 0; i < Dao.getAllAnnonce().size(); i++) {
+				Annonce an = new Annonce();
+				if(incrementIdAnnonce == an.getIdAnnonce()) {
+					incrementIdAnnonce ++;
+				}
+			}
+		} catch (Exception_Zak a ) {
+			System.out.println("Erreur Formulaire" + a.getMessage() + a.getCause());
+			a.printStackTrace();
+		}
+
 		return incrementIdAnnonce;
 	}
 
@@ -292,65 +359,29 @@ public class Annonce {
 		this.surface = surface;
 	}
 
-
-
 	/**
-	 * @return pays = Le pays de la propriété
+	 * @return creneauDebut = Le créneau de mise en location de la propriété
 	 */
-	public String getPays() {
-		return pays;
-	}
-
-
-	/**
-	 * @param pays = Le pays à set
-	 */
-	public void setPays(String pays) {
-		controlePays(pays);
-		this.pays = pays;
-	}
-
-
-	/**
-	 * @return ville = La ville de la propriété
-	 */
-	public String getVille() {
-		return ville;
-	}
-
-
-	/**
-	 * @param ville = La ville à set
-	 */
-	public void setVille(String ville) {
-		controleVille(ville);
-		this.ville = ville;
-	}
-
-
-	/**
-	 * @return creneau_debut = Le créneau de mise en location de la propriété
-	 */
-	public LocalDate getCreneau_debut() {
-		return creneau_debut;
+	public LocalDate getCreneauDebut() {
+		return creneauDebut;
 	}
 	/**
-	 * @param creneau_debut = Le creneau_debut à set
+	 * @param creneauDebut = Le creneauDebut à set
 	 */
-	public void setCreneau_debut(LocalDate creneau_debut) {
-		this.creneau_debut = creneau_debut;
+	public void setCreneauDebut(LocalDate creneauDebut) {
+		this.creneauDebut = creneauDebut;
 	}
 	/**
-	 * @return creneau_fin = Le créneau de fin de location de la propriété
+	 * @return creneauFin = Le créneau de fin de location de la propriété
 	 */
-	public LocalDate getCreneau_fin() {
-		return creneau_fin;
+	public LocalDate getCreneauFin() {
+		return creneauFin;
 	}
 	/**
-	 * @param creneau_fin = le creneau_fin à set
+	 * @param creneauFin = le creneauFin à set
 	 */
-	public void setCreneau_fin(LocalDate creneau_fin) {
-		this.creneau_fin = creneau_fin;
+	public void setCreneauFin(LocalDate creneauFin) {
+		this.creneauFin = creneauFin;
 	}
 	/**
 	 * @return description = Description de la propriété
@@ -379,136 +410,60 @@ public class Annonce {
 	public void setIdAnnonce(int idAnnonce) {
 		this.idAnnonce = idAnnonce;
 	}
+	
+	
 
 	/**
-	 * @return piscine = Option piscine de la propriété
+	 * @return the abonne
 	 */
-	public boolean isPiscine() {
-		return piscine;
-	}
-
-	/**
-	 * @param piscine = L'option piscine à set
-	 */
-	public void setPiscine(boolean piscine) {
-		this.piscine = piscine;
-	}
-
-	/**
-	 * @return spa = L'option spa de la propriété
-	 */
-	public boolean isSpa() {
-		return spa;
-	}
-
-	/**
-	 * @param spa = L'option spa à set
-	 */
-	public void setSpa(boolean spa) {
-		this.spa = spa;
-	}
-
-	/**
-	 * @return golf = L'option golf de la propriété
-	 */
-	public boolean isGolf() {
-		return golf;
-	}
-
-	/**
-	 * @param golf = L'option golf à set
-	 */
-	public void setGolf(boolean golf) {
-		this.golf = golf;
-	}
-
-	/**
-	 * @return tennis = L'option tennis de la propriété
-	 */
-	public boolean isTennis() {
-		return tennis;
-	}
-
-	/**
-	 * @param tennis = L'option tennis à set
-	 */
-	public void setTennis(boolean tennis) {
-		this.tennis = tennis;
-	}
-
-	/**
-	 * @return photo1 = 1er photo de la propriété
-	 */
-	public Photo getPhoto1() {
-		return photo1;
-	}
-
-	/**
-	 * @param photo1 = La photo 1 à set
-	 */
-	public void setPhoto1(Photo photo1) {
-		this.photo1 = photo1;
-	}
-
-	/**
-	 * @return photo2 = La 2nd photo de la propriété
-	 */
-	public Photo getPhoto2() {
-		return photo2;
-	}
-
-	/**
-	 * @param photo2 = La photo 2 à set
-	 */
-	public void setPhoto2(Photo photo2) {
-		this.photo2 = photo2;
-	}
-
-	/**
-	 * @return photo3 = La 3ème photo de la propriété
-	 */
-	public Photo getPhoto3() {
-		return photo3;
-	}
-
-	/**
-	 * @param photo3 = La photo 3 à set
-	 */
-	public void setPhoto3(Photo photo3) {
-		this.photo3 = photo3;
-	}
-
-	/**
-	 * @return photo4 = La 4ème photo de la propriété
-	 */
-	public Photo getPhoto4() {
-		return photo4;
-	}
-
-	/**
-	 * @param photo4 = La photo 4 à set
-	 */
-	public void setPhoto4(Photo photo4) {
-		this.photo4 = photo4;
+	public Abonne getAbonne() {
+		return abonne;
 	}
 
 
 	/**
-	 * @return idAbonne = Identifiant de l'abonné qui créer l'annonce
+	 * @param abonne the abonne to set
 	 */
-	public int getIdAbonne() {
-		return idAbonne;
+	public void setAbonne(Abonne abonne) {
+		this.abonne = abonne;
 	}
 
 
 	/**
-	 * @param idAbonne = L'identifiant de l'abonne à set
+	 * @return the options
 	 */
-	public void setIdAbonne(int idAbonne) {
-		this.idAbonne = idAbonne;
+	public Options getOptions() {
+		return options;
 	}
 
 
+	/**
+	 * @param options the options to set
+	 */
+	public void setOptions(Options options) {
+		this.options = options;
+	}
+
+
+	/**
+	 * @return the ville
+	 */
+	public Ville getVille() {
+		return ville;
+	}
+
+
+	/**
+	 * @param ville the ville to set
+	 */
+	public void setVille(Ville ville) {
+		this.ville = ville;
+	}
+
+	
+	public String getAliasAbonne() {
+		return abonne.getAlias();
+	}
 
 
 }

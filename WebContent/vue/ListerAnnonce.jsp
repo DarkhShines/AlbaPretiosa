@@ -36,28 +36,29 @@
 				<div class="col-md-12">
 					<div class="title">
 						<h2>Liste de mes annonces</h2>
-							<%						
+						<%
 							Abonne abonne = (Abonne) session.getAttribute("Abonne");
+							Annonces listeAn = (Annonces) request.getAttribute("liste");
+
 						if (abonne != null) {
 						%>
-						<h3><strong>
-							Bonjour <br>
-							<%=abonne.getPrenom()%>
-							<%=abonne.getNom()%></strong></h3>
+						<h3>
+							<strong> Bonjour <br> <%=abonne.getPrenom()%> <%=abonne.getNom()%></strong>
+						</h3>
 
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<section class="resip_section">
 		<div class="container">
 			<div class="row">
 
 				<div class="col-md-12">
 					<div class="col-md-6 offset-md-3">
-					
+
 						<br>
 						<div class="limiter">
 							<div class="container-table100">
@@ -76,15 +77,21 @@
 											</thead>
 
 											<%
-												for (Annonce ann : Dao.annonces) {
+											// Je n'ai pas reussi à la faire passer par la Servlet
+											// J'ai donc choisi d'utiliser la dao tout en sachant que ce n'est pas son role
+												for (Annonce ann : Dao.getAllAnnonceById(abonne)) {
 											%>
 											<tr>
 												<td class="column1"><%=ann.getIdAnnonce()%></td>
-												<td class="column2"><%=ann.getTitre() %></td>
-												<td class="column3"><%=ann.getCreneau_debut() %></td>
-												<td class="column4"><%=ann.getCreneau_fin() %></td>
-												<td class="column5"><a href="<%= request.getContextPath() + "/ModifAnnonce?id=" + ann.getIdAnnonce() %>"><img src="<%=request.getContextPath()%>/assets/images/modifier.png"/></a></td>
-												<td class="column5"><a href="<%= request.getContextPath() + "/SupprimerAnnonce?id=" + ann.getIdAnnonce() %>"><img src="<%=request.getContextPath()%>/assets/images/delete.png"/></a></td>
+												<td class="column2"><%=ann.getTitre()%></td>
+												<td class="column3"><%=ann.getCreneauDebut()%></td>
+												<td class="column4"><%=ann.getCreneauFin()%></td>
+												<td class="column5"><a
+													href="<%=request.getContextPath() + "/ModifAnnonce?id=" + ann.getIdAnnonce()%>"><img
+														src="<%=request.getContextPath()%>/assets/images/modifier.png" /></a></td>
+												<td class="column5"><a
+													href="<%=request.getContextPath() + "/SupprimerAnnonce?id=" + ann.getIdAnnonce()%>"><img
+														src="<%=request.getContextPath()%>/assets/images/delete.png" /></a></td>
 											</tr>
 											<%
 												}
