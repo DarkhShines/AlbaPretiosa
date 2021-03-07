@@ -48,7 +48,7 @@ public class AjoutComm extends HttpServlet {
             RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
             disp.forward(request, response);
 		}
-		
+		 
 	}
 
 	/**
