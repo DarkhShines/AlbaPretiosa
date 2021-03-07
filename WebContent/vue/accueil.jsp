@@ -47,6 +47,7 @@
 			<%= Dao.CreateCar() %>
 	<!-- end about -->
 
+<<<<<<< HEAD
 	<!-- Our Client -->
 	<div class="Client">
 		<div class="container">
@@ -67,4 +68,6 @@
 	</div>
 	<!-- end Our Client -->
 
+=======
+>>>>>>> refs/remotes/origin/Zakarya_1
 	<jsp:include page="/WEB-INF/footer.jsp" />

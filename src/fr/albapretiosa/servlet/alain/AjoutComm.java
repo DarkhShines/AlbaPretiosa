@@ -29,9 +29,32 @@ public class AjoutComm extends HttpServlet {
    
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
 
 
 
+=======
+		try {
+			System.out.println("Do Post de AjoutComm");
+			HttpSession session = request.getSession(true);
+			Abonne abonne = (Abonne) session.getAttribute("Abonne");
+			String comm = request.getParameter("commentaire");
+			int idAnnonce = Integer.parseInt(request.getParameter("idAnnonce"));
+			Commentaire commentaire = new Commentaire(abonne.getAlias(), comm , LocalDate.now(), idAnnonce);
+			for(Annonce ann : Dao.getAllAnnonce()) {
+				if(ann.getIdAnnonce() == idAnnonce ) {
+					ann.addComm(commentaire.getIdCom());
+				}
+			}
+			Dao.commentaires.add(commentaire);
+			response.sendRedirect("vue/consulter.jsp?idAnnonce="+idAnnonce+"");
+			System.out.println("Do Post de AjoutComm fin");
+		} catch (Exception e) {
+			request.setAttribute("message", "Le champ est vide");
+            RequestDispatcher disp = request.getRequestDispatcher(UtilAlain.getErrorLocation());
+            disp.forward(request, response);
+		}
+>>>>>>> refs/remotes/origin/Zakarya_1
 		
 	}
 

@@ -37,6 +37,9 @@ public class ConnexionServlet extends HttpServlet {
 		String alias = request.getParameter("alias");
 		String mdp = request.getParameter("mdp");
 		boolean connectionOk = false;
+
+
+
 		boolean adminOk		 = false;
 		Abonne abonne = new Abonne();
 		Admin  admin  = new Admin();
@@ -49,6 +52,7 @@ public class ConnexionServlet extends HttpServlet {
 		}catch(NullPointerException npe) {
 			admin = Dao.getAdmin(alias, mdp);
 			adminOk 	= admin.getAlias() != null;
+
 		}
 
 
@@ -68,4 +72,9 @@ public class ConnexionServlet extends HttpServlet {
 			disp.forward(request, response);
 		}
 	}
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> refs/remotes/origin/Zakarya_1

@@ -13,7 +13,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
 import AppException.Exception_Nico;
+
 import AppException.Exception_Zak;
 import fr.albapretiosa.metier.alain.Admin;
 import fr.albapretiosa.metier.alain.Commentaire;
@@ -27,6 +29,7 @@ import fr.albapretiosa.util.UtilAlain;
 
 
 public class Dao  {
+
 
 	public static ArrayList<Abonne> abonnes    			 = initAbo();
 	public static ArrayList<Admin> admins 				 = initAdmin();
@@ -163,6 +166,9 @@ public class Dao  {
 		return annonces;
 	}
 
+	
+
+
 
 
 	public static Annonce createAnnonce(Annonce annonce) throws Exception_Zak{
@@ -234,13 +240,11 @@ public class Dao  {
 
 			System.out.println(erreur);
 
-
-		} catch(ClassNotFoundException e)  {
-			System.err.println("*** Application - createAnnonce - ClassNotFoundException "  + e.getMessage() ); 
 		}
-		return annonce ;
+		}
 
-	}
+
+	
 
 
 
@@ -322,6 +326,7 @@ public class Dao  {
 					+ " Cause : " + e.getCause());
 		} finally {
 			System.out.println("Sortie du getAnnonceById");
+
 		}
 		return trouve;
 	}
@@ -331,54 +336,7 @@ public class Dao  {
 	 * @param annonce
 	 * @return
 	 */
-	public static Annonce updateAnnonce(Annonce annonce) {
-		Annonce trouve = null;
-
-		//Recherche dans le BD
-		try {
-			//Vérifier la configuration
-			Class.forName(strNomDriver);
-
-			String rqSQL = ConstRequest.UPDATEANNONCE;
-
-			//Créer une connexion et l'ouvrir
-			Connection con = DriverManager.getConnection(DBURL, USER, PASSWD); 			// Objet qui créer de la connection avec la BD
-
-			//Ecrire la requete
-			PreparedStatement test = con.prepareStatement(rqSQL);
-
-
-			test.setString(1, annonce.getTitre());
-			test.setInt(2, annonce.getSurface());
-			test.setString(3, annonce.getCreneauDebut().toString());
-			test.setString(4, annonce.getCreneauFin().toString());
-			test.setString(5, annonce.getDescription());
-			
-			test.setInt(6, annonce.getIdAnnonce());
-
-
-			//Executer le statement
-			test.execute();
-
-			System.out.println("Dao statement : " + test);
-
-			test.close();
-			con.close();
-		}
-		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Driver non trouvé");
-		}
-		// Objet qui créer la requête : (C’est elle qui sera envoyée vers le SGBD). 
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Erreur SQL");
-		}
-
-		return trouve;
-	}
+	
 	
 	public static void deleteAnnonce(Annonce annonce) {
 		
@@ -415,22 +373,71 @@ public class Dao  {
 				}
 		
 	}
+	
+	/**
+	 * Méthode qui modifie une annonce
+	 * @param annonce
+	 * @return
+	 */
+	public static Annonce updateAnnonce(Annonce annonce) {
+		Annonce trouve = null;
+
+		//Recherche dans le BD
+		try {
+			//Vérifier la configuration
+			Class.forName(strNomDriver);
+
+			String rqSQL = ConstRequest.UPDATEANNONCE;
+
+			//Créer une connexion et l'ouvrir
+			Connection con = DriverManager.getConnection(DBURL, USER, PASSWD); 			// Objet qui créer de la connection avec la BD
+
+			//Ecrire la requete
+			PreparedStatement test = con.prepareStatement(rqSQL);
+
 
 
 	public static String listCom(int idAnnonce) {
 		ArrayList<Commentaire> commentaires = getAllComm();
 		String comm ="";
-		for (Commentaire commentaire : commentaires) {
-			if(idAnnonce == commentaire.getIdAnnonce()) {
-				System.out.println(1);
-				comm += "<div class=\"infocomm\">" + 
-						"<p>Le " + UtilAlain.formatDateFr(commentaire.getDateCom())+ ", <span class=\"pseudoSession\">"+ commentaire.getExpediteur() +"</span> a �crit :</p><br>" + 
-						"<p> " + commentaire.getCommentaire() + "</p>" + 
-						"</div>";
-			}
+
+			test.setString(1, annonce.getTitre());
+			test.setInt(2, annonce.getSurface());
+			test.setString(3, annonce.getCreneauDebut().toString());
+			test.setString(4, annonce.getCreneauFin().toString());
+			test.setString(5, annonce.getDescription());
+			
+			test.setInt(6, annonce.getIdAnnonce());
+
+
+			//Executer le statement
+			test.execute();
+
+			System.out.println("Dao statement : " + test);
+
+			test.close();
+			con.close();
 		}
-		return comm;
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Driver non trouvé");
+		}
+		// Objet qui créer la requête : (C’est elle qui sera envoyée vers le SGBD). 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Erreur SQL");
+		}
+
+		return trouve;
 	}
+	
+	
+
+
+	
+
 
 	/**
 	 * Méthode qui génére la galerie d'annonce
@@ -852,6 +859,7 @@ public class Dao  {
 			Connection conn = DriverManager.getConnection(DBURL, USER, PASSWD);
 			String modifAdmin = ConstRequest.MODIF_ADMIN;
 
+<<<<<<< HEAD
 			PreparedStatement pstmt 	= conn.prepareStatement(modifAdmin);
 
 			pstmt.setString	(1,  admin.getNom());
@@ -879,6 +887,17 @@ public class Dao  {
 		}
 
 		return admin;
+=======
+	public static ArrayList<Notification> initNotif() {
+		Notification notif1 = new Notification("DarkhShines", 1, "Ouverture de poudlard", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+		Notification notif2 = new Notification("DarkhShines", 2, "Ouverture de numéro 2", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+		Notification notif3 = new Notification("DarkhShines", 3, "Ouverture de numéro 3", "Bla bla kljucoiheahj  aflij a ealcvkhv poiuz lkhrz ;,jnsd lsdihj dspoiuj ");
+		ArrayList<Notification> notification = new ArrayList<Notification>();
+		notification.add(notif1);
+		notification.add(notif2);
+		notification.add(notif3);
+		return notification;
+>>>>>>> refs/remotes/origin/Zakarya_1
 	}
 	
 	
@@ -921,10 +940,13 @@ public class Dao  {
 		return listNotif;
 	}
 
+<<<<<<< HEAD
 	
 
 
 
+=======
+>>>>>>> refs/remotes/origin/Zakarya_1
 	public static String selectAbo() {
 		ArrayList<Abonne> abonnes = getAllAbonnes();
 		String select = "<label for=\"abo\">Choisir un abonné : </label>" + 
@@ -1078,6 +1100,7 @@ public class Dao  {
 
 	}
 
+<<<<<<< HEAD
 
 	public static void ajoutComm(Commentaire comm, Abonne abonne) {
 		try {
@@ -1213,6 +1236,16 @@ public class Dao  {
         return expediteur;
     }
 
+=======
+	private static Abonne getAboById(int idAbo) {
+        ArrayList<Abonne> abonnes = getAllAbonnes();
+        Abonne expediteur = new Abonne();
+        for (Abonne abonne : abonnes) {
+            if(idAbo == abonne.getIdAbonne()) expediteur = abonne;
+        }
+        return expediteur;
+    }
+>>>>>>> refs/remotes/origin/Zakarya_1
 
 
 
