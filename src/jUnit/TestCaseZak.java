@@ -1,40 +1,59 @@
-
 package jUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.LocalDate;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import AppException.Exception_Zak;
+
+import fr.albapretiosa.dao.Dao;
 import fr.albapretiosa.metier.zak.Annonce;
-import org.junit.jupiter.api.Test;
+import fr.albapretiosa.metier.zak.Annonces;
+
 
 class TestCaseZak {
 
+	@DisplayName("Test1 equals dans Annonce - cas nominal")
+	@Test
+	void test1() {
+		Annonce anTest = new Annonce(1);
+		assertTrue(anTest.equals(Dao.getAllAnnonce().get(1)));
+	}
+	@DisplayName("Test1a equals dans Annonce - alternatif")
+	@Test
+	void test1a() {
+		Annonce anTest = new Annonce(1);
+		assertFalse(anTest.equals(Dao.getAllAnnonce().get(10)));
+	}
+	
+	@DisplayName("Test2 methode getAnnonceById dans Dao")
+	@Test
+	void test2() {
+		Annonce anTest = new Annonce(1);
+		assertEquals(anTest, Dao.getAnnonceById(1));
+	}
+	
+	@DisplayName("Test3 equals dans Annonce")
+	@Test
+	void test3() {
+		Annonce anTest = new Annonce(1);
+		assertTrue(anTest.equals(new Annonce(1)));
+	}
+	
+	
+	@DisplayName("Test4 methode getAllAnnonce dans Dao")
+	@Test
+	void test4() {
+		Annonces anTest = new Annonces();
+		assertEquals(anTest, Dao.getAllAnnonce());
+	}
 
-	@DisplayName("Test de la méthode controleTitre() si le titre est plus cours que 10 caractères.")
+	@DisplayName("Test5 methode getAbonne(String idAbonne) dans Dao avec idAbonne inexistant")
 	@Test
-	void testControleTitreC1() {
-		Annonce	ann = new Annonce("Manoir DeCruz", 1200, "France", "Paris", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), "Blablabla", true, true, false, true);
-		assertThrows(Exception_Zak.class, ()->{ ann.setTitre("Z");});
+	void test6() {
+		assertEquals(null, Dao.getAnnonceById(99));
 	}
-	
-	@DisplayName("Test de la méthode controleTitre() si le titre est plus long que 100 caractères.")
-	@Test
-	void testControleTitreC2() {
-		Annonce	ann = new Annonce("Manoir DeCruz", 1200, "France", "Paris", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), "Blablabla", true, true, false, true);
-		assertThrows(Exception_Zak.class, ()->{ann.setTitre("Annonce ann = new Annonce(\"Manoir DeCruz\", 1200, \"France\", \"Hyers\", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), \"Blablabla\", true, true, false, true);Annonce	ann = new Annonce(\"Manoir DeCruz\", 1200, \"France\", \"Hyers\", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), \"Blablabla\", true, true, false, true);");});	
-	}
-	
-	@DisplayName("Test de la méthode controleTitre() si le titre est null ")
-	@Test
-	void testControleTitreC3() {
-		Annonce	ann = new Annonce("Manoir DeCruz", 1200, "France", "Paris", LocalDate.of(2019,12,12), LocalDate.of(2022,12,12), "Blablabla", true, true, false, true);
-		assertThrows(Exception_Zak.class, ()->{ann.setTitre(null);});
-	}
-	
 }
+
 

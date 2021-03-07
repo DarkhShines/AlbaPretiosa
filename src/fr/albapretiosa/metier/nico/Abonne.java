@@ -87,6 +87,9 @@ public class Abonne {
 		super();
 	}
 
+	public Abonne(int idAbonne) {
+		setIdAbonne(idAbonne);
+	}
 	// GETTER
 	public String getNom() {
 		return nom;

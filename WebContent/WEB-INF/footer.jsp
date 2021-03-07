@@ -10,10 +10,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="lik">
-                                <li> <a href="#">Accueil</a></li>
-                                <li> <a href="consulter.jsp">Consulter les annonces</a></li>
+                                <li> <a href="accueil.jsp">Accueil</a></li>
+                                <li> <a href="galerie.jsp">Consulter les annonces</a></li>
                                 <li> <a href="DepotAnnonce.jsp">Déposer une annonce</a></li>
-                                <li> <a href="espaceabonne.jsp">Mon espace</a></li>
+                                <li> <a href="infosPersonnelles.jsp">Mon espace</a></li>
                                 <li> <a href="apropos.jsp">A propos</a></li>
                             </ul>
                         </div>

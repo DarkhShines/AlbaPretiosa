@@ -36,7 +36,7 @@ public class InscriptionServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String context = request.getContextPath();
-		ArrayList<Abonne> abonnes = Dao.abonnes;
+		ArrayList<Abonne> abonnes = Dao.getAllAbonnes();
 		String alias = request.getParameter("alias");
 		String mdp = request.getParameter("mdp");
 		String mdpConfirm = request.getParameter("mdpConfirm");

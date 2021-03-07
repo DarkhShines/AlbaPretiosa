@@ -2,8 +2,20 @@ package fr.albapretiosa.dao;
 
 
 public class ConstRequest{
+
+	protected static final String GETANNONCE 		= "select a.idAnnonce, titreAnnonce, surfaceAnnonce, creneau_debut, creneau_fin, description, idAbo, idVille, o.lib_option from annonce a"
+															+ " inner join ajouter_option ao on a.idAnnonce = ao.idAnnonce"
+															+ " inner join options o on ao.idOption = o.idOption "
+															+ " where idAbo = ?";
 	
-	protected static final String GETANNONCE = "select idAnnonce, titreAnnonce, surfaceAnnonce, pays, ville, creneau_debut, creneau_fin, description, piscine, golf, spa, tennis, idAbo where idAbo = ?";
+	protected static final String GETANNONCEBYID	=  "select a.idAnnonce, titreAnnonce, surfaceAnnonce, creneau_debut, creneau_fin, description, ab.alias, idVille, o.lib_option from Annonce a"
+															+ " inner join abonne ab on a.idAbo = ab.idAbo"
+															+ " inner join options o on ao.idOption = o.idOption "
+															+ " where idAbo = ?";
+
+	protected static final String GETALLANNONCE 	= "select idAnnonce, titreAnnonce, surfaceAnnonce, creneau_debut, creneau_fin, description, idAbo, idVille from Annonce";
+	
+	protected static final String GETALLANNONCEBYID = "select idAnnonce, titreAnnonce, surfaceAnnonce, creneau_debut, creneau_fin, description, idAbo, idVille from Annonce where idAbo = ?";
 
 
 	protected static final String GET_ABO 			= "select idAbo, alias, nomAbo, prenomAbo, telFixe, telMobile, code_parrainage, email from abonne where alias = ? and mdp = ?";
@@ -11,6 +23,14 @@ public class ConstRequest{
 	protected static final String GET_ADMIN_MDP 	= "select alias, mdp from admin where alias = ?";
 	protected static final String GET_ABO_MDP 		= "select alias, mdp from abonne where alias = ?";
 
+
+	protected static final String CREATEANNONCE		= "insert into Annonce (idAnnonce, titreAnnonce, surfaceAnnonce, creneau_debut, creneau_fin, description, idAbo, idVille)"
+															+ " values (?, ?, ?, ?, ?, ?, ?, ?)";
+	
+	
+	protected static final String DELETEANNONCE		= "delete from annonce where idAnnonce = ?";
+	
+	protected static final String UPDATEANNONCE		= "update annonce set titreAnnonce = ? , surfaceAnnonce = ? , creneau_debut = ? , creneau_fin = ? , description = ? where idAnnonce = ?  ";
 
 	protected static final String GET_ALL_ABONNES = "select nomAbo, idAbo, prenomAbo, alias, email, telMobile, telFixe, platinium from Abonne";
 	protected static final String BAN_ABO = "delete from abonne where idAbo = ?";
@@ -29,4 +49,8 @@ public class ConstRequest{
 	protected static final String MODIF_ABO			= "update abonne set nomAbo = ?, prenomAbo = ? , email = ?, telMobile = ?, telFixe = ?, mdp = ?, code_parrainage = ? where alias = ?";
 	protected static final String MODIF_ADMIN		= "update admin set nomAdmin = ?, prenomAdmin = ?, email = ?, telMobile = ?, telFixe = ?, mdp = ?, parrainage = ? where alias = ?";
 
+	
+
+
 }
+

@@ -35,7 +35,7 @@
 				<div class="col-xl-5 col-lg-5 col-md-10 col-sm-12 about_img_boxpdnt">
 					<div class="about_img">
 						<figure>
-							<img src="../assets/images/simpsons-live.jpg" alt="#/">
+							<img src="../assets/images/image_deco.jpg" alt="image de décoration">
 						</figure>
 					</div>
 				</div>
@@ -46,6 +46,7 @@
 	
 			<%= Dao.CreateCar() %>
 	<!-- end about -->
+
 	<!-- Our Client -->
 	<div class="Client">
 		<div class="container">
@@ -65,4 +66,5 @@
 		</div>
 	</div>
 	<!-- end Our Client -->
+
 	<jsp:include page="/WEB-INF/footer.jsp" />
