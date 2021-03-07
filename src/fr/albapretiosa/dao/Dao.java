@@ -101,7 +101,7 @@ public class Dao  {
 
 		return annonces;
 
-	}
+	} 
 	
 	/**
 	 * Methode pour rÃ©cupÃ©rer toute les annonces
@@ -430,7 +430,7 @@ public class Dao  {
 			if(idAnnonce == commentaire.getIdAnnonce()) {
 				System.out.println(1);
 				comm += "<div class=\"infocomm\">" + 
-						"<p>Le " + UtilAlain.formatDateFr(commentaire.getDateCom())+ ", <span class=\"pseudoSession\">"+ commentaire.getExpediteur() +"</span> a écrit :</p><br>" + 
+						"<p>Le " + UtilAlain.formatDateFr(commentaire.getDateCom())+ ", <span class=\"pseudoSession\">"+ commentaire.getExpediteur() +"</span> a ï¿½crit :</p><br>" + 
 						"<p> " + commentaire.getCommentaire() + "</p>" + 
 						"</div>";
 			}
@@ -745,7 +745,7 @@ public class Dao  {
 			System.err.println("Erreur : " + e);
 		}catch(SQLIntegrityConstraintViolationException e) {
 			if(e.getErrorCode() == 1062) {
-				throw new Exception_Nico("Cet abonne existe déjà");
+				throw new Exception_Nico("Cet abonne existe dï¿½jï¿½");
 			}
 		}catch(SQLException s) {
 			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
@@ -779,7 +779,7 @@ public class Dao  {
 			System.err.println("Erreur : " + e);
 		}catch(SQLIntegrityConstraintViolationException e) {
 			if(e.getErrorCode() == 1062) {
-				throw new Exception_Nico("Cet abonne existe déjà");
+				throw new Exception_Nico("Cet abonne existe dï¿½jï¿½");
 			}
 		}catch(SQLException s) {
 			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
@@ -878,7 +878,7 @@ public class Dao  {
 			System.err.println("Erreur : " + e);
 		}catch(SQLIntegrityConstraintViolationException e) {
 			if(e.getErrorCode() == 1062) {
-				throw new Exception_Nico("Cet abonne existe déjà");
+				throw new Exception_Nico("Cet abonne existe dï¿½jï¿½");
 			}
 		}catch(SQLException s) {
 			System.err.println("Erreur 2 Appel2Connexion : " + s.getSQLState() + " , " + " (" + s + ")");
@@ -1142,7 +1142,7 @@ public class Dao  {
 				ResultSet notifList = stmt.executeQuery(reqSql);
 				while (notifList.next()) {
 					
-					//String idNotif = notifList.getString("idNotif"); Pas besoin de l'ID pour l'affiché. 
+					//String idNotif = notifList.getString("idNotif"); Pas besoin de l'ID pour l'affichï¿½. 
 					String objetNotif = notifList.getString("objetNotif");
 					String textNotif = notifList.getString("textNotif");
 					LocalDate date = LocalDate.parse(notifList.getString("dateNotif"));
