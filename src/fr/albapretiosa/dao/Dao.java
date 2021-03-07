@@ -53,9 +53,13 @@ public class Dao  {
 			System.out.println("Connexion");
 			Connection con = DriverManager.getConnection(DBURL, USER, PASSWD); 			// Objet qui créer de la connection avec la BD
 			System.out.println("Connexion Ok");
+			
+			
 			//Ecrire la requete
 			String rqSQL = ConstRequest.GETALLANNONCE;
 			Statement stmt = con.createStatement();
+			
+			
 			ResultSet rs = stmt.executeQuery(rqSQL);
 
 			while(rs.next()) {
@@ -113,6 +117,8 @@ public class Dao  {
 			System.out.println("Connexion");
 			Connection con = DriverManager.getConnection(DBURL, USER, PASSWD); 			// Objet qui créer de la connection avec la BD
 			System.out.println("Connexion Ok");
+			
+			
 			//Ecrire la requete
 			String rqSQL = ConstRequest.GETALLANNONCEBYID;
 			
