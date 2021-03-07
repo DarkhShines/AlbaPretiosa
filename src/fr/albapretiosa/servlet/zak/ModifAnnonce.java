@@ -1,8 +1,10 @@
 package fr.albapretiosa.servlet.zak;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import AppException.Exception_Zak;
 import fr.albapretiosa.dao.Dao;
+import fr.albapretiosa.dao.Dao2;
 import fr.albapretiosa.metier.nico.Abonne;
 import fr.albapretiosa.metier.zak.Annonce;
 
@@ -47,22 +50,37 @@ public class ModifAnnonce extends HttpServlet {
 		
 		HttpSession session = request.getSession(true);
 		
-		Abonne a = (Abonne)session.getAttribute("Abonne"); 
+		int idAnnonce = Integer.parseInt(request.getParameter("id")); 
 		
 		
-		String titre 			= request.getParameter("titre");		
+		String titre 			= request.getParameter("titre");	
+		
 		int surface 			= Integer.parseInt(request.getParameter("surface").strip());
-		int idAnnonce = Integer.parseInt(request.getParameter("id"));
-		ArrayList<String> messages = new ArrayList<String>();
 		
-		for (Annonce ann : Dao.annonces) {
-			if (ann.getIdAnnonce() == idAnnonce) {
+		LocalDate creneauDebut  = LocalDate.parse(request.getParameter("datedebut"));
+		
+		LocalDate creneauFin    = LocalDate.parse(request.getParameter("datefin"));
+		
+		String description		= request.getParameter("description"); 
+		
+		
+
+		
+		for (Annonce ann : Dao.getAllAnnonce()) {
+			if ( idAnnonce == ann.getIdAnnonce()) {
 				ann.setTitre(titre);
 				ann.setSurface(surface);
+				ann.setCreneauDebut(creneauDebut);
+				ann.setCreneauFin(creneauFin);
+				ann.setDescription(description);
+				Dao.updateAnnonce(ann);
 				}
 		}
+
+		String chemin = "vue/ListerAnnonce.jsp";
 		
-		response.sendRedirect("vue/ListerAnnonce.jsp");
+		RequestDispatcher disp1 = request.getRequestDispatcher(chemin);
+		disp1.forward(request, response);
 	}
 
 }

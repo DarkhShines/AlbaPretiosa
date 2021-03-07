@@ -11,6 +11,10 @@ public class Exception_Zak extends NullPointerException {
 		super(msg);
 	}
 
+	public Exception_Zak(int i, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 
 	 */

@@ -32,31 +32,35 @@ public class SupprimerAnnonce extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
+		System.out.println("Je suis dans la methode get de SupprimerAnnonce");
 		
+		int idAnnonce = Integer.parseInt(request.getParameter("id"));
+		
+		ArrayList<Annonce> annonces = Dao.getAllAnnonce();
+		
+		System.out.println(idAnnonce);
+		
+//		for (int i = 0; i < annonces.size(); i++) {
+//			if (annonces.get(i).getIdAnnonce() == idAnnonce) {
+//				Dao.deleteAnnonce(annonces.get(i));
+//				}
+//		}
+		for (Annonce annonce : annonces) {
+			if (annonce.getIdAnnonce() == idAnnonce) Dao.deleteAnnonce(annonce);
+		}
+		
+		response.sendRedirect("vue/ListerAnnonce.jsp");
 	}
+		
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Je suis dans la methode get de SupprimerAnnonce");
-		
-		int idAnnonce = Integer.parseInt(request.getParameter("id"));
-		
-		ArrayList<Annonce> annonces = Dao.annonces;
-		
-		System.out.println(idAnnonce);
-		
-		for (int i = 0; i < annonces.size(); i++) {
-			if (annonces.get(i).getIdAnnonce() == idAnnonce) {
-				Dao.annonces.remove(annonces.get(i));
-				}
-		}
-		
-		response.sendRedirect("vue/ListerAnnonce.jsp");
-	}
 
+
+}
 }
