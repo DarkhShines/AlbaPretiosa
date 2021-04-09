@@ -43,7 +43,7 @@ public class Controleur extends HttpServlet {
 			admin = (Admin) session.getAttribute("Abonne");
 		}else {
 			// Si mon abonné est nul, aucun accès au site n'est autorisé, il est donc renvoyer vers l'accueil d'ou il pourra
-			// se connecter ou créé un compte
+			// se connecter
 			goIndex(request, response);
 		}
 		
@@ -51,14 +51,14 @@ public class Controleur extends HttpServlet {
 		String chemin = request.getContextPath();
 		System.out.println("path : "+ path);
 		System.out.println("chemin : "+ chemin);
-		if (path == null || path.equals("/")) goIndex(request, response);
-		else if (path.endsWith("/accueil")) goAccueil(request, response);
-		else if (path.endsWith("/consulter")) goConsulter(request, response);
-		else if (path.endsWith("/deposer")) goDeposer(request, response);
-		else if (path.endsWith("/apropos")) goApropos(request, response);
-		else if (path.endsWith("/connexion")) goEspaceAbo(request, response);
+		if (path == null || path.equals("/"))	 goIndex(request, response);
+		else if (path.endsWith("/accueil"))		 goAccueil(request, response);
+		else if (path.endsWith("/consulter"))	 goConsulter(request, response);
+		else if (path.endsWith("/deposer"))		 goDeposer(request, response);
+		else if (path.endsWith("/apropos"))		 goApropos(request, response);
+		else if (path.endsWith("/connexion")) 	 goEspaceAbo(request, response);
 		else if (path.endsWith("/notification")) goNotif(request, response);
-		else if (path.endsWith("/deconnexion")) goDeco(request, response);
+		else if (path.endsWith("/deconnexion"))  goDeco(request, response);
 		else if (path.endsWith("/vueAdmin")) {
 			if(admin.getAlias() != null)goAdmin(request, response); // Je profite du controleur pour filtré la page Admin
 			else {
